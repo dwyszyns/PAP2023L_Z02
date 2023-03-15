@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    @Query(value = "select c.events from Calendar c join fetch CalendarMember cm join fetch Member m where m.memberId = :memberId")
+    @Query(value = "select c.events from Calendar c " +
+            "join fetch CalendarMember cm on cm.calendar = c " +
+            "join fetch Member m on m = cm.member " +
+            "where m.memberId = :memberId")
     List<Event> getVisibleToMember(@Param("memberId") final Long memberId);
 }
