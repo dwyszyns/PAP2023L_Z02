@@ -1,3 +1,10 @@
+delete from event_subscriber;
+delete from calendar_member;
+delete from event;
+delete from member;
+delete from calendar;
+
+
 insert into member(member_id, first_name, last_name, username) values (0, 'John', 'Doe', 'johndoe');
 insert into member(member_id, first_name, last_name, username) values (1, 'Alice', 'Smith', 'smithy');
 insert into member(member_id, first_name, last_name, username) values (2, 'David', 'Schmidt', 'dschmidt');

@@ -13,15 +13,15 @@ import pl.edu.pw.calendarapp.member.Member;
 @NoArgsConstructor
 public class EventSubscriber {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
     @Column(name = "event_subscriber_id")
     private Long eventSubscriberId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "subscriber_id", nullable = false)
     private Member subscriber;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 }

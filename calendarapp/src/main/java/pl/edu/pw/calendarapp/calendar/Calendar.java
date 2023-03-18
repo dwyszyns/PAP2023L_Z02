@@ -17,7 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Calendar {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
     @Column(name = "calendar_id", nullable = false)
     private Long calendarId;
     @Column(name = "name", nullable = false)
