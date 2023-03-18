@@ -9,17 +9,18 @@ import pl.edu.pw.calendarapp.event.EventSubscriber;
 import java.util.List;
 
 @Entity
+@Table(name = "member")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "memberId", nullable = false)
+    @Column(name = "member_id", nullable = false)
     private Long memberId;
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
     @Column(name = "username", nullable = false)
     private String username;
