@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.calendarapp.calendar.Calendar;
-import pl.edu.pw.calendarapp.member.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.member.Member;
+import pl.edu.pw.calendarapp.member.MemberRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
-    private final CalendarMemberRepository calendarMemberRepository;
+    private final MemberRepository memberRepository;
     private final EventRepository eventRepository;
-    private final EventSubscriberRepository eventSubscriberRepository;
 
     @Override
     public List<Event> getVisibleToMember(final long memberId) {
@@ -44,7 +43,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void addEvent(final Event event, final Calendar calendar) {
         event.setCalendar(calendar);
-        subscribeMembersToEvent(event, calendarMemberRepository.findAutoSubscribedForCalendar(calendar.getCalendarId()));
+        subscribeMembersToEvent(event, memberRepository.findAutoSubscribedForCalendar(calendar.getCalendarId()));
         eventRepository.save(event);
     }
 }
