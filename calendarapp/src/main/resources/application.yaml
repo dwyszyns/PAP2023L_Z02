@@ -3,6 +3,10 @@ server:
 
 
 spring:
+  security:
+    user:
+      password: password
+      name: sa
   jmx:
     enabled: true
   datasource:
