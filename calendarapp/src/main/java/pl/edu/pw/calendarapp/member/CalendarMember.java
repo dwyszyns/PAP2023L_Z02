@@ -5,27 +5,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.edu.pw.calendarapp.calendar.Calendar;
-import pl.edu.pw.calendarapp.member.Member;
 
 @Entity
+@Table(name = "calendar_member")
 @Getter
 @Setter
 @NoArgsConstructor
 public class CalendarMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @Column(name = "calendar_member_id", nullable = false)
     private Long calendarMemberId;
-    @Column
+    @Column(name = "is_owner")
     private Boolean isOwner;
-    @Column
+    @Column(name = "auto_subscribed")
     private Boolean autoSubscribed;
 
     @ManyToOne
-    @JoinColumn(name = "memberId", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "calendarId", nullable = false)
+    @JoinColumn(name = "calendar_id", nullable = false)
     private Calendar calendar;
 }

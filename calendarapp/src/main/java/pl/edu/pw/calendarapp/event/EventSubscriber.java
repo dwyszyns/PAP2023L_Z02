@@ -7,20 +7,21 @@ import lombok.Setter;
 import pl.edu.pw.calendarapp.member.Member;
 
 @Entity
+@Table(name = "event_subscriber")
 @Getter
 @Setter
 @NoArgsConstructor
 public class EventSubscriber {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @Column(name = "event_subscriber_id")
     private Long eventSubscriberId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subscriberId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "subscriber_id", nullable = false)
     private Member subscriber;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "eventId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 }

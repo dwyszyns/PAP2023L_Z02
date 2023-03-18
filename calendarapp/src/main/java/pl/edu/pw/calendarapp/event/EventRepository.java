@@ -14,4 +14,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "join fetch Member m on m = cm.member " +
             "where m.memberId = :memberId")
     List<Event> getVisibleToMember(@Param("memberId") final Long memberId);
+
+
+    List<Event> findAllByName(final String name);
 }

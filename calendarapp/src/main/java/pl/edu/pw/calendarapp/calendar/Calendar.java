@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "calendar")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Calendar {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "calendarId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @Column(name = "calendar_id", nullable = false)
     private Long calendarId;
     @Column(name = "name", nullable = false)
     private String name;
