@@ -1,5 +1,13 @@
-.Main {
+.container {
     display: flex;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border: 4px solid black;
+    border-radius: 30px;
+    margin-bottom: 25px;
 }
 
 .navbar {
@@ -8,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     height: 97.9vh;
-    width: 70px;
+    width: 60px;
     border: 10px black;
     padding-top: 20px;
     margin: -8px 0 -8px -8px;
