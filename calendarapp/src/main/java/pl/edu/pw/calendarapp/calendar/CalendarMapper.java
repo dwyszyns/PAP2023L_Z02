@@ -6,7 +6,6 @@ import pl.edu.pw.calendarapp.event.EventView;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CalendarMapper {
     private CalendarMapper() {
@@ -21,7 +20,7 @@ public class CalendarMapper {
                     .map(l -> l.stream()
                             .map(EventMapper::map)
                             .filter(Objects::nonNull)
-                            .collect(Collectors.toList()))
+                            .toList())
                     .orElse(List.of());
             view.setEvents(events);
             return view;

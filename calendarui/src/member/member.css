@@ -12,7 +12,28 @@
     border: 2px solid black;
 }
 
-.names-container {
-    font-size: 3rem;
+.description {
+    font-family: Roboto, ui-rounded;
     width: 600px;
+    height: fit-content;
+    margin-top: 40px;
+}
+
+.full-name {
+    font-weight: 500;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.username {
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: #888;
+    margin: 0;
+}
+
+.joined {
+    margin-top: 20px;
+    font-weight: 350;
+    font-size: 1.5rem;
 }

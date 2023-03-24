@@ -1,8 +1,7 @@
 package pl.edu.pw.calendarapp.event;
 
 
-import pl.edu.pw.calendarapp.common.DateUtil;
-
+import java.sql.Timestamp;
 import java.util.Optional;
 
 public class EventMapper {
@@ -14,8 +13,8 @@ public class EventMapper {
             final EventView view = new EventView();
             view.setId(e.getEventId() != null ? e.getEventId() : -1L);
             view.setName(e.getName());
-            Optional.ofNullable(e.getStartTime()).ifPresent(date -> view.setStartDate(DateUtil.getDateTimeFromMilli(date)));
-            Optional.ofNullable(e.getEndTime()).ifPresent(date -> view.setEndDate(DateUtil.getDateTimeFromMilli(date)));
+            Optional.ofNullable(e.getStartTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setStartDate);
+            Optional.ofNullable(e.getEndTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setEndDate);
             return view;
         }).orElse(null);
     }

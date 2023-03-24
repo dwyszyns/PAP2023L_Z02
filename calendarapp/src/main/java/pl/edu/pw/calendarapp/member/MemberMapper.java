@@ -1,5 +1,6 @@
 package pl.edu.pw.calendarapp.member;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 public class MemberMapper {
@@ -14,6 +15,7 @@ public class MemberMapper {
             memberView.setFirstName(member.getFirstName());
             memberView.setLastName(member.getLastName());
             memberView.setUsername(member.getUsername());
+            Optional.ofNullable(member.getDateJoined()).map(Timestamp::toLocalDateTime).ifPresent(memberView::setDateJoined);
             return memberView;
         }).orElse(null);
     }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.edu.pw.calendarapp.calendar.Calendar;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,9 +23,9 @@ public class Event {
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "start_time", nullable = false)
-    private Long startTime;
+    private Timestamp startTime;
     @Column(name = "end_time", nullable = false)
-    private Long endTime;
+    private Timestamp endTime;
 
     @ManyToOne
     @JoinColumn(name = "calendar_id")

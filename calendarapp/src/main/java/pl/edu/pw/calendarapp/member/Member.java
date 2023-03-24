@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.edu.pw.calendarapp.event.EventSubscriber;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,8 @@ public class Member {
     private String lastName;
     @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "date_joined", nullable = false)
+    private Timestamp dateJoined;
 
     @OneToMany(mappedBy = "member")
     private List<CalendarMember> calendars;
