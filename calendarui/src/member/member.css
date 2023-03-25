@@ -1,33 +1,43 @@
 .profile-container {
-    width: 98%;
+    position: absolute;
+    width: 95%;
+    height: 98%;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.details-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    width: fit-content;
+    gap: 30px;
     margin-top: 100px;
 }
 
 .profile-picture {
-    width: 300px;
-    height: 300px;
+    width: 260px;
+    height: 260px;
+    box-shadow: 3px 3px 8px 2px rgba(0, 0, 0, 0.2);
     border: 2px solid black;
+    border-radius: 150px;
 }
 
 .description {
-    font-family: Roboto, ui-rounded;
-    width: 600px;
     height: fit-content;
-    margin-top: 40px;
+    align-self: center;
 }
 
 .full-name {
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin: 0;
 }
 
 .username {
     font-weight: 500;
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     color: #888;
     margin: 0;
 }
@@ -35,5 +45,39 @@
 .joined {
     margin-top: 20px;
     font-weight: 350;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.calendars {
+    width: 700px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 100px;
+}
+
+.calendars a, a:focus, a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+    color: black;
+}
+
+.calendar {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 6px 2px #cdcdcd;
+}
+
+.calendar:hover {
+    background-color: #dadada;
 }

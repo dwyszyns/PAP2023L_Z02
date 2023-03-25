@@ -1,6 +1,7 @@
 create table calendar(
     calendar_id number(19, 0) not null,
     name        varchar(255) not null,
+    public      boolean default false,
     constraint pk_calendar primary key (calendar_id)
 );
 

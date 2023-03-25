@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    font-family: Roboto, ui-rounded;
 }
 
 .logo {

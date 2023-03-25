@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @GetMapping("/{memberId}")
     public MemberView getMemberById(@PathVariable("memberId") final long memberId) {
-        return memberRepository.findById(memberId).map(MemberMapper::map).orElse(null);
+        return MemberMapper.map(memberService.findById(memberId));
     }
 }

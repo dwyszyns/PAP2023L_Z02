@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetMemberByIdQuery } from '../store';
 import './member.css';
+import MemberCalendarsPreview from './member-calendars-preview';
 
 const MemberProfile = () => {
   const { memberId } = useParams();
@@ -13,18 +14,21 @@ const MemberProfile = () => {
   };
 
   const renderProfile = (profileData) => data && (
-  <div className="profile-container">
-    <div className="profile-picture" />
-    <div className="description">
-      <p className="full-name">{`${profileData.firstName} ${profileData.lastName}`}</p>
-      <p className="username">
-        {`#${profileData.username}`}
-      </p>
-      <p className="joined">
-        {renderDateJoined(profileData.dateJoined)}
-      </p>
+    <div className="profile-container">
+      <div className="details-container">
+        <div className="profile-picture" />
+        <div className="description">
+          <p className="full-name">{`${profileData.firstName} ${profileData.lastName}`}</p>
+          <p className="username">
+            {`#${profileData.username}`}
+          </p>
+          <p className="joined">
+            {renderDateJoined(profileData.dateJoined)}
+          </p>
+        </div>
+      </div>
+      <MemberCalendarsPreview calendars={profileData.calendarsPreview} />
     </div>
-  </div>
   );
 
   const render = () => {
