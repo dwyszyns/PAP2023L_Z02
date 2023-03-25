@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.event;
+package pl.edu.pw.calendarapp.event.rest;
 
 import lombok.Data;
 

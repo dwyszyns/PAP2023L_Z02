@@ -1,5 +1,8 @@
-package pl.edu.pw.calendarapp.event;
+package pl.edu.pw.calendarapp.event.bizz;
 
+
+import pl.edu.pw.calendarapp.event.repo.Event;
+import pl.edu.pw.calendarapp.event.rest.EventView;
 
 import java.sql.Timestamp;
 import java.util.Optional;
