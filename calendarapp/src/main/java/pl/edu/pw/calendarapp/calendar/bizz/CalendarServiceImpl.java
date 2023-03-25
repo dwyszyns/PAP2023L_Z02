@@ -1,9 +1,12 @@
-package pl.edu.pw.calendarapp.calendar;
+package pl.edu.pw.calendarapp.calendar.bizz;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.calendarapp.event.Event;
-import pl.edu.pw.calendarapp.event.EventRepository;
+import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
+import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
+import pl.edu.pw.calendarapp.event.repo.Event;
+import pl.edu.pw.calendarapp.event.repo.EventRepository;
 
 import java.util.HashSet;
 import java.util.List;

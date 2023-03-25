@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.event;
+package pl.edu.pw.calendarapp.event.bizz;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.pw.calendarapp.calendar.Calendar;
-import pl.edu.pw.calendarapp.calendar.CalendarRepository;
+import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
+import pl.edu.pw.calendarapp.event.repo.Event;
+import pl.edu.pw.calendarapp.event.repo.EventRepository;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +52,8 @@ class EventServiceIntegrationTest {
     private static Event prepareEvent() {
         final Event event = new Event();
         event.setName(EVENT_NAME);
-        event.setStartTime(System.currentTimeMillis());
-        event.setEndTime(System.currentTimeMillis());
+        event.setStartTime(Timestamp.from(Instant.now()));
+        event.setEndTime(Timestamp.from(Instant.now()));
         return event;
     }
 }

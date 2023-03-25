@@ -1,6 +1,8 @@
-package pl.edu.pw.calendarapp.member;
+package pl.edu.pw.calendarapp.member.bizz;
 
-import pl.edu.pw.calendarapp.calendar.CalendarMapper;
+import pl.edu.pw.calendarapp.calendar.bizz.CalendarMapper;
+import pl.edu.pw.calendarapp.member.repo.Member;
+import pl.edu.pw.calendarapp.member.rest.MemberView;
 
 import java.sql.Timestamp;
 import java.util.List;

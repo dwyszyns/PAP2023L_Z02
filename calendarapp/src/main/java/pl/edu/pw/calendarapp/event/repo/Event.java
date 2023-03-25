@@ -1,10 +1,10 @@
-package pl.edu.pw.calendarapp.event;
+package pl.edu.pw.calendarapp.event.repo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.edu.pw.calendarapp.calendar.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 
 import java.sql.Timestamp;
 import java.util.List;

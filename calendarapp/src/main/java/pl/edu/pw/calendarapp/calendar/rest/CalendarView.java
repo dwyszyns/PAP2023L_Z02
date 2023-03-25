@@ -1,7 +1,7 @@
-package pl.edu.pw.calendarapp.calendar;
+package pl.edu.pw.calendarapp.calendar.rest;
 
 import lombok.Data;
-import pl.edu.pw.calendarapp.event.EventView;
+import pl.edu.pw.calendarapp.event.rest.EventView;
 
 import java.util.List;
 

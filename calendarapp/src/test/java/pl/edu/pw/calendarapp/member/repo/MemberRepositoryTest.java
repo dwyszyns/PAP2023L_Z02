@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.member;
+package pl.edu.pw.calendarapp.member.repo;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
