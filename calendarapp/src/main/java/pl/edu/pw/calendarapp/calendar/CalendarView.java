@@ -9,6 +9,7 @@ import java.util.List;
 public class CalendarView {
     private long id;
     private String name;
+    private boolean isPublic;
     private List<EventView> events;
 
 }

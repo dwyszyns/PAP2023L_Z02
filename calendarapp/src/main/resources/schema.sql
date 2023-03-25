@@ -1,14 +1,16 @@
 create table calendar(
     calendar_id number(19, 0) not null,
     name        varchar(255) not null,
+    public      boolean default false,
     constraint pk_calendar primary key (calendar_id)
 );
 
 create table member(
     member_id  number(19, 0) not null,
-    first_name varchar(255) not null,
-    last_name  varchar(255) not null,
-    username   varchar(255) not null,
+    first_name  varchar(255) not null,
+    last_name   varchar(255) not null,
+    username    varchar(255) not null,
+    date_joined timestamp not null,
     constraint pk_member primary key (member_id)
 );
 
@@ -27,8 +29,8 @@ create table event(
     event_id    number(19, 0) not null,
     calendar_id number(19, 0) not null,
     name        varchar(255) not null,
-    start_time  number(19, 0) not null,
-    end_time    number(19, 0) not null,
+    start_time  timestamp not null,
+    end_time    timestamp not null,
     constraint pk_event primary key (event_id),
     constraint fk_event_calendar foreign key (calendar_id) references calendar (calendar_id)
 );

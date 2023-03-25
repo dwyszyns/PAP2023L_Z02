@@ -22,6 +22,8 @@ public class Calendar {
     private Long calendarId;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "public", nullable = false)
+    private Boolean isPublic;
 
     @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
     private List<Event> events;
