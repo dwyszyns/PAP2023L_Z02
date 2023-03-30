@@ -44,6 +44,16 @@ create table event_subscriber(
     constraint fk_event_subscriber_member foreign key (subscriber_id) references member (member_id)
 );
 
+create table friend_request(
+    request_id  number(19, 0) not null,
+    sender_id   number(19, 0) not null,
+    receiver_id number(19, 0) not null,
+    accepted    boolean not null default false,
+    constraint pk_friend_request primary key (request_id),
+    constraint fk_friend_sender foreign key (sender_id) references member (member_id),
+    constraint fk_friend_receiver foreign key (receiver_id) references member (member_id)
+);
+
 create sequence common_db_sequence
     start with 100
     increment by 1
