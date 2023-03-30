@@ -1,0 +1,20 @@
+.flex-1 {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    position: fixed;
+    /*width: 90%;*/
+    /*height: 90%;*/
+    /*left: 100px;*/
+    /*top: 30px;*/
+    text-align: center;
+    /*margin: 0 auto;*/
+}
+
+.flex-1-day {
+    background-color: rgba(220, 219, 219, 0.8);
+    border: 1px solid rgba(115, 115, 115, 0.8);
+    padding: 40px;
+    font-size: 20px;
+    text-align: center;
+}

@@ -48,7 +48,7 @@
     font-size: 1.4rem;
 }
 
-.calendars {
+.member-calendars {
     width: 700px;
     height: 140px;
     display: flex;
@@ -58,12 +58,12 @@
     margin-top: 100px;
 }
 
-.calendars a, a:focus, a:hover, a:visited, a:link, a:active {
+.member-calendars a, a:focus, a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     color: black;
 }
 
-.calendar {
+.member-calendar {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -78,6 +78,6 @@
     box-shadow: 3px 3px 6px 2px #cdcdcd;
 }
 
-.calendar:hover {
+.member-calendar:hover {
     background-color: #dadada;
 }

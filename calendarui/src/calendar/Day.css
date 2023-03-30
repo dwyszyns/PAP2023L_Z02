@@ -1,0 +1,30 @@
+.border {
+    text-align: center;
+}
+
+.day-col {
+    text-align: center;
+}
+
+.day {
+    text-align: center;
+    margin-top: 1px;
+}
+
+.text-day {
+    text-align: center;
+    padding: 1px;
+    margin: 1px;
+}
+
+.text-day-current {
+    text-align: center;
+    background-color: blue;
+    border-radius: 20px;
+    color: white;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    margin: auto;
+    width: 30px;
+    /*" rounded-full w-7"*/
+}
