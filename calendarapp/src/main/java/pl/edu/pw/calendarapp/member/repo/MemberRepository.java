@@ -21,4 +21,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             "join fetch Calendar c on cm.calendar = c " +
             "and m.memberId = :memberId")
     Optional<Member> findByIdWithCalendars(@Param("memberId") Long memberId);
+
+    Optional<Object> findByUsername(String username);
 }

@@ -1,9 +1,9 @@
-import {hot} from 'react-hot-loader';
+import { hot } from 'react-hot-loader';
 import React from 'react';
 import './app.css';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import {store} from './store';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import Main from './main/main';
 import MemberProfile from './member/member-profile';
 import CalendarElement from './calendar/calendar';
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <MemberProfile />,
       },
       {
-        path: 'calendar/member/:memberId',
+        path: 'calendar/:calendarId',
         element: <CalendarElement />,
       },
     ],

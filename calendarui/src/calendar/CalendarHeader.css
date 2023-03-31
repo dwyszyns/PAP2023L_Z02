@@ -2,4 +2,39 @@
     padding: 2px 4px;
     margin: auto;
     align-items: center;
+    display: flex;
+}
+
+.calendar-logo {
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+}
+
+.calendar-title {
+    margin-right: 10px;
+    font-size: xx-large;
+    color: gray;
+    font-weight: 700;
+}
+
+.calendar-change-sth-button {
+    text-align: center;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-right: 5px;
+}
+
+.calendar-cursor-pointer-left {
+    color: blueviolet;
+}
+
+.calendar-cursor-pointer-right {
+    color: blueviolet;
+}
+
+.calendar-header-month-year {
+
 }

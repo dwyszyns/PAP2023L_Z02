@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.calendarapp.member.MemberRepository;
+import pl.edu.pw.calendarapp.member.repo.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +15,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findByUsername(username).orElse(null);
+        return (UserDetails) memberRepository.findByUsername(username).orElse(null);
     }
 }
