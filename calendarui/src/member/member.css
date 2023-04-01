@@ -1,8 +1,6 @@
 .profile-container {
-    position: absolute;
-    width: 95%;
-    height: 98%;
-    margin-left: 3%;
+    height: 98vh;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,13 +8,14 @@
 
 .details-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: fit-content;
     gap: 30px;
     margin-top: 100px;
 }
 
 .profile-picture {
+    margin-left: 200px;
     width: 260px;
     height: 260px;
     box-shadow: 3px 3px 8px 2px rgba(0, 0, 0, 0.2);
@@ -25,6 +24,7 @@
 }
 
 .description {
+    width: 500px;
     height: fit-content;
     align-self: center;
 }

@@ -1,24 +1,20 @@
 .icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
 }
 
 .button {
-    width: 44px;
-    height: 44px;
-    border-radius: 6px;
-    background-color: #ededed;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background-color: #ffffff;
     border: 0;
 }
 
-.button:hover {
-    background-color: #cdcdcd;
+.button:hover, .selected {
+    background-color: #efefef;
 }
 
 .button:active {
-    background-color: #bdbdbd;
-}
-
-.selected {
-    background-color: #cdcdcd;
+    background-color: #dfdfdf;
 }

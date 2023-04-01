@@ -1,0 +1,34 @@
+.friend-request {
+    width: 180px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.friend-request-username {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.friend-request-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+.friend-request-button {
+    width: 100px;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;;
+    background-color: #dfdfdf;
+}
+
+.friend-request-button:hover {
+    background-color: #cacaca;
+}

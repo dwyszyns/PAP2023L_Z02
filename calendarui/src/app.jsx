@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import './app.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import Main from './main/main';
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Main />,
     children: [
+      {
+        path: '',
+        element: <Navigate to="member/1" />,
+      },
       {
         path: 'member/:memberId',
         element: <MemberProfile />,
