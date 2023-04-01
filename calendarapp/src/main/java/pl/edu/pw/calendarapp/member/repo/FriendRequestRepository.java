@@ -1,5 +1,6 @@
 package pl.edu.pw.calendarapp.member.repo;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,7 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
             "where (f.sender.memberId = :memberId and f.accepted = true) " +
             "or f.receiver.memberId = :memberId " +
             "order by f.accepted")
+    @EntityGraph(attributePaths = {"sender", "receiver"})
     List<FriendRequest> findAllFriendsOrRequestsForMember(@Param("memberId") long memberId);
 
     @Query(value = "select f from FriendRequest f " +
