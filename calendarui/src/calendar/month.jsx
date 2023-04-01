@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Day from './Day';
-import './Month.css';
+import Day from './day';
+import './month.css';
 import { getMonth } from './util';
 
 const propTypes = {
@@ -9,11 +9,11 @@ const propTypes = {
 };
 
 const Month = ({ monthIndex }) => (
-  <div className="flex-1">
+  <div className="calendar-month">
     {getMonth(monthIndex).map((row, index) => (
       <React.Fragment key={row}>
         {row.map((day) => (
-          <div className="flex-1-day">
+          <div className="calendar-day">
             <Day day={day} key={day} rowIdx={index} />
           </div>
         ))}

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './calendar.css';
 import dayjs from 'dayjs';
 import CalendarSidebar from './calendarSidebar';
-import CalendarHeader from './CalendarHeader';
-import Month from './Month';
+import CalendarHeader from './calendarHeader';
+import Month from './month';
 
 function CalendarElement() {
   const [currentMonth, setCurrentMonth] = useState(dayjs().month());
@@ -12,7 +12,7 @@ function CalendarElement() {
     <>
       <div className="h-screen">
         <CalendarHeader monthIndex={currentMonth} setMonthIndex={setCurrentMonth} />
-        <div className="flex flex-1">
+        <div className="flex calendar-month">
           <CalendarSidebar />
           <Month monthIndex={currentMonth} />
         </div>

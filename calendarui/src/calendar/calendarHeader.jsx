@@ -1,5 +1,5 @@
 import React from 'react';
-import './CalendarHeader.css';
+import './calendarHeader.css';
 import './calendar.svg';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';

@@ -22,12 +22,17 @@
     text-align: center;
     margin-top: 15px;
     height: 50%;
+    border-radius: 5px;
+}
+
+.small-calendar-reset-button {
+    color: deeppink;
+    font-size: medium;
 }
 
 .small-calendar-cursor-pointer-left {
     color: deeppink;
     font-size: medium;
-    /*margin-left: 2px;*/
 }
 
 .small-calendar-cursor-pointer-right {
@@ -51,7 +56,7 @@
     text-align: center;
 }
 
-.small-calendar-button {
+.small-calendar-button- {
     width: 100%;
     background-color: white;
     border: 1px solid rgba(220, 216, 216, 0.8);
@@ -65,4 +70,10 @@
     margin: 4px 0;
     cursor: pointer;
     border-radius: 7px;
+}
+
+.small-calendar-button-current {
+    width: 100%;
+    background-color: #7e9dec;
+    border: 1px solid rgba(220, 216, 216, 0.8);
 }

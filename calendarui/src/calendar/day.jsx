@@ -1,5 +1,5 @@
 import React from 'react';
-import './Day.css';
+import './day.css';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 

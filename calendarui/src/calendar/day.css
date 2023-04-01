@@ -21,9 +21,9 @@
 
 .text-day-current {
     text-align: center;
-    background-color: blue;
+    background-color: #7e9dec;
     border-radius: 20px;
-    color: white;
+    color: black;
     padding-bottom: 1px;
     padding-top: 1px;
     margin: auto;

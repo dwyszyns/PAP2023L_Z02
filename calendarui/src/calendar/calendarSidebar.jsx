@@ -4,7 +4,7 @@ import './calendarSidebar.css';
 import SmallCalendar from './smallCalendar';
 
 const CalendarSidebar = () => (
-  <aside className="calendar_sidebar">
+  <aside className="calendar-sidebar">
     <CreateEventButton />
     <SmallCalendar />
   </aside>

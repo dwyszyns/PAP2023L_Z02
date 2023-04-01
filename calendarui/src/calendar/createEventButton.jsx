@@ -3,8 +3,8 @@ import './createEventButton.css';
 
 const CreateEventButton = () => (
   // eslint-disable-next-line react/button-has-type
-  <button className="calendar_create_event">
-    <span className="text_create_event"> CREATE EVENT </span>
+  <button className="calendar-create-event">
+    <span className="text-create-event"> CREATE EVENT </span>
   </button>
 );
 
