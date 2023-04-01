@@ -4,6 +4,8 @@
 
 .day-col {
     text-align: center;
+    width: 80px;
+    /*/ZMIANA SZEROKOŚCI DNI W KALENDARZU\*/
 }
 
 .day {
@@ -26,5 +28,4 @@
     padding-top: 1px;
     margin: auto;
     width: 30px;
-    /*" rounded-full w-7"*/
 }

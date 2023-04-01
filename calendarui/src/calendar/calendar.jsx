@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './calendar.css';
 import dayjs from 'dayjs';
-import Sidebar from './Sidebar';
+import CalendarSidebar from './calendarSidebar';
 import CalendarHeader from './CalendarHeader';
 import Month from './Month';
 
@@ -13,7 +13,7 @@ function CalendarElement() {
       <div className="h-screen">
         <CalendarHeader monthIndex={currentMonth} setMonthIndex={setCurrentMonth} />
         <div className="flex flex-1">
-          <Sidebar />
+          <CalendarSidebar />
           <Month monthIndex={currentMonth} />
         </div>
       </div>

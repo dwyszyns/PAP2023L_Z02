@@ -3,6 +3,7 @@ import './CalendarHeader.css';
 import './calendar.svg';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
+import CalendarIcon from '../icons/calendar-icon';
 
 const propTypes = {
   monthIndex: PropTypes.number.isRequired,
@@ -14,13 +15,19 @@ export default function CalendarHeader({ monthIndex, setMonthIndex }) {
 
   const handleNextMonth = () => setMonthIndex(monthIndex + 1);
 
+  const handleReset = () => setMonthIndex(
+    monthIndex === dayjs().month()
+      ? monthIndex + Math.random()
+      : dayjs().month(),
+  );
+
   return (
     <header className="calendar-header">
-      {/* <img src="calendar.svg" alt="CALENDAR" className="calendar-logo" /> */}
+      <CalendarIcon classname="calendar-logo" />
       <h1 className="calendar-title">
         My calendar
       </h1>
-      <button className="calendar-change-sth-button" type="button">
+      <button onClick={handleReset} className="calendar-change-sth-button" type="button">
         Today
       </button>
       <button onClick={handlePrevMonth} type="button">
