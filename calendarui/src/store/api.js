@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:8080/';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl }),
+  tagTypes: ['FriendRequests'],
   endpoints: (builder) => ({
     getMemberById: builder.query({
       query: (id) => `member/${id}`,
@@ -12,7 +13,35 @@ export const api = createApi({
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
     }),
+    getFriendsForMemberId: builder.query({
+      query: (id) => `member/${id}/friends`,
+      providesTags: () => ['FriendRequests'],
+    }),
+    acceptRequestForMemberIdAndRequestId: builder.mutation({
+      query({ memberId, requestId }) {
+        return {
+          url: `member/${memberId}/friends/${requestId}`,
+          method: 'POST',
+        };
+      },
+      invalidatesTags: ['FriendRequests'],
+    }),
+    declineRequestForMemberIdAndRequestId: builder.mutation({
+      query({ memberId, requestId }) {
+        return {
+          url: `member/${memberId}/friends/${requestId}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: ['FriendRequests'],
+    }),
   }),
 });
 
-export const { useGetMemberByIdQuery, useGetCalendarsForMemberIdQuery } = api;
+export const {
+  useGetMemberByIdQuery,
+  useGetCalendarsForMemberIdQuery,
+  useGetFriendsForMemberIdQuery,
+  useAcceptRequestForMemberIdAndRequestIdMutation,
+  useDeclineRequestForMemberIdAndRequestIdMutation,
+} = api;
