@@ -6,6 +6,7 @@ import {
 
 import './sidebar.css';
 import FriendsSidebar from './friends/friends-sidebar';
+import CalendarsSidebar from './calendars/calendars-sidebar';
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('');
@@ -22,7 +23,7 @@ const Sidebar = () => {
       case 'user':
         return <></>;
       case 'calendars':
-        return <></>;
+        return <CalendarsSidebar />;
       case 'friends':
         return <FriendsSidebar />;
       case 'notifications':

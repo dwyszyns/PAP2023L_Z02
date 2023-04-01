@@ -1,8 +1,8 @@
 .h-screen {
-    margin: 0 auto;
     /*width: 90%;*/
     /*height: 90%;*/
     position: fixed;
     left: 95px;
     text-align: center;
+    margin-left: 270px;
 }
