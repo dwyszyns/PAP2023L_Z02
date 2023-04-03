@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.calendarapp.member.bizz.MemberMapper;
 import pl.edu.pw.calendarapp.member.bizz.MemberService;
+import pl.edu.pw.calendarapp.member.repo.Member;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -13,6 +15,12 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @GetMapping("/current")
+    public MemberView getCurrentMember(final Principal principal) {
+        return MemberMapper.mapMember((Member) principal);
+
+    }
 
     @GetMapping("/{memberId}")
     public MemberView getMemberById(@PathVariable("memberId") final long memberId) {
