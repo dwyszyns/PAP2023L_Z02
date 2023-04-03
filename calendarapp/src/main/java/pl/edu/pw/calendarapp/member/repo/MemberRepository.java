@@ -22,5 +22,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             "and m.memberId = :memberId")
     Optional<Member> findByIdWithCalendars(@Param("memberId") Long memberId);
 
-    Optional<Member> findMemberByUsername(String username);
+    Optional<MemberUserProjection> findMemberByUsername(String username);
 }

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.calendarapp.auth.bizz.AuthService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -14,17 +16,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@Valid @RequestBody MemberRegisterView memberRegisterView) {
+    public ResponseEntity<Map<String, String>> register(@Valid @RequestBody MemberRegisterView memberRegisterView) {
         try {
             authService.registerMember(memberRegisterView);
-            return ResponseEntity.status(HttpStatus.OK).body("Registration successful");
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("status", "Registration successful"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("status", "error", "message", e.getMessage()));
         }
     }
 
     @GetMapping("/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.status(HttpStatus.OK).body("Login successful");
+    public ResponseEntity<Map<String, String>> login() {
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("status", "Login successful"));
     }
 }

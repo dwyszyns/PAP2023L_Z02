@@ -2,11 +2,24 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseUrl = 'http://localhost:8080/';
 
+const getEncodedCredentials = (state) => btoa(`${state.auth.username}:${state.auth.password}`);
+
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery(
+    {
+      baseUrl,
+      prepareHeaders: (headers, { getState }) => {
+        headers.set('Authorization', `Basic ${getEncodedCredentials(getState())}`);
+        return headers;
+      },
+    },
+  ),
   tagTypes: ['FriendRequests'],
   endpoints: (builder) => ({
+    login: builder.query({
+      query: () => 'auth/login',
+    }),
     getMemberById: builder.query({
       query: (id) => `member/${id}`,
     }),
@@ -39,6 +52,7 @@ export const api = createApi({
 });
 
 export const {
+  useLazyLoginQuery,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetFriendsForMemberIdQuery,

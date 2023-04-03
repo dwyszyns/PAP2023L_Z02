@@ -6,6 +6,7 @@ import {
 
 import './sidebar.css';
 import FriendsSidebar from './friends/friends-sidebar';
+import LogoutIcon from '../icons/logout-icon';
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('');
@@ -55,6 +56,15 @@ const Sidebar = () => {
             {iconWrapper.icon()}
           </IconButton>
         ))}
+        <Link to="/logout" className="logout-button">
+          <IconButton
+            selected={false}
+            onClick={() => {}}
+            title="logout"
+          >
+            <LogoutIcon />
+          </IconButton>
+        </Link>
       </div>
       { renderNested() }
     </>

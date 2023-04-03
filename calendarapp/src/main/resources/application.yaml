@@ -22,7 +22,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        generate_statistics: true
+        generate_statistics: false
         jdbc:
           batch_size: 50
           batch_versioned_data: true
@@ -37,3 +37,9 @@ spring:
     properties:
       org.quartz.threadPool:
         threadCount: 2
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

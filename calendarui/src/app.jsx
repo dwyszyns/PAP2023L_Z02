@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Main from './main/main';
 import MemberProfile from './member/member-profile';
+import Login from './auth/login';
+import Logout from './auth/logout';
 
 const router = createBrowserRouter([
   {
@@ -14,13 +16,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Navigate to="member/1" />,
+        element: <Navigate to="login" />,
       },
       {
         path: 'member/:memberId',
         element: <MemberProfile />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/logout',
+    element: <Logout />,
   },
 ]);
 
