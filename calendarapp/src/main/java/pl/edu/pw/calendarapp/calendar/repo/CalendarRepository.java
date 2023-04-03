@@ -7,10 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
     @Query(value = "select cm.calendar from CalendarMember cm where cm.member.memberId = :memberId")
-    @EntityGraph(attributePaths = {"events"})
     List<Calendar> findAllForMember(@Param("memberId") Long memberId);
+
+    @EntityGraph(attributePaths = {"events"})
+    Optional<Calendar> findByCalendarId(long calendarId);
 }

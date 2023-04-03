@@ -1,8 +1,8 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
-import {useGetMemberByIdQuery} from '../store';
+import { useParams } from 'react-router-dom';
+import { useGetMemberByIdQuery } from '../store';
 import './member.css';
-import MemberCalendarsPreview from "./member-calendars-preview";
+import MemberCalendarsPreview from './member-calendars-preview';
 
 const MemberProfile = () => {
   const { memberId } = useParams();

@@ -21,21 +21,19 @@ public class CalendarServiceImpl implements CalendarService {
     private final EventRepository eventRepository;
 
     @Override
-    public Optional<Calendar> findById(long calendarId) {
-        return calendarRepository.findById(calendarId);
+    public CalendarView getViewById(long memberId, long calendarId) {
+        final Set<Long> subscribedIds = eventRepository.getSubscribedForMemberAndCalendar(memberId, calendarId)
+                .stream()
+                .map(Event::getEventId)
+                .collect(Collectors.toCollection(HashSet::new));
+        final Optional<CalendarView> calendar = calendarRepository.findByCalendarId(calendarId).map(CalendarMapper::map);
+        calendar.map(CalendarView::getEvents)
+                .ifPresent(views -> views.forEach(view -> view.setSubscribed(subscribedIds.contains(view.getId()))));
+        return calendar.orElse(null);
     }
 
     @Override
-    public List<CalendarView> findAllForMember(long memberId) {
-        final List<CalendarView> calendars = calendarRepository.findAllForMember(memberId).stream()
-                .map(CalendarMapper::map)
-                .toList();
-        final Set<Long> subscribedEventIds = eventRepository.getSubscribedByMember(memberId).stream()
-                .map(Event::getEventId)
-                .collect(Collectors.toCollection(HashSet::new));
-        calendars.stream()
-                .flatMap(calendar -> calendar.getEvents().stream())
-                .forEach(event -> event.setSubscribed(subscribedEventIds.contains(event.getId())));
-        return calendars;
+    public List<Calendar> findAllForMember(long memberId) {
+        return calendarRepository.findAllForMember(memberId);
     }
 }

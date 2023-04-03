@@ -17,6 +17,12 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query(value = "select e from EventSubscriber es " +
             "join fetch Event e on e = es.event " +
+            "where es.subscriber.memberId = :memberId " +
+            "and e.calendar.calendarId = :calendarId")
+    List<Event> getSubscribedForMemberAndCalendar(@Param("memberId") final Long memberId, @Param("calendarId") final Long calendarId);
+
+    @Query(value = "select e from EventSubscriber es " +
+            "join fetch Event e on e = es.event " +
             "where es.subscriber.memberId = :memberId")
     List<Event> getSubscribedByMember(@Param("memberId") final Long memberId);
 

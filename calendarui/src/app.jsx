@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Main from './main/main';
 import MemberProfile from './member/member-profile';
-import CalendarElement from './calendar/calendar';
+import Calendar from './calendar/calendar';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'calendar/:calendarId',
-        element: <CalendarElement />,
+        element: <Calendar />,
       },
     ],
   },

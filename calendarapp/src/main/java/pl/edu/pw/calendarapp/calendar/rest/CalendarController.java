@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pw.calendarapp.calendar.bizz.CalendarMapper;
 import pl.edu.pw.calendarapp.calendar.bizz.CalendarService;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public class CalendarController {
 
     @GetMapping("/member/{memberId}")
     public List<CalendarView> getCalendarsForMember(@PathVariable Long memberId) {
-        return calendarService.findAllForMember(memberId);
+        return calendarService.findAllForMember(memberId).stream().map(CalendarMapper::mapPreview).toList();
+    }
+
+    @GetMapping("{calendarId}")
+    public CalendarView getCalendarById(@PathVariable Long calendarId) {
+        return calendarService.getViewById(1, calendarId);
     }
 }

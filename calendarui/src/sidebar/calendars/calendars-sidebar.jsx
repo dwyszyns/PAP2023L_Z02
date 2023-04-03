@@ -4,14 +4,14 @@ import { useGetCalendarsForMemberIdQuery } from '../../store';
 import '../sidebar.css';
 
 const CalendarsSidebar = () => {
-  const [selectedCalendar, setSelectedCalendar] = useState('');
+  const [selectedCalendarId, setSelectedCalendarId] = useState('');
   const { data, isLoading, error } = useGetCalendarsForMemberIdQuery(1);
 
-  const isSelected = (username) => username === selectedCalendar;
+  const isSelected = (id) => id === selectedCalendarId;
 
-  const renderClassName = (CalendarReq) => [
+  const renderClassName = (calendar) => [
     'nested-sidebar-button',
-    isSelected(CalendarReq.name) ? 'selected' : '',
+    isSelected(calendar.id) ? 'selected' : '',
   ].join(' ');
 
   return (
@@ -20,17 +20,16 @@ const CalendarsSidebar = () => {
         <p className="nested-sidebar-title">
           Calendars
         </p>
-        {!isLoading && !error && data.map((CalendarReq) => (
+        {!isLoading && !error && data.map((calendar) => (
           <>
             <button
               type="button"
-              key={CalendarReq.name}
-              className={renderClassName(CalendarReq)}
-              onClick={() => setSelectedCalendar(CalendarReq.friend.username)}
+              key={calendar.id}
+              className={renderClassName(calendar)}
+              onClick={() => setSelectedCalendarId(calendar.id)}
             >
-              <Link to={`/calendar/${CalendarReq.id}`} className="nested-sidebar-link">
-                <div className="friend-profile-picture" />
-                {CalendarReq.name}
+              <Link to={`/calendar/${calendar.id}`} className="nested-sidebar-link">
+                {calendar.name}
               </Link>
             </button>
           </>

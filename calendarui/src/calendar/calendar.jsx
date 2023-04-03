@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './calendar.css';
-import dayjs from 'dayjs';
-import CalendarSidebar from './calendarSidebar';
-import CalendarHeader from './calendarHeader';
-import Month from './month';
+import { useParams } from 'react-router-dom';
+import CalendarHeader from './calendar-header';
+import SmallCalendar from './small-calendar';
+import { useGetCalendarByCalendarIdQuery } from '../store/api';
 
-function CalendarElement() {
-  const [currentMonth, setCurrentMonth] = useState(dayjs().month());
+const Calendar = () => {
+  const { calendarId } = useParams();
+  const { error, data, isLoading } = useGetCalendarByCalendarIdQuery(calendarId);
 
   return (
-    <>
-      <div className="h-screen">
-        <CalendarHeader monthIndex={currentMonth} setMonthIndex={setCurrentMonth} />
-        <div className="flex calendar-month">
-          <CalendarSidebar />
-          <Month monthIndex={currentMonth} />
+    data ? (
+      <div className="calendar-container">
+        <CalendarHeader calendarName={data.name} />
+        <div className="calendar-main-view">
+          <SmallCalendar />
         </div>
       </div>
-    </>
+    ) : <></>
   );
-}
+};
 
-export default CalendarElement;
+export default Calendar;

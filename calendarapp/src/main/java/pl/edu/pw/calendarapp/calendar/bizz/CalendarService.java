@@ -4,11 +4,10 @@ import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CalendarService {
 
-    Optional<Calendar> findById(long calendarId);
+    CalendarView getViewById(long memberId, long calendarId);
 
-    List<CalendarView> findAllForMember(long memberId);
+    List<Calendar> findAllForMember(long memberId);
 }

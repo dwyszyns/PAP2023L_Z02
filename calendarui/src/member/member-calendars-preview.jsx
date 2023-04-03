@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import './member.css'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './member.css';
 
 const propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
