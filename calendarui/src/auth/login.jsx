@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCredentials } from './auth-slice';
 import { useLazyLoginQuery } from '../store/api';
+import './auth.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -25,10 +26,11 @@ const Login = () => {
     trigger();
   };
 
+  const invalidCredentials = () => status.isError && userTriggered;
+
   const render = () => {
-    console.log(status);
-    if (status.isError && userTriggered) {
-      return <p>Wrong credentials</p>;
+    if (invalidCredentials()) {
+      return <p className="auth-error-message">Wrong credentials</p>;
     }
     if (status.isSuccess) {
       navigate('/member/current');
@@ -37,13 +39,28 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <input value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="button" onClick={onButtonClick}>
-        LOGIN
+    <div className="auth-container">
+      <h1 className="auth-title">Login</h1>
+      <input
+        className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
+        value={username}
+        placeholder="username"
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
+        type="password"
+        value={password}
+        placeholder="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="auth-submit-button" type="button" onClick={onButtonClick}>
+        Submit
       </button>
-      {render()}
+      <div className="auth-footer">
+        <Link to="/register" className="auth-link">{'Don\'t have an account?'}</Link>
+        {render()}
+      </div>
     </div>
   );
 };

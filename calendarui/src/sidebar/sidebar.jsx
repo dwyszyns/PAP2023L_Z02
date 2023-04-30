@@ -37,7 +37,7 @@ const Sidebar = () => {
     <>
       <div className="navbar">
         <div className="logo" />
-        <Link to="member/1">
+        <Link to="member/current">
           <IconButton
             selected={selectedTab === 'user'}
             onClick={() => onButtonClick('user')}

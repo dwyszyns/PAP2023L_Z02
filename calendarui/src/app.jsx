@@ -8,6 +8,7 @@ import Main from './main/main';
 import MemberProfile from './member/member-profile';
 import Login from './auth/login';
 import Logout from './auth/logout';
+import Register from './auth/register';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/logout',
     element: <Logout />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
 ]);
 

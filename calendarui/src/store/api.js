@@ -9,8 +9,11 @@ export const api = createApi({
   baseQuery: fetchBaseQuery(
     {
       baseUrl,
-      prepareHeaders: (headers, { getState }) => {
-        headers.set('Authorization', `Basic ${getEncodedCredentials(getState())}`);
+      prepareHeaders: (headers, { getState, endpoint }) => {
+        console.log(endpoint);
+        if (endpoint !== 'register') {
+          headers.set('Authorization', `Basic ${getEncodedCredentials(getState())}`);
+        }
         return headers;
       },
     },
@@ -48,11 +51,19 @@ export const api = createApi({
       },
       invalidatesTags: ['FriendRequests'],
     }),
+    register: builder.mutation({
+      query: (body) => ({
+        url: 'auth/register',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useLazyLoginQuery,
+  useRegisterMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetFriendsForMemberIdQuery,
