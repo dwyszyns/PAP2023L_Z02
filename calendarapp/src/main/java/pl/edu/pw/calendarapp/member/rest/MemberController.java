@@ -1,9 +1,11 @@
 package pl.edu.pw.calendarapp.member.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.calendarapp.member.bizz.MemberMapper;
 import pl.edu.pw.calendarapp.member.bizz.MemberService;
+import pl.edu.pw.calendarapp.member.repo.MemberUserProjection;
 
 import java.util.List;
 
@@ -13,6 +15,14 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @GetMapping("/current")
+    public MemberView getCurrentMember() {
+        final MemberUserProjection memberFromAuth =
+                (MemberUserProjection) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return MemberMapper.mapMember(memberService.findById(memberFromAuth.getMemberId()));
+
+    }
 
     @GetMapping("/{memberId}")
     public MemberView getMemberById(@PathVariable("memberId") final long memberId) {

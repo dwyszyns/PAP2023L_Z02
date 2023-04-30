@@ -25,6 +25,8 @@ public class Member {
     private String lastName;
     @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "password", nullable = false)
+    private String password;
     @Column(name = "date_joined", nullable = false)
     private Timestamp dateJoined;
 

@@ -10,6 +10,7 @@ create table member(
     first_name  varchar(255) not null,
     last_name   varchar(255) not null,
     username    varchar(255) not null,
+    password    varchar(255) not null,
     date_joined timestamp not null,
     constraint pk_member primary key (member_id)
 );

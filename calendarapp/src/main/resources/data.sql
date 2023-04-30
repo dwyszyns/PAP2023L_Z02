@@ -1,15 +1,15 @@
-insert into member(member_id, first_name, last_name, username, date_joined) values (0, 'John', 'Doe', 'johndoe', '2023-02-21 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (1, 'Alice', 'Smith', 'smithy', '2023-02-27 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (2, 'David', 'Schmidt', 'dschmidt', '2023-03-01 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (3, 'Harrison', 'Barnes', 'barnesnoble', '2023-03-01 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (4, 'Giles', 'McAfee', 'othermcafee', '2023-03-01 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (5, 'Curt', 'Reyer', 'creyer', '2023-03-02 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (6, 'Howard', 'Van Aalst', 'hvagon', '2023-03-02 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (7, 'Vincent', 'Jérôme', 'vinny', '2023-03-02 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (8, 'Hoyt', 'Dreessen', 'hoytdree', '2023-03-03 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (9, 'Amanda', 'Parks', 'parksnrec', '2023-03-05 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (10, 'Charity', 'Forrest', 'runcharity', '2023-03-05 00:00:00');
-insert into member(member_id, first_name, last_name, username, date_joined) values (11, 'Heidi', 'Kappel', 'heidikapp', '2023-03-07 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (0, 'John', 'Doe', 'johndoe', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-02-21 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (1, 'Alice', 'Smith', 'smithy', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-02-27 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (2, 'David', 'Schmidt', 'dschmidt', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-01 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (3, 'Harrison', 'Barnes', 'barnesnoble', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-01 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (4, 'Giles', 'McAfee', 'othermcafee', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-01 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (5, 'Curt', 'Reyer', 'creyer', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-02 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (6, 'Howard', 'Van Aalst', 'hvagon', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-02 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (7, 'Vincent', 'Jérôme', 'vinny', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-02 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (8, 'Hoyt', 'Dreessen', 'hoytdree', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-03 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (9, 'Amanda', 'Parks', 'parksnrec', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-05 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (10, 'Charity', 'Forrest', 'runcharity', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-05 00:00:00');
+insert into member(member_id, first_name, last_name, username, password, date_joined) values (11, 'Heidi', 'Kappel', 'heidikapp', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-03-07 00:00:00');
 
 insert into calendar(calendar_id, name, public) values (0, 'My Calendar', true);
 insert into calendar(calendar_id, name, public) values (1, 'Family', true);

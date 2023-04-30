@@ -18,6 +18,11 @@
     margin-bottom: 25px;
 }
 
+.logout-button {
+    margin-top: auto;
+    margin-bottom: 50px;
+}
+
 .nested-sidebar {
     background-color: #ffffff;
     border-right: 1px solid #ccc;
