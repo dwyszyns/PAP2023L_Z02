@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id", nullable = false)
     private Long memberId;
     @Column(name = "first_name", nullable = false)

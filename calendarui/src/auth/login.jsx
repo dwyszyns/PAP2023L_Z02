@@ -16,7 +16,7 @@ const Login = () => {
   useEffect(() => {
     setUserTriggered(false);
     trigger();
-  }, []);
+  }, [trigger]);
 
   const onButtonClick = () => {
     dispatch(setCredentials({ username, password }));

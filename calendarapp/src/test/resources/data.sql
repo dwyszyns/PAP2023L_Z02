@@ -36,3 +36,5 @@ insert into friend_request(request_id, sender_id, receiver_id, accepted) values 
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (1, 0, 2, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (2, 2, 1, true);
 
+insert into event_seq(seq_id, next_val) values (0, 100);
+insert into event_subscriber_seq(seq_id, next_val) values (0, 100);
