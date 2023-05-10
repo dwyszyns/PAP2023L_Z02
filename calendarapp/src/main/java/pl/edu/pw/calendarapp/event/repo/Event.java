@@ -17,7 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "event_id", nullable = false)
     private Long eventId;
     @Column(name = "name", nullable = false)

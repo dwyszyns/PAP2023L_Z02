@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseUrl = 'http://localhost:8080/';
+const baseUrl = 'http://localhost:8000/';
 
 const getEncodedCredentials = (state) => btoa(`${state.auth.username}:${state.auth.password}`);
 
@@ -10,7 +10,6 @@ export const api = createApi({
     {
       baseUrl,
       prepareHeaders: (headers, { getState, endpoint }) => {
-        console.log(endpoint);
         if (endpoint !== 'register') {
           headers.set('Authorization', `Basic ${getEncodedCredentials(getState())}`);
         }

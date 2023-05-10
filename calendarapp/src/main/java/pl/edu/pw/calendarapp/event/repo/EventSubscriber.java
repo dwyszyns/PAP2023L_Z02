@@ -13,7 +13,7 @@ import pl.edu.pw.calendarapp.member.repo.Member;
 @NoArgsConstructor
 public class EventSubscriber {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "event_subscriber_id")
     private Long eventSubscriberId;
 

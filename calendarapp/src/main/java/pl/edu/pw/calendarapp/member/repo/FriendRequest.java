@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class FriendRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_db_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "request_id", nullable = false)
     private Long requestId;
     @Column(name = "accepted", nullable = false)
