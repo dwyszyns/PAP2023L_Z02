@@ -8,10 +8,7 @@ import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +25,10 @@ public class CalendarServiceImpl implements CalendarService {
                 .collect(Collectors.toCollection(HashSet::new));
         final Optional<CalendarView> calendar = calendarRepository.findByCalendarId(calendarId).map(CalendarMapper::map);
         calendar.map(CalendarView::getEvents)
-                .ifPresent(views -> views.forEach(view -> view.setSubscribed(subscribedIds.contains(view.getId()))));
+                .ifPresent(views -> views.values().stream()
+                        .flatMap(Collection::stream)
+                        .forEach(view -> view.setSubscribed(subscribedIds.contains(view.getId())))
+                );
         return calendar.orElse(null);
     }
 

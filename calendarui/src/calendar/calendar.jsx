@@ -2,7 +2,7 @@ import React from 'react';
 import './calendar.css';
 import { useParams } from 'react-router-dom';
 import CalendarHeader from './calendar-header';
-import SmallCalendar from './small-calendar';
+import CalendarMonth from './calendar-month';
 import { useGetCalendarByCalendarIdQuery } from '../store/api';
 
 const Calendar = () => {
@@ -14,7 +14,7 @@ const Calendar = () => {
       <div className="calendar-container">
         <CalendarHeader calendarName={data.name} />
         <div className="calendar-main-view">
-          <SmallCalendar />
+          <CalendarMonth calendarId={calendarId} />
         </div>
       </div>
     ) : <></>
