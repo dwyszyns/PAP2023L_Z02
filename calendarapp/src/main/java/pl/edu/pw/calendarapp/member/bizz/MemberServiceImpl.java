@@ -29,7 +29,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void rejectFriendRequest(final long requestId, final long memberId) {
-
         friendRequestRepository.findByIdForMember(requestId, memberId)
                 .ifPresent(friendRequestRepository::delete);
     }
@@ -55,6 +54,5 @@ public class MemberServiceImpl implements MemberService {
             friendRequestRepository.save(friendRequest);
         }
     }
-
 
 }

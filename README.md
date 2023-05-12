@@ -23,6 +23,7 @@
 - A page for logging in and registering
 
 ### Core functionality
+
 - Creating calendars and allowing users to add others to their calendars
 - Allowing users to find and join public calendars
 - Creating events inside calendars
@@ -33,7 +34,26 @@
 - Dynamic reminders
 - Sending / receiving friend requests
 
+# Running the application
+
+### Full application
+
+Make sure that docker and docker-compose are installed and the docker daemon is running. Then run
+
+```docker compose up```
+
+from the root directory of the project. This will start the database and the backend and frontend servers.
+
+### Only the database instance (local development)
+
+Make sure that docker and docker-compose are installed and the docker daemon is running. Then run
+
+```docker compose create mysqldb && docker compose start mysqldb```
+
+from the root directory of the project. This will start the database without the backend and frontend servers.
+
 # Authors
+
 - Rafał Cendrowski
 
 - Dominika Wyszyńska

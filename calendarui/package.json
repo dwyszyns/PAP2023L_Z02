@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --open",
+    "start:server": "webpack-dev-server --mode development --host 0.0.0.0 --open",
     "build": "webpack --mode production",
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src"
   },

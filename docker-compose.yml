@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  calendarapp:
+    build: ./calendarapp
+    ports:
+      - "8000:8000"
+    links:
+      - mysqldb
+    depends_on:
+      - mysqldb
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: calendar_db
+      DATABASE_PORT: 3306
+  calendarui:
+    build: ./calendarui
+    ports:
+      - "80:5000"
+  mysqldb:
+    image: mysql:8
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql-init-files:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: calendar_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3600:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10

@@ -6,7 +6,13 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Main from './main/main';
 import MemberProfile from './member/member-profile';
+<<<<<<< HEAD
 import Calendar from './calendar/calendar';
+=======
+import Login from './auth/login';
+import Logout from './auth/logout';
+import Register from './auth/register';
+>>>>>>> main
 
 const router = createBrowserRouter([
   {
@@ -15,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Navigate to="member/1" />,
+        element: <Navigate to="login" />,
       },
       {
         path: 'member/:memberId',
@@ -26,6 +32,18 @@ const router = createBrowserRouter([
         element: <Calendar />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/logout',
+    element: <Logout />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
 ]);
 
