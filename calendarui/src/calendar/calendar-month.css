@@ -3,26 +3,60 @@
     flex-direction: column;
 }
 
-.small-calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.small-calendar-h1 {
+    /*width: 100%;*/
+    width: 770px;
+    margin: auto;
 }
+
+.l1 {
+    width: 25%;
+    height: 1px;
+    float: left;
+}
+
+.text-header-small-calendar {
+    width: 50%;
+    float: left;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #000000;
+    font-weight: bold;
+    margin: 0;
+    width: 50%;
+}
+
+.l2 {
+    width: 25%;
+    float: left;
+    text-align: right;
+
+}
+
 
 .text-header-small-calendar {
     font-size: 2.5rem;
     color: #000000;
     font-weight: bold;
     margin: 0;
+    width: 50%;
 }
 
-.small-calendar-button-sideways {
+.small-calendar-button {
+    float: right;
     color: white;
     background-color: white;
     text-align: center;
     margin-top: 15px;
-    height: 50%;
+    margin-left: 40px;
     border-radius: 5px;
+    width: 100px;
+    height: 40px;
+}
+
+.small-calendar-elems {
+    display: flex;
+    align-items: center;
 }
 
 .small-calendar-array {
@@ -55,7 +89,7 @@
 
 .small-calendar-button-other {
     width: 100%;
-    background-color: gray;
+    background-color: #d2d0d0;
     border: 1px solid rgba(220, 216, 216, 0.8);
 }
 
@@ -72,3 +106,41 @@
     background-color: #7e9dec;
     border: 1px solid rgba(220, 216, 216, 0.8);
 }
+
+.small-calendar-reset-button {
+    color: #144fff;
+    font-size: medium;
+
+}
+
+.small-calendar-cursor-pointer-left {
+    padding: 0;
+    border: none;
+    background-size: 65%;
+    color: white;
+    background-color: white;
+    width: 50px;
+    height: 55px;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-image: url("chevron-left.svg");
+    background-repeat: no-repeat;
+}
+
+.small-calendar-cursor-pointer-right {
+    margin-left: 15px;
+    padding: 0;
+    border: none;
+    background-size: 65%;
+    color: white;
+    background-color: white;
+    width: 50px;
+    height: 55px;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-image: url("chevron-right.svg");
+    background-repeat: no-repeat;
+}
+

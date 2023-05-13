@@ -15,10 +15,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<<<<<<< HEAD:calendarapp/src/main/java/pl/edu/pw/calendarapp/config/UserDetailsServiceImpl.java
-        return (UserDetails) memberRepository.findByUsername(username).orElse(null);
-=======
         return memberRepository.findMemberByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
->>>>>>> main:calendarapp/src/main/java/pl/edu/pw/calendarapp/auth/bizz/UserDetailsServiceImpl.java
     }
 }

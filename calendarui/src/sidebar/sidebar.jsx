@@ -6,11 +6,8 @@ import {
 
 import './sidebar.css';
 import FriendsSidebar from './friends/friends-sidebar';
-<<<<<<< HEAD
 import CalendarsSidebar from './calendars/calendars-sidebar';
-=======
 import LogoutIcon from '../icons/logout-icon';
->>>>>>> main
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('calendars');

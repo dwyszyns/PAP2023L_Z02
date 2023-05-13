@@ -15,6 +15,12 @@ const CalendarMonth = ({ calendarId }) => {
 
   const dayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
+  const handlePrevMonth = () => setCurrentMonth(currentMonth - 1);
+
+  const handleNextMonth = () => setCurrentMonth(currentMonth + 1);
+
+  const handleReset = () => setCurrentMonth(dayjs().month());
+
   const getDayClass = (day) => {
     console.log(day.format('YYYY-MM-DD'));
     const format = 'DD-MM-YY';
@@ -33,25 +39,38 @@ const CalendarMonth = ({ calendarId }) => {
 
   return (
     <div className="small-calendar">
-      <header className="small-calendar-header">
-        <p className="text-header-small-calendar">
+      <div className="small-calendar-h1">
+        <div className="l1"> </div>
+        <div className="text-header-small-calendar">
           {dayjs(new Date(dayjs().year(), currentMonth)).format('MMMM YYYY')}
-        </p>
-      </header>
-      <div className="small-calendar-array">
-        {dayNames.map((day) => (
-          <p key={day} className="text-day-small-calendar">
-            {day}
-          </p>
-        ))}
-        {getDayArray(currentMonth).filter((day) => day !== undefined).map((day) => (
-          <button key={day.format('DD-MM-YYYY')} type="button" className={`small-calendar-button-${getDayClass(day)}`}>
-            <span className="small-calendar-day">
-              <div>{day.format('D')}</div>
-              <div>{getEventsForDay(day) && getEventsForDay(day).map((event) => <p key={event.id}>{event.name}</p>)}</div>
+        </div>
+        <div className="l2">
+          <button className="small-calendar-button" onClick={handleReset} type="button">
+            <span className="small-calendar-reset-button">
+              Today
             </span>
           </button>
-        ))}
+        </div>
+      </div>
+      <div className="small-calendar-elems">
+        <button className="small-calendar-cursor-pointer-left" onClick={handlePrevMonth} type="button" />
+        <div className="small-calendar-array">
+          {dayNames.map((day) => (
+            <p key={day} className="text-day-small-calendar">
+              {day}
+            </p>
+          ))}
+          {getDayArray(currentMonth).filter((day) => day !== undefined).map((day) => (
+            <button key={day.format('DD-MM-YYYY')} type="button" className={`small-calendar-button-${getDayClass(day)}`}>
+              <span className="small-calendar-day">
+                <div>{day.format('D')}</div>
+                {/* eslint-disable-next-line max-len */}
+                <div>{getEventsForDay(day) && getEventsForDay(day).map((event) => <p key={event.id}>{event.name}</p>)}</div>
+              </span>
+            </button>
+          ))}
+        </div>
+        <button className="small-calendar-cursor-pointer-right" onClick={handleNextMonth} type="button" />
       </div>
     </div>
   );
