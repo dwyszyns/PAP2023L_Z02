@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className="page-login">
       <div className="page-description">
-        LOL
+        Description
       </div>
       <div className="login">
         <div className="auth-container">

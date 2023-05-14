@@ -1,6 +1,7 @@
 .small-calendar {
     display: flex;
     flex-direction: column;
+    width: auto;
 }
 
 .small-calendar-h1 {
@@ -84,6 +85,7 @@
     background-color: white;
     border: 1px solid rgba(220, 216, 216, 0.8);
     display: grid;
+    cursor: pointer;
 }
 
 .small-calendar-button-other {
@@ -91,6 +93,7 @@
     background-color: #d2d0d0;
     border: 1px solid rgba(220, 216, 216, 0.8);
     display: grid;
+    cursor: pointer;
 }
 
 .small-calendar-day {
@@ -107,12 +110,14 @@
     background-color: #7e9dec;
     border: 1px solid rgba(220, 216, 216, 0.8);
     display: grid;
+    cursor: pointer;
 }
 
 .event-elems {
     width: 100%;
     background-color: #7e9dec;
     border: 1px solid rgba(220, 216, 216, 0.8);
+    cursor: pointer;
 }
 
 .small-calendar-reset-button {

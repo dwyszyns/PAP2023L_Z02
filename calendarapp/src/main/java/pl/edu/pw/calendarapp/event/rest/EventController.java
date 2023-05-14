@@ -12,16 +12,11 @@ import pl.edu.pw.calendarapp.event.repo.Event;
 import java.util.List;
 
 @RestController
-@RequestMapping("calendar/event")
+@RequestMapping("/events")
 @RequiredArgsConstructor
 public class EventController {
 
     private final EventService eventService;
-
-//    @GetMapping("/{eventId}")
-//    public EventView getEventById(@PathVariable("eventId") final long eventId) {
-//        return EventMapper.map(eventService.findById(eventId));
-//    }
 
     @GetMapping("{memberId}/{calendarId}")
     public List<EventView> getEventsForCalendar(@PathVariable("memberId") final long memberId,
@@ -29,7 +24,7 @@ public class EventController {
         return eventService.getSubscribedForMemberAndCalendar(memberId, calendarId).stream().map(EventMapper::map).toList();
     }
 
-    @PostMapping("/calendar/event/add")
+    @PostMapping("/calendar/events/add")
     public void addEvent(@Valid @NotNull @RequestBody Event event, Calendar calendar) {
         eventService.addEvent(event, calendar);
     }

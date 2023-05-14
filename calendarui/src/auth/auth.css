@@ -1,13 +1,8 @@
-body {
-    background-image: url("./images/background.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
-
 .page-login {
     display: flex;
     height: 1000px;
     width: 100%;
+    background-color: white;
 }
 
 .login {

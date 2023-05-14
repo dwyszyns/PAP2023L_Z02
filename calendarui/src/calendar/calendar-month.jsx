@@ -14,6 +14,7 @@ const CalendarMonth = ({ calendarId }) => {
   const [currentMonth, setCurrentMonth] = useState(dayjs().month());
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalDay, setModalDay] = useState(0);
 
   const dayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
@@ -66,6 +67,7 @@ const CalendarMonth = ({ calendarId }) => {
             <button
               key={day.format('DD-MM-YYYY')}
               onClick={() => {
+                setModalDay(day);
                 setModalOpen(true);
               }}
               type="button"
@@ -77,7 +79,9 @@ const CalendarMonth = ({ calendarId }) => {
               </span>
             </button>
           ))}
-          {modalOpen && <Modal setOpenModal={setModalOpen} />}
+          {modalOpen && (
+          <Modal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
+          )}
         </div>
         <button className="small-calendar-cursor-pointer-right" onClick={handleNextMonth} type="button" />
       </div>
