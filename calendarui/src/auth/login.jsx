@@ -39,27 +39,34 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h1 className="auth-title">Login</h1>
-      <input
-        className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
-        value={username}
-        placeholder="username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
-        type="password"
-        value={password}
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="auth-submit-button" type="button" onClick={onButtonClick}>
-        Submit
-      </button>
-      <div className="auth-footer">
-        <Link to="/register" className="auth-link">{'Don\'t have an account?'}</Link>
-        {render()}
+    <div className="page-login">
+      <div className="page-description">
+        LOL
+      </div>
+      <div className="login">
+        <div className="auth-container">
+          <h1 className="auth-title">Login</h1>
+          <input
+            className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
+            value={username}
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            className={`auth-input ${invalidCredentials() ? 'invalid' : ''}`}
+            type="password"
+            value={password}
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="auth-submit-button" type="button" onClick={onButtonClick}>
+            Submit
+          </button>
+          <div className="auth-footer">
+            <Link to="/register" className="auth-link">{'Don\'t have an account?'}</Link>
+            {render()}
+          </div>
+        </div>
       </div>
     </div>
   );
