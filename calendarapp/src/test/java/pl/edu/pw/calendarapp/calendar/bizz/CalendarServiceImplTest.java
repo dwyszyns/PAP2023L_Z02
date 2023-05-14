@@ -8,14 +8,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
-import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,7 +64,7 @@ class CalendarServiceImplTest {
 
     @Test
     void testFindAllForMember() {
-        List<CalendarView> result = calendarService.findAllForMember(MEMBER_ID);
+        List<Calendar> result = calendarService.findAllForMember(MEMBER_ID);
 
         assertEquals(EXPECTED_CALENDARS_SIZE, result.size());
         assertEquals(ID_1, result.get(0).getId());

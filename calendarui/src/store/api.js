@@ -28,6 +28,14 @@ export const api = createApi({
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
     }),
+    getEventsForMemberIdAndCalendarId: builder.mutation({
+      query({ memberId, calendarId }) {
+        return {
+          url: `member/${memberId}/${calendarId}`,
+          method: 'POST',
+        };
+      },
+    }),
     getCalendarByCalendarId: builder.query({
       query: (id) => `calendar/${id}`,
     }),
@@ -70,6 +78,7 @@ export const {
   useGetCalendarsForMemberIdQuery,
   useGetCalendarByCalendarIdQuery,
   useGetFriendsForMemberIdQuery,
+  useGetEventsForMemberIdAndCalendarIdMutation,
   useAcceptRequestForMemberIdAndRequestIdMutation,
   useDeclineRequestForMemberIdAndRequestIdMutation,
 } = api;

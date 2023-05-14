@@ -11,5 +11,7 @@ public interface EventService {
 
     Optional<Event> findById(long eventId);
 
+    List<Event> getSubscribedForMemberAndCalendar(long memberId, long calendarId);
+
     void addEvent(Event event, Calendar calendar);
 }

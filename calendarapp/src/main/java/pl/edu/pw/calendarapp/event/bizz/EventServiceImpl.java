@@ -32,6 +32,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Event> getSubscribedForMemberAndCalendar(long memberId, long calendarId) {
+        return eventRepository.getSubscribedForMemberAndCalendar(memberId, calendarId);
+    }
+
+    @Override
     @Transactional
     public void addEvent(final Event event, final Calendar calendar) {
         event.setCalendar(calendar);

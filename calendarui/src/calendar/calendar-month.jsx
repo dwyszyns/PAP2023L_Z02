@@ -4,6 +4,7 @@ import './calendar-month.css';
 import PropTypes from 'prop-types';
 import { getDayArray } from './util';
 import { useGetCalendarByCalendarIdQuery } from '../store/api';
+import Modal from './modal';
 
 const propTypes = {
   calendarId: PropTypes.number.isRequired,
@@ -12,6 +13,7 @@ const propTypes = {
 const CalendarMonth = ({ calendarId }) => {
   const [currentMonth, setCurrentMonth] = useState(dayjs().month());
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const dayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
@@ -61,14 +63,21 @@ const CalendarMonth = ({ calendarId }) => {
             </p>
           ))}
           {getDayArray(currentMonth).filter((day) => day !== undefined).map((day) => (
-            <button key={day.format('DD-MM-YYYY')} type="button" className={`small-calendar-button-${getDayClass(day)}`}>
+            <button
+              key={day.format('DD-MM-YYYY')}
+              onClick={() => {
+                setModalOpen(true);
+              }}
+              type="button"
+              className={`small-calendar-button-${getDayClass(day)}`}
+            >
               <span className="small-calendar-day">
-                <div>{day.format('D')}</div>
-                {/* eslint-disable-next-line max-len */}
-                <div>{getEventsForDay(day) && getEventsForDay(day).map((event) => <p key={event.id}>{event.name}</p>)}</div>
+                <div className>{day.format('D')}</div>
+                <div className="event-elems">{getEventsForDay(day) && getEventsForDay(day).map((event) => <p key={event.id}>{event.name}</p>)}</div>
               </span>
             </button>
           ))}
+          {modalOpen && <Modal setOpenModal={setModalOpen} />}
         </div>
         <button className="small-calendar-cursor-pointer-right" onClick={handleNextMonth} type="button" />
       </div>

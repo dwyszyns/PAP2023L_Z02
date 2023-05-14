@@ -30,7 +30,6 @@
     width: 25%;
     float: left;
     text-align: right;
-
 }
 
 
@@ -85,12 +84,14 @@
     width: 100%;
     background-color: white;
     border: 1px solid rgba(220, 216, 216, 0.8);
+    display: grid;
 }
 
 .small-calendar-button-other {
     width: 100%;
     background-color: #d2d0d0;
     border: 1px solid rgba(220, 216, 216, 0.8);
+    display: grid;
 }
 
 .small-calendar-day {
@@ -103,6 +104,14 @@
 
 .small-calendar-button-current {
     width: 100%;
+    height: 90%;
+    background-color: #7e9dec;
+    border: 1px solid rgba(220, 216, 216, 0.8);
+    display: grid;
+}
+
+.event-elems {
+    width: 100%;
     background-color: #7e9dec;
     border: 1px solid rgba(220, 216, 216, 0.8);
 }
@@ -113,8 +122,20 @@
 
 }
 
+.small-calendar-button {
+    float: right;
+    color: white;
+    background-color: white;
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 40px;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+}
+
 .small-calendar-cursor-pointer-left {
-    padding: 0;
+    /*padding: 0;*/
     border: none;
     background-size: 65%;
     color: white;
@@ -143,4 +164,3 @@
     background-image: url("chevron-right.svg");
     background-repeat: no-repeat;
 }
-
