@@ -48,7 +48,7 @@ insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (17, 9, 3, false, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (18, 12, 3, false, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (19, 4, 3, false, true);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (21, 3, 8, true, true);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (20, 3, 8, true, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (21, 4, 9, true, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (22, 5, 11, true, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (23, 6, 11, true, true);
@@ -81,7 +81,7 @@ insert into friend_request(request_id, sender_id, receiver_id, accepted) values 
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (7, 2, 8, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (8, 2, 9, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (9, 2, 11, true);
-insert into friend_request(request_id, sender_id, receiver_id, accepted) values (10, 11, 2, true);
+insert into friend_request(request_id, sender_id, receiver_id, accepted) values (10, 10, 2, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (11, 2, 12, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (12, 4, 5, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (13, 4, 11, false);

@@ -40,6 +40,14 @@ public class MemberController {
                 .toList();
     }
 
+    @GetMapping("/current/friends")
+    public List<FriendView> getFriendsForCurrentMember() {
+        final long memberId = AuthUtil.getMemberIdFromSecurityContext();
+        return memberService.getFriendsForMember(memberId).stream()
+                .map(request -> MemberMapper.mapFriend(request, memberId))
+                .toList();
+    }
+
     @PostMapping("/{memberId}/friends/{requestId}")
     public void acceptFriendRequest(@PathVariable("memberId") final long memberId,
                                     @PathVariable("requestId") final long requestId) {
