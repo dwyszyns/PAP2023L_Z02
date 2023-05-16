@@ -69,6 +69,7 @@ create table event_subscriber_seq(
 
 create table notification(
     notification_id identity not null,
+    notify_time     timestamp not null,
     member_id       number(19, 0) not null,
     event_id        number(19, 0) not null,
     constraint pk_notification primary key (member_id),

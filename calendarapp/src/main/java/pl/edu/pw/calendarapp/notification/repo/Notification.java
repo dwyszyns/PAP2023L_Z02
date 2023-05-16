@@ -7,6 +7,8 @@ import lombok.Setter;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "notification")
 @Getter
@@ -17,6 +19,8 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "notification_id", nullable = false)
     private Long notificationId;
+    @Column(name = "notify_time", nullable = false)
+    private Timestamp notifyTime;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
