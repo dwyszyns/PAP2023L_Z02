@@ -40,16 +40,26 @@ const Modal = ({ setOpenModal, calendarId, modalDay }) => {
             {'   '}
             {modalDay.format('DD-MM-YY')}
           </h1>
-          <div className="event-elems-view">
-            {getEventsForDay(modalDay) && getEventsForDay(modalDay).map((event) => (
-              <div className="event-view-list">
-                <p key={event.id} className="event-elem-name">
-                  {event.name}
-                </p>
-                <button type="button" className="event-del-button">X</button>
-              </div>
-            ))}
-          </div>
+          {getEventsForDay(modalDay) === undefined ? (<span className="no-events">No events for today.</span>) : (
+            <div className="event-elems-view">
+              {getEventsForDay(modalDay) && getEventsForDay(modalDay).map((event) => (
+                <div className="event-view-list">
+                  <div className="elemx">
+                    <p key={event.id} className="event-elem-name">
+                      {event.name}
+                      {' : '}
+                      {event.startDate.substr(11, 5)}
+                      {' - '}
+                      {event.endDate.substr(11, 5)}
+                    </p>
+                  </div>
+                  <div className="button-del-ev">
+                    <button type="button" className="event-del-button">X</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="body" />
         <div className="footer">

@@ -24,7 +24,7 @@ public class EventController {
         return eventService.getSubscribedForMemberAndCalendar(memberId, calendarId).stream().map(EventMapper::map).toList();
     }
 
-    @PostMapping("/calendar/events/add")
+    @PostMapping("/add")
     public void addEvent(@Valid @NotNull @RequestBody Event event, Calendar calendar) {
         eventService.addEvent(event, calendar);
     }
