@@ -68,12 +68,20 @@ export const api = createApi({
         body,
       }),
     }),
+    addEvent: builder.mutation({
+      query: (body) => ({
+        url: '/events',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useLazyLoginQuery,
   useRegisterMutation,
+  useAddEventMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetCalendarByCalendarIdQuery,

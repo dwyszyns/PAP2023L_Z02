@@ -76,13 +76,35 @@ const CalendarMonth = ({ calendarId }) => {
               <span className="small-calendar-day">
                 <div className>{day.format('D')}</div>
                 <div className="event-elems">
-                  {getEventsForDay(day) && getEventsForDay(day).map((event) => (
-                    <div className="event-of-day">
-                      <p key={event.id} className="event-of-day-name">
-                        {event.name}
-                      </p>
-                    </div>
-                  ))}
+                  {getEventsForDay(day) && getEventsForDay(day).length > 2 ? (
+                    <>
+                      <div className="event-of-day">
+                        <p key={getEventsForDay(day)[0].id} className="event-of-day-name">
+                          {getEventsForDay(day)[0].name}
+                        </p>
+                      </div>
+                      <div className="event-of-day">
+                        <p key={getEventsForDay(day)[1].id} className="event-of-day-name">
+                          {getEventsForDay(day)[1].name}
+                        </p>
+                      </div>
+                      <div className="event-of-day">
+                        <p className="event-of-day-name">
+                          {`+${(getEventsForDay(day).length - 2).toString()}`}
+                        </p>
+                      </div>
+                    </>
+                  ) : '' }
+
+                  {getEventsForDay(day)
+                      && getEventsForDay(day).length < 3
+                      && getEventsForDay(day).map((event) => (
+                        <div className="event-of-day">
+                          <p key={event.id} className="event-of-day-name">
+                            {event.name}
+                          </p>
+                        </div>
+                      ))}
                 </div>
               </span>
             </button>
