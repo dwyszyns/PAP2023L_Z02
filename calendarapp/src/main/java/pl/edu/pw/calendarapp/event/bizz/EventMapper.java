@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.event.bizz;
 
 
 import pl.edu.pw.calendarapp.event.repo.Event;
+import pl.edu.pw.calendarapp.event.rest.AddEventView;
 import pl.edu.pw.calendarapp.event.rest.EventView;
 
 import java.sql.Timestamp;
@@ -19,6 +20,16 @@ public class EventMapper {
             Optional.ofNullable(e.getStartTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setStartDate);
             Optional.ofNullable(e.getEndTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setEndDate);
             return view;
+        }).orElse(null);
+    }
+
+    public static Event mapFromRequest(final AddEventView addEventView) {
+        return Optional.ofNullable(addEventView).map(aev -> {
+            final Event event = new Event();
+            event.setName(aev.getName());
+            event.setStartTime(Timestamp.valueOf(aev.getStartTime()));
+            event.setEndTime(Timestamp.valueOf(aev.getEndTime()));
+            return event;
         }).orElse(null);
     }
 }

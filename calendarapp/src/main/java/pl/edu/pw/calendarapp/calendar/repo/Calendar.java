@@ -17,7 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Calendar {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calendar_id", nullable = false)
     private Long calendarId;
     @Column(name = "name", nullable = false)

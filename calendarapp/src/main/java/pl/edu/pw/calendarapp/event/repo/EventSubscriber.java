@@ -13,7 +13,7 @@ import pl.edu.pw.calendarapp.member.repo.Member;
 @NoArgsConstructor
 public class EventSubscriber {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_subscriber_id")
     private Long eventSubscriberId;
 

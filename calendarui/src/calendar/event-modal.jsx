@@ -10,11 +10,12 @@ const propTypes = {
   modalDay: PropTypes.number.isRequired,
 };
 
-const Modal = ({ setOpenModal, calendarId, modalDay }) => {
+const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   const [fields, setFields] = useState({
     name: '',
     startTime: '',
     endTime: '',
+    calendarId,
   });
 
   const [errors, setErrors] = useState({
@@ -54,7 +55,7 @@ const Modal = ({ setOpenModal, calendarId, modalDay }) => {
       return <p className="auth-error-message">Some problems</p>;
     }
     if (isSuccess) {
-      <p>OK</p>;
+      return <p>OK</p>;
     }
     return <></>;
   };
@@ -76,14 +77,10 @@ const Modal = ({ setOpenModal, calendarId, modalDay }) => {
           {getEventsForDay(modalDay) === undefined ? (<span className="no-events">No events for today.</span>) : (
             <div className="event-elems-view">
               {getEventsForDay(modalDay) && getEventsForDay(modalDay).map((event) => (
-                <div className="event-view-list">
+                <div className="event-view-list" key={event.id}>
                   <div className="elemx">
                     <p key={event.id} className="event-elem-name">
-                      {event.name}
-                      {' : '}
-                      {event.startDate.substr(11, 5)}
-                      {' - '}
-                      {event.endDate.substr(11, 5)}
+                      {`${event.name} : ${event.startDate} - ${event.endDate} `}
                     </p>
                   </div>
                   <div className="button-del-ev">
@@ -139,6 +136,6 @@ const Modal = ({ setOpenModal, calendarId, modalDay }) => {
   );
 };
 
-Modal.propTypes = propTypes;
+EventModal.propTypes = propTypes;
 
-export default Modal;
+export default EventModal;

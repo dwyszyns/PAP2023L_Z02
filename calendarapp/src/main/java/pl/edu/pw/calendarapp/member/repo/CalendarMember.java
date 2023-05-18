@@ -13,7 +13,7 @@ import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 @NoArgsConstructor
 public class CalendarMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calendar_member_id", nullable = false)
     private Long calendarMemberId;
     @Column(name = "is_owner")

@@ -1,18 +1,18 @@
 package pl.edu.pw.calendarapp.event.bizz;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
 import pl.edu.pw.calendarapp.event.rest.AddEventView;
 import pl.edu.pw.calendarapp.member.repo.Member;
+import pl.edu.pw.calendarapp.member.repo.MemberRepository;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
+    private final CalendarRepository calendarRepository;
     private final EventRepository eventRepository;
-    private static final long ID_1 = 1L;
+    private final MemberRepository memberRepository;
 
 
     @Override
@@ -39,27 +40,13 @@ public class EventServiceImpl implements EventService {
         return eventRepository.getSubscribedForMemberAndCalendar(memberId, calendarId);
     }
 
+    @Transactional
     @Override
     public void addEvent(AddEventView eventView) {
-        final Event event = new Event();
-        event.setName(eventView.getName());
-
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-            Date parsedEndDate = dateFormat.parse(eventView.getEndTime());
-            Timestamp endTime = new java.sql.Timestamp(parsedEndDate.getTime());
-
-            Date parsedStartDate = dateFormat.parse(eventView.getStartTime());
-            Timestamp startTime = new java.sql.Timestamp(parsedStartDate.getTime());
-
-            event.setStartTime(startTime);
-            event.setEndTime(endTime);
-        } catch (Exception e) {
-        }
-
-        Calendar cal = new Calendar();
-        event.setCalendar(cal);
-        cal.setCalendarId(ID_1);
+        final Calendar calendar = calendarRepository.getReferenceById(eventView.getCalendarId());
+        final Event event = EventMapper.mapFromRequest(eventView);
+        event.setCalendar(calendar);
+        subscribeMembersToEvent(event, memberRepository.findAutoSubscribedForCalendar(calendar.getCalendarId()));
         eventRepository.save(event);
     }
 

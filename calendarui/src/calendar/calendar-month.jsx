@@ -4,7 +4,7 @@ import './calendar-month.css';
 import PropTypes from 'prop-types';
 import { getDayArray } from './util';
 import { useGetCalendarByCalendarIdQuery } from '../store/api';
-import Modal from './modal';
+import EventModal from './event-modal';
 
 const propTypes = {
   calendarId: PropTypes.number.isRequired,
@@ -99,7 +99,7 @@ const CalendarMonth = ({ calendarId }) => {
                   {getEventsForDay(day)
                       && getEventsForDay(day).length < 3
                       && getEventsForDay(day).map((event) => (
-                        <div className="event-of-day">
+                        <div className="event-of-day" key={event.id}>
                           <p key={event.id} className="event-of-day-name">
                             {event.name}
                           </p>
@@ -110,7 +110,7 @@ const CalendarMonth = ({ calendarId }) => {
             </button>
           ))}
           {modalOpen && (
-          <Modal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
+          <EventModal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
           )}
         </div>
         <button className="small-calendar-cursor-pointer-right" onClick={handleNextMonth} type="button" />
