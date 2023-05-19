@@ -14,4 +14,6 @@ public interface EventService {
     List<Event> getSubscribedForMemberAndCalendar(long memberId, long calendarId);
 
     void addEvent(AddEventView event);
+
+    void removeEvent(long eventId);
 }

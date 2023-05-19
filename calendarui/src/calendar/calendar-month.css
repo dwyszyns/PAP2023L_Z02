@@ -1,12 +1,12 @@
 .small-calendar {
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 90%;
 }
 
 .small-calendar-h1 {
     /*width: 100%;*/
-    width: 770px;
+    width: 75%;
     margin: auto;
 }
 
@@ -56,12 +56,14 @@
 .small-calendar-elems {
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .small-calendar-array {
     display: grid;
-    height: 660px;
-    width: 770px;
+    height: 750px;
+    width: 950px;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
 }
@@ -106,8 +108,8 @@
 
 .small-calendar-button-current {
     width: 100%;
-    height: 90%;
-    background-color: #7e9dec;
+    height: 100%;
+    background-color: #b8c6ee;
     border: 1px solid rgba(220, 216, 216, 0.8);
     display: grid;
     cursor: pointer;
@@ -122,6 +124,7 @@
 
 .event-of-day-name {
     margin: 0;
+    line-break: anywhere;
 }
 
 .event-of-day {
@@ -130,6 +133,8 @@
     height: auto;
     background-color: #7e9dec;
     margin-bottom: 5px;
+    max-height: 16px;
+    overflow: hidden;
 }
 
 .small-calendar-reset-button {

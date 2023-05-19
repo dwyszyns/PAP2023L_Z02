@@ -50,6 +50,13 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
+    @Transactional
+    @Override
+    public void removeEvent(long eventId) {
+        eventRepository.findById(eventId)
+                .ifPresent(eventRepository::delete);
+    }
+
     private void subscribeMembersToEvent(final Event event, final List<Member> members) {
         event.setSubscribers(new ArrayList<>(Optional.ofNullable(event.getSubscribers()).orElse(List.of())));
         members.forEach(member -> {

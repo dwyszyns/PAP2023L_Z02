@@ -75,6 +75,15 @@ export const api = createApi({
         body,
       }),
     }),
+    removeEvent: builder.mutation({
+      query({ eventId }) {
+        return {
+          url: '/events',
+          method: 'DELETE',
+          eventId,
+        };
+      },
+    }),
   }),
 });
 
@@ -82,6 +91,7 @@ export const {
   useLazyLoginQuery,
   useRegisterMutation,
   useAddEventMutation,
+  useRemoveEventMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetCalendarByCalendarIdQuery,

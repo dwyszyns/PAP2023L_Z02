@@ -75,16 +75,16 @@ const CalendarMonth = ({ calendarId }) => {
             >
               <span className="small-calendar-day">
                 <div className>{day.format('D')}</div>
-                <div className="event-elems">
+                <div className="event-elems" id={day.format('YYYY-MM-DD')}>
                   {getEventsForDay(day) && getEventsForDay(day).length > 2 ? (
                     <>
                       <div className="event-of-day">
-                        <p key={getEventsForDay(day)[0].id} className="event-of-day-name">
+                        <p key={getEventsForDay(day)[0].id} className="event-of-day-name" id={getEventsForDay(day)[0].id}>
                           {getEventsForDay(day)[0].name}
                         </p>
                       </div>
                       <div className="event-of-day">
-                        <p key={getEventsForDay(day)[1].id} className="event-of-day-name">
+                        <p key={getEventsForDay(day)[1].id} className="event-of-day-name" id={getEventsForDay(day)[1].id}>
                           {getEventsForDay(day)[1].name}
                         </p>
                       </div>
@@ -99,8 +99,8 @@ const CalendarMonth = ({ calendarId }) => {
                   {getEventsForDay(day)
                       && getEventsForDay(day).length < 3
                       && getEventsForDay(day).map((event) => (
-                        <div className="event-of-day" key={event.id}>
-                          <p key={event.id} className="event-of-day-name">
+                        <div className="event-of-day" key={event.id} id={`event-day-${event.id}`}>
+                          <p key={event.id} id={event.id} className="event-of-day-name">
                             {event.name}
                           </p>
                         </div>

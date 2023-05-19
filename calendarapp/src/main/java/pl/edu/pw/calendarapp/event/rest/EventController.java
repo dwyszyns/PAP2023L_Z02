@@ -24,4 +24,9 @@ public class EventController {
     public void addEvent(@RequestBody AddEventView event) {
         eventService.addEvent(event);
     }
+
+    @DeleteMapping("{eventId}")
+    public void removeEvent(@PathVariable("eventId") final long eventId) {
+        eventService.removeEvent(eventId);
+    }
 }

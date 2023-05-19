@@ -24,12 +24,21 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
     endTime: false,
   });
 
+  // const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [rmEvent] = useRemoveEventMutation();
   const [addEvent, { isError, isSuccess }] = useAddEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
   const fieldNames = ['name', 'startTime', 'endTime'];
   const getEventsForDay = (day) => {
     const formattedDay = day.format('YYYY-MM-DD');
     return !(isLoading || error) && data.events[formattedDay];
+  };
+
+  const removeEvent = (eventId) => {
+    try {
+      // rmEvent(eventId.substr(10, eventId.size));
+      document.getElementById(eventId).remove();
+    } catch {}
   };
 
   const handleSubmit = () => {
@@ -52,10 +61,24 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
 
   const render = () => {
     if (isError) {
-      return <p className="auth-error-message">Some problems</p>;
+      return <p className="event-error-message">Please provide correct details.</p>;
     }
     if (isSuccess) {
-      return <p>OK</p>;
+      // sprawdzic ilosc elementow - jak =2 to dodajemy nowy z napisem +1, jak wiecej to dodajemy +1
+      const newRaw = document.createElement('p');
+      newRaw.className = 'event-of-day';
+      newRaw.appendChild(document.createTextNode(`${fields.name}`));
+      document.getElementById(fields.startTime.substr(0, 10)).appendChild(newRaw);
+
+      const newRawDay = document.createElement('div');
+      newRawDay.className = 'event-view-list';
+      try {
+        document.querySelector('.no-events').innerText = '';
+      } catch {}
+      // newRawDay.id = newRaw.appendChild(document.createTextNode(fields.name));
+      newRawDay.appendChild(document.createTextNode(`NEW EVENT:  ${fields.name} : ${fields.startTime} - ${fields.endTime} `));
+      document.getElementById(fields.startTime.substr(2, 8)).appendChild(newRawDay);
+      return <p className="added-event">The event has been added successfully.</p>;
     }
     return <></>;
   };
@@ -64,7 +87,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
     <div className="modal-background">
       <div className="modal-container">
         <div className="title-close-btn">
-          <button type="button" onClick={() => { setOpenModal(false); }}>
+          <button type="button" onClick={() => { setOpenModal(false); }} className="exit-events-view">
             X
           </button>
         </div>
@@ -74,17 +97,18 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
             {'   '}
             {modalDay.format('DD-MM-YY')}
           </h1>
-          {getEventsForDay(modalDay) === undefined ? (<span className="no-events">No events for today.</span>) : (
-            <div className="event-elems-view">
+          {getEventsForDay(modalDay) === undefined ? (<div className="no-events" id={modalDay.format('YY-MM-DD')}>No events for today.</div>) : (
+            <div className="event-elems-view" id={modalDay.format('YY-MM-DD')}>
               {getEventsForDay(modalDay) && getEventsForDay(modalDay).map((event) => (
-                <div className="event-view-list" key={event.id}>
+                <div className="event-view-list" key={event.id} id={`event-day-${event.id}`}>
                   <div className="elemx">
                     <p key={event.id} className="event-elem-name">
-                      {`${event.name} : ${event.startDate} - ${event.endDate} `}
+                      {`${event.name} : ${event.startDate} - ${event.endDate}`}
                     </p>
                   </div>
                   <div className="button-del-ev">
                     <button type="button" className="event-del-button">X</button>
+                    {/* onClick={removeEvent(`event-day-${event.id}`)} */}
                   </div>
                 </div>
               ))}
@@ -119,6 +143,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                       className="add-event-input"
                       onChange={(e) => setFields({ ...fields, [fieldName]: e.target.value })}
                     />
+                    {/* {fieldName === 'startTime' ? (<DateTimePicker onChange={(date) => setSelectedDate(date)} selected={selectedDate} />) : ''} */}
                     {errors[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
                   </>
                 ))}

@@ -49,15 +49,25 @@
     height: 45px;
     margin: 10px;
     border: none;
-    background-color: cornflowerblue;
+    background-color: #4979fa;
     color: white;
     border-radius: 8px;
     font-size: 20px;
     cursor: pointer;
 }
 
+.footer button:hover {
+    transition: 0.25s;
+    background-color: cornflowerblue;
+}
+
 #cancel-btn-event {
-    background-color: crimson;
+    background-color: #cc1234;
+}
+
+#cancel-btn-event:hover {
+    background-color: #ee1645;
+    transition: 0.25s;
 }
 
 .popup-background {
@@ -97,6 +107,7 @@
     margin: 0;
     cursor: pointer;
     border: none;
+    cursor: text;
 }
 
 
@@ -116,6 +127,8 @@
 .event-view-list {
     display: flex;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
     height: auto;
     background-color: #7e9dec;
@@ -132,4 +145,22 @@
     padding-bottom: 2px;
     margin-bottom: 4px;
     width: 100%;
+}
+
+.added-event {
+    color: darkgreen;
+}
+
+.event-error-message {
+    color: #a80505;
+}
+
+.event-del-button:hover {
+    background-color: #9d0202;
+    transition: 0.25s;
+}
+
+.exit-events-view:hover {
+    color: #8a8888;
+    transition: 0.25s;
 }
