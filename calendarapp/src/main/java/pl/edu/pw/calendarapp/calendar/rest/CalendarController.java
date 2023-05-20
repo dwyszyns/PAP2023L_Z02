@@ -26,13 +26,7 @@ public class CalendarController {
 
     @PostMapping("/{calendarId}/member/{memberId}")
     public void addMemberToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
-        applyWithCalendarAndMember(calendarId, memberId, (calendar, member) -> {
-            try {
-                calendarService.addMemberToCalendar(calendar, member);
-            } catch (IllegalArgumentException e) {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-            }
-        });
+        applyWithCalendarAndMember(calendarId, memberId, calendarService::addMemberToCalendar);
     }
 
     @PostMapping("/{calendarId}/member/{memberId}/subscribe")

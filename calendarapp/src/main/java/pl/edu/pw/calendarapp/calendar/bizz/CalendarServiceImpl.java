@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.calendar.bizz;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
@@ -55,7 +56,7 @@ public class CalendarServiceImpl implements CalendarService {
             calendarMember.setMember(member);
             calendarMemberRepository.save(calendarMember);
         } else {
-            throw new IllegalArgumentException("You are not an owner of this calendar");
+            throw new AccessDeniedException("You are not an owner of this calendar");
         }
     }
 
@@ -69,7 +70,7 @@ public class CalendarServiceImpl implements CalendarService {
             calendarMember.setAutoSubscribed(true);
             calendarMemberRepository.save(calendarMember);
         } else {
-            throw new IllegalArgumentException("You are not an owner of this calendar");
+            throw new AccessDeniedException("You are not an owner of this calendar");
         }
     }
 }

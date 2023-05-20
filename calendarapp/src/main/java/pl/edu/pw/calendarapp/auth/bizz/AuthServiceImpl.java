@@ -1,8 +1,11 @@
 package pl.edu.pw.calendarapp.auth.bizz;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pw.calendarapp.auth.rest.MemberRegisterView;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
@@ -28,6 +31,13 @@ public class AuthServiceImpl implements AuthService {
             member.setPassword(bCryptPasswordEncoder.encode(registerView.getPassword()));
             member.setUsername(registerView.getUsername());
             memberRepository.save(member);
+        }
+    }
+
+    @Override
+    public void isMemberFromAuth(Long memberId) throws AccessDeniedException {
+        if (AuthUtil.getMemberIdFromSecurityContext() != memberId) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
     }
 }
