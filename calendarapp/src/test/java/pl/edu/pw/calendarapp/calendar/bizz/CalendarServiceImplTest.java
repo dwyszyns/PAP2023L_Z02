@@ -8,13 +8,17 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
+import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,20 +42,23 @@ class CalendarServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        List<Calendar> calendars = new ArrayList<>();
-        Calendar calendar1 = new Calendar();
+        final LocalDateTime startTime = LocalDateTime.of(2023, 5, 1, 12, 0);
+        final List<Calendar> calendars = new ArrayList<>();
+        final Calendar calendar1 = new Calendar();
         calendar1.setCalendarId(ID_1);
         calendar1.setEvents(new ArrayList<>());
-        Event event1 = new Event();
+        final Event event1 = new Event();
         event1.setEventId(ID_1);
+        event1.setStartTime(Timestamp.valueOf(startTime));
         calendar1.getEvents().add(event1);
         calendars.add(calendar1);
 
-        Calendar calendar2 = new Calendar();
+        final Calendar calendar2 = new Calendar();
         calendar2.setCalendarId(ID_2);
         calendar2.setEvents(new ArrayList<>());
-        Event event2 = new Event();
+        final Event event2 = new Event();
         event2.setEventId(ID_2);
+        event2.setStartTime(Timestamp.valueOf(startTime));
         calendar2.getEvents().add(event2);
         calendars.add(calendar2);
 
@@ -64,14 +71,22 @@ class CalendarServiceImplTest {
 
     @Test
     void testFindAllForMember() {
-        List<Calendar> result = calendarService.findAllForMember(MEMBER_ID);
+        List<CalendarView> result = calendarService.findAllForMember(MEMBER_ID);
 
         assertEquals(EXPECTED_CALENDARS_SIZE, result.size());
         assertEquals(ID_1, result.get(0).getId());
         assertEquals(EXPECTED_EVENTS_SIZE_1, result.get(0).getEvents().size());
-        assertTrue(result.get(0).getEvents().get(0).isSubscribed());
+        assertTrue(result.get(0).getEvents().values().stream()
+                .flatMap(Collection::stream)
+                .toList()
+                .get(0)
+                .isSubscribed());
         assertEquals(ID_2, result.get(1).getId());
         assertEquals(EXPECTED_EVENTS_SIZE_2, result.get(1).getEvents().size());
-        assertFalse(result.get(1).getEvents().get(0).isSubscribed());
+        assertFalse(result.get(1).getEvents().values().stream()
+                .flatMap(Collection::stream)
+                .toList()
+                .get(0)
+                .isSubscribed());
     }
 }

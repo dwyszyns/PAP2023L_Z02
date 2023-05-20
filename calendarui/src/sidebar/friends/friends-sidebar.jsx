@@ -6,7 +6,7 @@ import FriendRequest from './friend-request';
 
 const FriendsSidebar = () => {
   const [selectedFriend, setSelectedFriend] = useState('');
-  const { data, isLoading, error } = useGetFriendsForMemberIdQuery(1);
+  const { data, isLoading, error } = useGetFriendsForMemberIdQuery('current');
 
   const isSelected = (username) => username === selectedFriend;
 

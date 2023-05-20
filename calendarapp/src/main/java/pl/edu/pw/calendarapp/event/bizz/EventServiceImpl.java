@@ -2,13 +2,16 @@ package pl.edu.pw.calendarapp.event.bizz;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
 import pl.edu.pw.calendarapp.event.rest.AddEventView;
+import pl.edu.pw.calendarapp.member.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
 
@@ -20,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
+    private final CalendarMemberRepository calendarMemberRepository;
     private final CalendarRepository calendarRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
@@ -54,7 +58,16 @@ public class EventServiceImpl implements EventService {
     @Override
     public void removeEvent(long eventId) {
         eventRepository.findById(eventId)
-                .ifPresent(eventRepository::delete);
+                .ifPresent(event -> {
+                    if (calendarMemberRepository.memberOwnsCalendar(
+                            AuthUtil.getMemberIdFromSecurityContext(),
+                            event.getCalendar().getCalendarId())
+                    ) {
+                        eventRepository.delete(event);
+                    } else {
+                        throw new AccessDeniedException("Member does not own calendar");
+                    }
+                });
     }
 
     private void subscribeMembersToEvent(final Event event, final List<Member> members) {
