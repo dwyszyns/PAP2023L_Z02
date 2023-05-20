@@ -18,8 +18,8 @@ public class MemberServiceImpl implements MemberService {
     private final FriendRequestRepository friendRequestRepository;
 
     @Override
-    public Member findById(long memberId) {
-        return memberRepository.findByIdWithCalendars(memberId).orElse(null);
+    public Optional<Member> findById(long memberId) {
+        return memberRepository.findByIdWithCalendars(memberId);
     }
 
     @Override

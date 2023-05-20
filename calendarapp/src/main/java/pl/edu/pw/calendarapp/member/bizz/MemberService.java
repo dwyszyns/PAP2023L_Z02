@@ -5,10 +5,11 @@ import pl.edu.pw.calendarapp.member.repo.FriendRequest;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberService {
 
-    Member findById(long id);
+    Optional<Member> findById(long id);
 
     List<FriendRequest> getFriendsForMember(long id);
 
