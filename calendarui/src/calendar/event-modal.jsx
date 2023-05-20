@@ -36,7 +36,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
 
   const removeEvent = (eventId) => {
     try {
-      // rmEvent(eventId.substr(10, eventId.size));
+      rmEvent(eventId.substr(10, eventId.size));
       document.getElementById(eventId).remove();
     } catch {}
   };
@@ -64,7 +64,6 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
       return <p className="event-error-message">Please provide correct details.</p>;
     }
     if (isSuccess) {
-      // sprawdzic ilosc elementow - jak =2 to dodajemy nowy z napisem +1, jak wiecej to dodajemy +1
       const newRaw = document.createElement('p');
       newRaw.className = 'event-of-day';
       newRaw.appendChild(document.createTextNode(`${fields.name}`));
@@ -74,10 +73,10 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
       newRawDay.className = 'event-view-list';
       try {
         document.querySelector('.no-events').innerText = '';
+        // newRawDay.id = newRaw.appendChild(document.createTextNode(fields.name));
+        newRawDay.appendChild(document.createTextNode(`NEW EVENT:  ${fields.name} : ${fields.startTime} - ${fields.endTime} `));
+        document.getElementById(fields.startTime.substr(2, 8)).appendChild(newRawDay);
       } catch {}
-      // newRawDay.id = newRaw.appendChild(document.createTextNode(fields.name));
-      newRawDay.appendChild(document.createTextNode(`NEW EVENT:  ${fields.name} : ${fields.startTime} - ${fields.endTime} `));
-      document.getElementById(fields.startTime.substr(2, 8)).appendChild(newRawDay);
       return <p className="added-event">The event has been added successfully.</p>;
     }
     return <></>;

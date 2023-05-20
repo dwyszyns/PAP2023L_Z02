@@ -10,6 +10,7 @@ import Calendar from './calendar/calendar';
 import Login from './auth/login';
 import Logout from './auth/logout';
 import Register from './auth/register';
+import AddCalendar from './calendar/add-calendar';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'calendar/:calendarId',
         element: <Calendar />,
+      },
+      {
+        path: 'calendar/add',
+        element: <AddCalendar />,
       },
     ],
   },

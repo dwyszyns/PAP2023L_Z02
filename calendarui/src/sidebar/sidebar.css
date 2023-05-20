@@ -82,3 +82,73 @@
 .nested-sidebar-button:active {
     background-color: #dedede;
 }
+
+.nested-sidebar-list-calendar {
+    height: 85%;
+    width: 80%;
+}
+
+.action-btn-calendar {
+    height: 15%;
+    width: 80%;
+    justify-content: center;
+    text-align: center;
+}
+
+.action-btn-calendar .button {
+    margin: 10px;
+    border: none;
+    background-color: #16a816;
+    width: auto;
+    color: white;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.action-btn-calendar .button:hover {
+    background-color: #1fbb1f;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.trash-bin-icon {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.trash-bin-icon:hover {
+    fill: red;
+    filter: invert(25%) sepia(83%) saturate(3594%) hue-rotate(347deg) brightness(103%) contrast(97%);
+    transition: 0.25s;
+}
+
+.nested-sidebar-button {
+    width: 80%;
+}
+
+.nested-sidebar-button.selected {
+    width: 80%;
+}
+
+.calendar-nav-elem {
+    width: 100%;
+    display: flex;
+}
+
+.calendar-nav-elem-remove {
+    width: 20%;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border: none;
+    background-color: white;
+}
+
+
+.popup-remove-calendar {
+    width: auto;
+    height: auto;
+}
