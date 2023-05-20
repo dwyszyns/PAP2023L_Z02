@@ -5,7 +5,6 @@
 }
 
 .small-calendar-h1 {
-    /*width: 100%;*/
     width: 75%;
     margin: auto;
 }
@@ -32,46 +31,42 @@
     text-align: right;
 }
 
-
-.text-header-small-calendar {
-    font-size: 2.5rem;
-    color: #000000;
-    font-weight: bold;
-    margin: 0;
-    width: 50%;
-}
-
-.small-calendar-button {
-    float: right;
-    color: white;
-    background-color: white;
-    text-align: center;
-    margin-top: 15px;
-    margin-left: 40px;
-    border-radius: 5px;
-    width: 100px;
-    height: 40px;
-}
-
 .small-calendar-elems {
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
+    height: 750px;
+}
+
+.small-calendar-calendar-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-calendar-day-labels {
+    display: grid;
+    height: 60px;
+    width: 950px;
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .small-calendar-array {
     display: grid;
-    height: 750px;
+    height: 620px;
     width: 950px;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
 }
 
 .text-day-small-calendar {
     display: flex;
     align-items: flex-end;
-    padding-bottom: 10px;
+    height: fit-content;
+    padding-top: 10px;
+    margin-bottom: 5px;
     justify-content: center;
 }
 
@@ -117,7 +112,6 @@
 
 .event-elems {
     width: 100%;
-    /*border: 1px solid rgba(220, 216, 216, 0.8);*/
     border: none;
     cursor: pointer;
 }
@@ -133,7 +127,9 @@
     height: auto;
     background-color: #7e9dec;
     margin-bottom: 5px;
-    max-height: 16px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    max-height: 21px;
     overflow: hidden;
 }
 
@@ -167,8 +163,7 @@
     color: white;
 }
 
-.small-calendar-cursor-pointer-left {
-    /*padding: 0;*/
+.small-calendar-cursor-pointer {
     border: none;
     background-size: 65%;
     color: white;
@@ -183,20 +178,9 @@
     cursor: pointer;
 }
 
-.small-calendar-cursor-pointer-right {
+.small-calendar-cursor-pointer.right {
     margin-left: 15px;
     padding: 0;
-    border: none;
-    background-size: 65%;
-    color: white;
-    background-color: white;
-    width: 50px;
-    height: 55px;
-    text-align: center;
-    margin-top: 15px;
-    border-radius: 5px;
     background-image: url("chevron-right.svg");
-    background-repeat: no-repeat;
-    cursor: pointer;
 }
 

@@ -24,21 +24,12 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
     endTime: false,
   });
 
-  // const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [rmEvent] = useRemoveEventMutation();
   const [addEvent, { isError, isSuccess }] = useAddEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
   const fieldNames = ['name', 'startTime', 'endTime'];
   const getEventsForDay = (day) => {
     const formattedDay = day.format('YYYY-MM-DD');
     return !(isLoading || error) && data.events[formattedDay];
-  };
-
-  const removeEvent = (eventId) => {
-    try {
-      rmEvent(eventId.substr(10, eventId.size));
-      document.getElementById(eventId).remove();
-    } catch {}
   };
 
   const handleSubmit = () => {
@@ -64,19 +55,6 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
       return <p className="event-error-message">Please provide correct details.</p>;
     }
     if (isSuccess) {
-      const newRaw = document.createElement('p');
-      newRaw.className = 'event-of-day';
-      newRaw.appendChild(document.createTextNode(`${fields.name}`));
-      document.getElementById(fields.startTime.substr(0, 10)).appendChild(newRaw);
-
-      const newRawDay = document.createElement('div');
-      newRawDay.className = 'event-view-list';
-      try {
-        document.querySelector('.no-events').innerText = '';
-        // newRawDay.id = newRaw.appendChild(document.createTextNode(fields.name));
-        newRawDay.appendChild(document.createTextNode(`NEW EVENT:  ${fields.name} : ${fields.startTime} - ${fields.endTime} `));
-        document.getElementById(fields.startTime.substr(2, 8)).appendChild(newRawDay);
-      } catch {}
       return <p className="added-event">The event has been added successfully.</p>;
     }
     return <></>;
@@ -107,7 +85,6 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                   </div>
                   <div className="button-del-ev">
                     <button type="button" className="event-del-button">X</button>
-                    {/* onClick={removeEvent(`event-day-${event.id}`)} */}
                   </div>
                 </div>
               ))}
@@ -142,7 +119,6 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                       className="add-event-input"
                       onChange={(e) => setFields({ ...fields, [fieldName]: e.target.value })}
                     />
-                    {/* {fieldName === 'startTime' ? (<DateTimePicker onChange={(date) => setSelectedDate(date)} selected={selectedDate} />) : ''} */}
                     {errors[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
                   </>
                 ))}

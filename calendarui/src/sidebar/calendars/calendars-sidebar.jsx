@@ -10,8 +10,6 @@ const CalendarsSidebar = () => {
 
   const isSelected = (id) => id === selectedCalendarId;
 
-  // const removeCalendar = () => (<Popup className="popup-remove-calendar">x</Popup>);
-
   const renderClassName = (calendar) => [
     'nested-sidebar-button',
     isSelected(calendar.id) ? 'selected' : '',
@@ -25,21 +23,19 @@ const CalendarsSidebar = () => {
         </p>
         <div className="nested-sidebar-list-calendar">
           {!isLoading && !error && data.map((calendar) => (
-            <div className="calendar-nav-elem">
-              <button
-                type="button"
-                key={calendar.id}
-                className={renderClassName(calendar)}
-                onClick={() => setSelectedCalendarId(calendar.id)}
-              >
-                <Link to={`/calendar/${calendar.id}`} className="nested-sidebar-link">
-                  {calendar.name}
-                </Link>
-              </button>
+            <button
+              type="button"
+              key={calendar.id}
+              className={renderClassName(calendar)}
+              onClick={() => setSelectedCalendarId(calendar.id)}
+            >
+              <Link to={`/calendar/${calendar.id}`} className="nested-sidebar-link">
+                <p>{calendar.name}</p>
+              </Link>
               <button type="button" className="calendar-nav-elem-remove">
                 <img id={`trash${calendar.id.toString()}`} src={TrashBin} alt="X" className="trash-bin-icon" />
               </button>
-            </div>
+            </button>
           ))}
         </div>
         <div className="action-btn-calendar">

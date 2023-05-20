@@ -18,16 +18,9 @@ const CalendarMonth = ({ calendarId }) => {
 
   const dayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
-  const handlePrevMonth = () => setCurrentMonth(currentMonth - 1);
-
-  const handleNextMonth = () => setCurrentMonth(currentMonth + 1);
-
-  const handleReset = () => setCurrentMonth(dayjs().month());
-
   const getDayClass = (day) => {
-    console.log(day.format('YYYY-MM-DD'));
     const format = 'DD-MM-YY';
-    if (currentMonth !== day.month()) {
+    if ((currentMonth % 12) + (currentMonth < 0 ? 12 : 0) !== day.month() % 12) {
       return 'other';
     }
     const today = dayjs().format(format);
@@ -48,7 +41,7 @@ const CalendarMonth = ({ calendarId }) => {
           {dayjs(new Date(dayjs().year(), currentMonth)).format('MMMM YYYY')}
         </div>
         <div className="l2">
-          <button className="small-calendar-button" onClick={handleReset} type="button">
+          <button className="small-calendar-button" onClick={() => setCurrentMonth(dayjs().month())} type="button">
             <span className="small-calendar-reset-button">
               Today
             </span>
@@ -56,47 +49,50 @@ const CalendarMonth = ({ calendarId }) => {
         </div>
       </div>
       <div className="small-calendar-elems">
-        <button className="small-calendar-cursor-pointer-left" onClick={handlePrevMonth} type="button" />
-        <div className="small-calendar-array">
-          {dayNames.map((day) => (
-            <p key={day} className="text-day-small-calendar">
-              {day}
-            </p>
-          ))}
-          {getDayArray(currentMonth).filter((day) => day !== undefined).map((day) => (
-            <button
-              key={day.format('DD-MM-YYYY')}
-              onClick={() => {
-                setModalDay(day);
-                setModalOpen(true);
-              }}
-              type="button"
-              className={`small-calendar-button-${getDayClass(day)}`}
-            >
-              <span className="small-calendar-day">
-                <div className>{day.format('D')}</div>
-                <div className="event-elems" id={day.format('YYYY-MM-DD')}>
-                  {getEventsForDay(day) && getEventsForDay(day).length > 2 ? (
-                    <>
-                      <div className="event-of-day">
-                        <p key={getEventsForDay(day)[0].id} className="event-of-day-name" id={getEventsForDay(day)[0].id}>
-                          {getEventsForDay(day)[0].name}
-                        </p>
-                      </div>
-                      <div className="event-of-day">
-                        <p key={getEventsForDay(day)[1].id} className="event-of-day-name" id={getEventsForDay(day)[1].id}>
-                          {getEventsForDay(day)[1].name}
-                        </p>
-                      </div>
-                      <div className="event-of-day">
-                        <p className="event-of-day-name">
-                          {`+${(getEventsForDay(day).length - 2).toString()}`}
-                        </p>
-                      </div>
-                    </>
-                  ) : '' }
+        <button className="small-calendar-cursor-pointer" onClick={() => setCurrentMonth(currentMonth - 1)} type="button" />
+        <div className="small-calendar-calendar-body">
+          <div className="small-calendar-day-labels">
+            {dayNames.map((day) => (
+              <p key={day} className="text-day-small-calendar">
+                {day}
+              </p>
+            ))}
+          </div>
+          <div className="small-calendar-array">
+            {getDayArray(currentMonth).filter((day) => day !== undefined).map((day) => (
+              <button
+                key={day.format('DD-MM-YYYY')}
+                onClick={() => {
+                  setModalDay(day);
+                  setModalOpen(true);
+                }}
+                type="button"
+                className={`small-calendar-button-${getDayClass(day)}`}
+              >
+                <span className="small-calendar-day">
+                  <div className>{day.format('D')}</div>
+                  <div className="event-elems" id={day.format('YYYY-MM-DD')}>
+                    {getEventsForDay(day) && getEventsForDay(day).length > 2 ? (
+                      <>
+                        <div className="event-of-day">
+                          <p key={getEventsForDay(day)[0].id} className="event-of-day-name" id={getEventsForDay(day)[0].id}>
+                            {getEventsForDay(day)[0].name}
+                          </p>
+                        </div>
+                        <div className="event-of-day">
+                          <p key={getEventsForDay(day)[1].id} className="event-of-day-name" id={getEventsForDay(day)[1].id}>
+                            {getEventsForDay(day)[1].name}
+                          </p>
+                        </div>
+                        <div className="event-of-day">
+                          <p className="event-of-day-name">
+                            {`+${(getEventsForDay(day).length - 2).toString()}`}
+                          </p>
+                        </div>
+                      </>
+                    ) : '' }
 
-                  {getEventsForDay(day)
+                    {getEventsForDay(day)
                       && getEventsForDay(day).length < 3
                       && getEventsForDay(day).map((event) => (
                         <div className="event-of-day" key={event.id} id={`event-day-${event.id}`}>
@@ -105,15 +101,16 @@ const CalendarMonth = ({ calendarId }) => {
                           </p>
                         </div>
                       ))}
-                </div>
-              </span>
-            </button>
-          ))}
-          {modalOpen && (
-          <EventModal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
-          )}
+                  </div>
+                </span>
+              </button>
+            ))}
+            {modalOpen && (
+            <EventModal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
+            )}
+          </div>
         </div>
-        <button className="small-calendar-cursor-pointer-right" onClick={handleNextMonth} type="button" />
+        <button className="small-calendar-cursor-pointer right" onClick={() => setCurrentMonth(currentMonth + 1)} type="button" />
       </div>
     </div>
   );

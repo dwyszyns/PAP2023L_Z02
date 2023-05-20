@@ -16,11 +16,7 @@ const AddCalendar = () => {
   const [isPublicInfo, setIsPublicInfo] = useState('');
 
   const handleAdd = async () => {
-    if (isPublicInfo === '1') {
-      fields.isPublic = true;
-    } else {
-      fields.isPublic = false;
-    }
+    fields.isPublic = isPublicInfo === '1';
     let newErrors = { ...errors };
     let isValid = true;
     fieldNames.forEach((fieldName) => {
@@ -57,7 +53,12 @@ const AddCalendar = () => {
         <option value="0">Private</option>
         <option value="1">Public</option>
       </select>
-      <p className="info-add-calendar"><i>If you want your calendar to be visible to your friends, choose "Public", otherwise leave it on "Private".</i></p>
+      <p className="info-add-calendar">
+        <i>
+          If you want your calendar to be visible to your friends,
+          choose &quot;Public&quot;, otherwise leave it on &quot;Private&quot;
+        </i>
+      </p>
 
       <button type="button" className="add-calendar-button" onClick={handleAdd}>Add</button>
       <div className="auth-footer" />
