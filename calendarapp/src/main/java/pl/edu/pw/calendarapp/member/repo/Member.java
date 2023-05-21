@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
 
 import java.sql.Timestamp;

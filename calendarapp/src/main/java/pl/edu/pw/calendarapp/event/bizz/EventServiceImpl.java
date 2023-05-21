@@ -5,13 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriberRepository;
 import pl.edu.pw.calendarapp.event.rest.AddEventView;
-import pl.edu.pw.calendarapp.member.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
 

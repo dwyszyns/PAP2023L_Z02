@@ -6,12 +6,12 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
-import pl.edu.pw.calendarapp.member.repo.CalendarMember;
-import pl.edu.pw.calendarapp.member.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
 import java.util.*;
@@ -30,8 +30,8 @@ public class CalendarServiceImpl implements CalendarService {
                 .stream()
                 .map(Event::getEventId)
                 .collect(Collectors.toCollection(HashSet::new));
-        final Optional<CalendarView> calendar = calendarRepository.findByCalendarId(calendarId)
-                .map(CalendarMapper::map);
+        final Optional<CalendarView> calendar = calendarMemberRepository.getCalendarMember(calendarId, memberId)
+                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getIsOwner()));
         calendar.map(CalendarView::getEvents)
                 .ifPresent(views -> views.values().stream()
                         .flatMap(Collection::stream)
@@ -47,7 +47,9 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     public List<CalendarView> findAllForMember(long memberId) {
-        return calendarRepository.findAllForMember(memberId).stream().map(CalendarMapper::map).toList();
+        return calendarMemberRepository.findAllForMember(memberId).stream()
+                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getIsOwner()))
+                .toList();
     }
 
     @Override

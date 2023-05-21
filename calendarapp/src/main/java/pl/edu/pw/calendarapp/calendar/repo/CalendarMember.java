@@ -1,10 +1,10 @@
-package pl.edu.pw.calendarapp.member.repo;
+package pl.edu.pw.calendarapp.calendar.repo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.member.repo.Member;
 
 @Entity
 @Table(name = "calendar_member")

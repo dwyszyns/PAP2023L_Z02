@@ -11,6 +11,7 @@ public class CalendarView {
     private long id;
     private String name;
     private boolean isPublic;
+    private boolean isOwner;
     private Map<String, List<EventView>> events;
 
 }

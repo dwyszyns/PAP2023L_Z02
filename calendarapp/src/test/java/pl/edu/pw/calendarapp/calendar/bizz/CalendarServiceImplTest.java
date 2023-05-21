@@ -7,7 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
-import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
@@ -23,9 +24,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CalendarServiceImplTest {
-
     @Mock
-    private CalendarRepository calendarRepository;
+    private CalendarMemberRepository calendarMemberRepository;
 
     @Mock
     private EventRepository eventRepository;
@@ -43,7 +43,8 @@ class CalendarServiceImplTest {
     @BeforeEach
     void setUp() {
         final LocalDateTime startTime = LocalDateTime.of(2023, 5, 1, 12, 0);
-        final List<Calendar> calendars = new ArrayList<>();
+        final List<CalendarMember> calendarMembers = new ArrayList<>();
+        final CalendarMember calendarMember1 = new CalendarMember();
         final Calendar calendar1 = new Calendar();
         calendar1.setCalendarId(ID_1);
         calendar1.setEvents(new ArrayList<>());
@@ -51,8 +52,10 @@ class CalendarServiceImplTest {
         event1.setEventId(ID_1);
         event1.setStartTime(Timestamp.valueOf(startTime));
         calendar1.getEvents().add(event1);
-        calendars.add(calendar1);
+        calendarMember1.setCalendar(calendar1);
+        calendarMembers.add(calendarMember1);
 
+        final CalendarMember calendarMember2 = new CalendarMember();
         final Calendar calendar2 = new Calendar();
         calendar2.setCalendarId(ID_2);
         calendar2.setEvents(new ArrayList<>());
@@ -60,9 +63,10 @@ class CalendarServiceImplTest {
         event2.setEventId(ID_2);
         event2.setStartTime(Timestamp.valueOf(startTime));
         calendar2.getEvents().add(event2);
-        calendars.add(calendar2);
+        calendarMember2.setCalendar(calendar2);
+        calendarMembers.add(calendarMember2);
 
-        when(calendarRepository.findAllForMember(MEMBER_ID)).thenReturn(calendars);
+        when(calendarMemberRepository.findAllForMember(MEMBER_ID)).thenReturn(calendarMembers);
 
         List<Event> subscribedEvents = new ArrayList<>();
         subscribedEvents.add(event1);

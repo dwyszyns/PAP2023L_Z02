@@ -23,7 +23,7 @@ public class MemberMapper {
                     final List<CalendarView> calendars = Optional.ofNullable(member.getCalendars())
                             .map(calendarMembers -> calendarMembers.stream()
                                     .filter(calendarMember -> calendarMember != null && calendarMember.getIsOwner())
-                                    .map(calendarMember -> CalendarMapper.mapPreview(calendarMember.getCalendar()))
+                                    .map(calendarMember -> CalendarMapper.mapPreview(calendarMember.getCalendar(), true))
                                     .filter(calendarView -> calendarView != null && calendarView.isPublic())
                                     .limit(6)
                                     .toList()
