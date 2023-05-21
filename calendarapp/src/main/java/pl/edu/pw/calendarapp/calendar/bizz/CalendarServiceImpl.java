@@ -55,28 +55,33 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     @Transactional
     public void addMemberToCalendar(Calendar calendar, Member member) {
-        if (calendarMemberRepository.memberOwnsCalendar(
-                AuthUtil.getMemberIdFromSecurityContext(), calendar.getCalendarId())) {
-            final CalendarMember calendarMember = new CalendarMember();
-            calendarMember.setCalendar(calendar);
-            calendarMember.setMember(member);
-            calendarMemberRepository.save(calendarMember);
-        } else {
-            throw new AccessDeniedException("You are not an owner of this calendar");
-        }
+        validateUserOwnsCalendar(calendar.getCalendarId());
+        final CalendarMember calendarMember = new CalendarMember();
+        calendarMember.setCalendar(calendar);
+        calendarMember.setMember(member);
+        calendarMemberRepository.save(calendarMember);
     }
 
     @Override
     @Transactional
     public void subscribeToCalendar(Calendar calendar, Member member) {
-        if (calendarMemberRepository.memberOwnsCalendar(
-                AuthUtil.getMemberIdFromSecurityContext(), calendar.getCalendarId())) {
-            final CalendarMember calendarMember = calendarMemberRepository.getCalendarMember(calendar.getCalendarId(), member.getMemberId())
-                    .orElseThrow(() -> new IllegalArgumentException("Member is not a part of this calendar"));
-            calendarMember.setAutoSubscribed(true);
-            calendarMemberRepository.save(calendarMember);
-        } else {
-            throw new AccessDeniedException("You are not an owner of this calendar");
+        validateUserOwnsCalendar(calendar.getCalendarId());
+        final CalendarMember calendarMember = calendarMemberRepository.getCalendarMember(calendar.getCalendarId(), member.getMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("Member is not a part of this calendar"));
+        calendarMember.setAutoSubscribed(true);
+        calendarMemberRepository.save(calendarMember);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCalendar(Long calendarId) {
+        validateUserOwnsCalendar(calendarId);
+        calendarRepository.deleteById(calendarId);
+    }
+
+    private void validateUserOwnsCalendar(final long calendarId) {
+        if (!calendarMemberRepository.memberOwnsCalendar(AuthUtil.getMemberIdFromSecurityContext(), calendarId)) {
+            throw new AccessDeniedException("You are not the owner of this calendar");
         }
     }
 }

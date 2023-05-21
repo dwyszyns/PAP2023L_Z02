@@ -18,4 +18,6 @@ public interface CalendarService {
     void addMemberToCalendar(Calendar calendar, Member member);
 
     void subscribeToCalendar(Calendar calendar, Member member);
+
+    void deleteCalendar(Long calendarId);
 }

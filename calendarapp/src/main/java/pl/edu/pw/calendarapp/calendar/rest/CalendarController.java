@@ -41,6 +41,11 @@ public class CalendarController {
         applyWithCalendarAndMember(calendarId, memberId, calendarService::subscribeToCalendar);
     }
 
+    @DeleteMapping("/{calendarId}")
+    public void deleteCalendar(@PathVariable Long calendarId) {
+        calendarService.deleteCalendar(calendarId);
+    }
+
     private void applyWithCalendarAndMember(long calendarId, long memberId, BiConsumer<Calendar, Member> andThen) {
         final Member member = memberService.findById(memberId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
