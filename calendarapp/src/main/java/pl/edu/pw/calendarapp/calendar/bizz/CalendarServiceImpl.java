@@ -75,8 +75,12 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     @Transactional
     public void deleteCalendar(Long calendarId) {
-        validateUserOwnsCalendar(calendarId);
-        calendarRepository.deleteById(calendarId);
+        final long memberId = AuthUtil.getMemberIdFromSecurityContext();
+        if (!calendarMemberRepository.memberOwnsCalendar(memberId, calendarId)) {
+            calendarMemberRepository.deleteByCalendarIdAndMemberId(calendarId, memberId);
+        } else {
+            calendarRepository.deleteById(calendarId);
+        }
     }
 
     private void validateUserOwnsCalendar(final long calendarId) {

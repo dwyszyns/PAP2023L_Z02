@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.calendar.repo;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,11 @@ public interface CalendarMemberRepository extends JpaRepository<CalendarMember, 
     @Query(value = "select cm from CalendarMember cm where cm.member.memberId = :memberId")
     @EntityGraph(attributePaths = {"calendar", "calendar.events"})
     List<CalendarMember> findAllForMember(@Param("memberId") Long memberId);
+
+    @Modifying
+    @Query("delete from CalendarMember cm " +
+            "where cm.calendar.calendarId = :calendarId " +
+            "and cm.member.memberId = :memberId")
+    void deleteByCalendarIdAndMemberId(Long calendarId, Long memberId);
+
 }

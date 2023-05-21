@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useGetCalendarsForMemberIdQuery } from '../../store';
 import '../sidebar.css';
 import TrashBin from './trash-bin.svg';
+import { useRemoveCalendarMutation } from '../../store/api';
 
 const CalendarsSidebar = () => {
   const [selectedCalendarId, setSelectedCalendarId] = useState('');
-  const { data, isLoading, error } = useGetCalendarsForMemberIdQuery(1);
+  const { data, isLoading, error } = useGetCalendarsForMemberIdQuery('current');
+  const [removeCalendar] = useRemoveCalendarMutation();
 
   const isSelected = (id) => id === selectedCalendarId;
 
@@ -32,7 +34,7 @@ const CalendarsSidebar = () => {
               <Link to={`/calendar/${calendar.id}`} className="nested-sidebar-link">
                 <p>{calendar.name}</p>
               </Link>
-              <button type="button" className="calendar-nav-elem-remove">
+              <button type="button" className="calendar-nav-elem-remove" onClick={() => removeCalendar(calendar.id)}>
                 <img id={`trash${calendar.id.toString()}`} src={TrashBin} alt="X" className="trash-bin-icon" />
               </button>
             </button>

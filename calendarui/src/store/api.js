@@ -17,7 +17,7 @@ export const api = createApi({
       },
     },
   ),
-  tagTypes: ['FriendRequests', 'Events'],
+  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar'],
   endpoints: (builder) => ({
     login: builder.query({
       query: () => 'auth/login',
@@ -27,6 +27,7 @@ export const api = createApi({
     }),
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
+      providesTags: ['Calendars'],
     }),
     getCalendarByCalendarId: builder.query({
       query: (id) => `calendar/${id}`,
@@ -78,6 +79,16 @@ export const api = createApi({
       },
       invalidatesTags: ['Calendar'],
     }),
+    removeCalendar: builder.mutation({
+      query(calendarId) {
+        return {
+          url: `/calendar/${calendarId}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: ['Calendars'],
+
+    }),
   }),
 });
 
@@ -86,6 +97,7 @@ export const {
   useRegisterMutation,
   useAddEventMutation,
   useRemoveEventMutation,
+  useRemoveCalendarMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetCalendarByCalendarIdQuery,
