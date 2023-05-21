@@ -21,6 +21,8 @@ public class Notification {
     private Long notificationId;
     @Column(name = "notify_time", nullable = false)
     private Timestamp notifyTime;
+    @Column(name = "status")
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
