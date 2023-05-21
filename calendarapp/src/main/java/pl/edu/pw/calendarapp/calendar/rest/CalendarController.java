@@ -25,6 +25,16 @@ public class CalendarController {
         return calendarService.findAllForMember(memberId);
     }
 
+    @GetMapping("/member/current")
+    public List<CalendarView> getCalendarsForCurrentMember() {
+        return calendarService.findAllForMember(AuthUtil.getMemberIdFromSecurityContext());
+    }
+
+    @PostMapping
+    public CalendarView createCalendar(@RequestBody AddCalendarView calendarView) {
+        return calendarService.createCalendar(calendarView);
+    }
+
     @GetMapping("{calendarId}")
     public CalendarView getCalendarById(@PathVariable Long calendarId) {
         return calendarService.findById(AuthUtil.getMemberIdFromSecurityContext(), calendarId).orElseThrow(() ->

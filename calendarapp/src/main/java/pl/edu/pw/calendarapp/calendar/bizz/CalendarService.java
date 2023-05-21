@@ -1,6 +1,7 @@
 package pl.edu.pw.calendarapp.calendar.bizz;
 
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendar.rest.AddCalendarView;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
@@ -20,4 +21,6 @@ public interface CalendarService {
     void subscribeToCalendar(Calendar calendar, Member member);
 
     void deleteCalendar(Long calendarId);
+
+    CalendarView createCalendar(AddCalendarView calendarView);
 }

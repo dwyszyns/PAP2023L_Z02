@@ -9,10 +9,12 @@ import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
+import pl.edu.pw.calendarapp.calendar.rest.AddCalendarView;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
+import pl.edu.pw.calendarapp.member.repo.MemberRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarRepository calendarRepository;
     private final EventRepository eventRepository;
     private final CalendarMemberRepository calendarMemberRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public Optional<CalendarView> findById(long memberId, long calendarId) {
@@ -81,6 +84,22 @@ public class CalendarServiceImpl implements CalendarService {
         } else {
             calendarRepository.deleteById(calendarId);
         }
+    }
+
+    @Override
+    @Transactional
+    public CalendarView createCalendar(AddCalendarView calendarView) {
+        final Member member = memberRepository.getReferenceById(AuthUtil.getMemberIdFromSecurityContext());
+        final Calendar calendar = new Calendar();
+        calendar.setName(calendarView.getName());
+        calendar.setIsPublic(calendarView.isPublic());
+        calendarRepository.save(calendar);
+        final CalendarMember calendarMember = new CalendarMember();
+        calendarMember.setCalendar(calendar);
+        calendarMember.setMember(member);
+        calendarMember.setIsOwner(true);
+        return CalendarMapper.mapPreview(calendarMemberRepository.save(calendarMember).getCalendar(), true);
+
     }
 
     private void validateUserOwnsCalendar(final long calendarId) {

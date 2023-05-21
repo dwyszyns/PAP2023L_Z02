@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './add-calendar.css';
+import { useAddCalendarMutation } from '../store/api';
 
 const AddCalendar = () => {
   const [fields, setFields] = useState({
@@ -12,24 +13,22 @@ const AddCalendar = () => {
     isPublic: false,
   });
 
-  const fieldNames = ['name', 'isPublic'];
   const [isPublicInfo, setIsPublicInfo] = useState('');
+  const [addCalendar] = useAddCalendarMutation();
 
-  const handleAdd = async () => {
+  const handleAdd = () => {
     fields.isPublic = isPublicInfo === '1';
     let newErrors = { ...errors };
     let isValid = true;
-    fieldNames.forEach((fieldName) => {
-      if (fields[fieldName].trim() === '') {
-        newErrors = { ...newErrors, [fieldName]: true };
-        isValid = false;
-      } else {
-        newErrors = { ...newErrors, [fieldName]: false };
-      }
-    });
+    if (!fields.name) {
+      newErrors = { ...newErrors, name: true };
+      isValid = false;
+    } else {
+      newErrors = { ...newErrors, name: false };
+    }
     if (isValid) {
       const { ...body } = fields;
-      // addCalendar(body);
+      addCalendar(body);
     }
     setErrors(newErrors);
   };
@@ -60,7 +59,7 @@ const AddCalendar = () => {
         </i>
       </p>
 
-      <button type="button" className="add-calendar-button" onClick={handleAdd}>Add</button>
+      <button type="button" className="add-calendar-button" onClick={() => handleAdd()}>Add</button>
       <div className="auth-footer" />
     </div>
   );

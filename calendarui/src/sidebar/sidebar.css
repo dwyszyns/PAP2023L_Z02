@@ -96,24 +96,18 @@
 }
 
 .action-btn-calendar {
-    height: 15%;
-    width: 80%;
-    justify-content: center;
-    text-align: center;
+    height: fit-content;
+    width: fit-content;
 }
 
-.action-btn-calendar .button {
-    margin: 10px;
+.action-btn-calendar button {
+    background: transparent;
     border: none;
-    background-color: #16a816;
-    width: auto;
-    color: white;
-    border-radius: 8px;
-    font-size: 18px;
+    font-size: 3rem;
 }
 
-.action-btn-calendar .button:hover {
-    background-color: #1fbb1f;
+.action-btn-calendar button:hover {
+    color: #777777;
     cursor: pointer;
     transition: 0.25s;
 }

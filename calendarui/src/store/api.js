@@ -89,6 +89,14 @@ export const api = createApi({
       invalidatesTags: ['Calendars'],
 
     }),
+    addCalendar: builder.mutation({
+      query: (body) => ({
+        url: '/calendar',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Calendars'],
+    }),
   }),
 });
 
@@ -97,6 +105,7 @@ export const {
   useRegisterMutation,
   useAddEventMutation,
   useRemoveEventMutation,
+  useAddCalendarMutation,
   useRemoveCalendarMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,

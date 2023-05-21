@@ -39,11 +39,11 @@ const CalendarsSidebar = () => {
               </button>
             </button>
           ))}
-        </div>
-        <div className="action-btn-calendar">
-          <Link to="/calendar/add">
-            <button type="button" className="button">Add calendar</button>
-          </Link>
+          <div className="action-btn-calendar">
+            <Link to="/calendar/add">
+              <button type="button">+</button>
+            </Link>
+          </div>
         </div>
       </div>
     </>
