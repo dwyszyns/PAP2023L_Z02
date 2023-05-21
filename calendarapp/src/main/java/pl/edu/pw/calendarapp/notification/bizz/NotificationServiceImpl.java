@@ -21,6 +21,6 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotificationView> findAllForMember(long memberId) {
-        return notificationRepository.findAllForMember(memberId);
+        return NotificationMapper.map(notificationRepository.findAllForMember(memberId));
     }
 }
