@@ -2,7 +2,6 @@ package pl.edu.pw.calendarapp.event.bizz;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
@@ -10,6 +9,7 @@ import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
+import pl.edu.pw.calendarapp.event.repo.EventSubscriberRepository;
 import pl.edu.pw.calendarapp.event.rest.AddEventView;
 import pl.edu.pw.calendarapp.member.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
@@ -27,6 +27,7 @@ public class EventServiceImpl implements EventService {
     private final CalendarRepository calendarRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+    private final EventSubscriberRepository eventSubscriberRepository;
 
 
     @Override
@@ -65,7 +66,9 @@ public class EventServiceImpl implements EventService {
                     ) {
                         eventRepository.delete(event);
                     } else {
-                        throw new AccessDeniedException("Member does not own calendar");
+                        eventSubscriberRepository.deleteByEventIdAndMemberId(
+                                event.getEventId(),
+                                AuthUtil.getMemberIdFromSecurityContext());
                     }
                 });
     }

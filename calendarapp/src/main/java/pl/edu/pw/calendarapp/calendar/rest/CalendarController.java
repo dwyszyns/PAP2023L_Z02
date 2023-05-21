@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.bizz.CalendarService;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.member.bizz.MemberService;
@@ -26,7 +27,7 @@ public class CalendarController {
 
     @GetMapping("{calendarId}")
     public CalendarView getCalendarById(@PathVariable Long calendarId) {
-        return calendarService.findById(1, calendarId).orElseThrow(() ->
+        return calendarService.findById(AuthUtil.getMemberIdFromSecurityContext(), calendarId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
     }
 

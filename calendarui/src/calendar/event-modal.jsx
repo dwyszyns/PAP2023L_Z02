@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './modal.css';
+import './event-modal.css';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
-import { useAddEventMutation, useGetCalendarByCalendarIdQuery } from '../store/api';
+import { useAddEventMutation, useGetCalendarByCalendarIdQuery, useRemoveEventMutation } from '../store/api';
 
 const propTypes = {
   setOpenModal: PropTypes.func.isRequired,
@@ -25,6 +25,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   });
 
   const [addEvent, { isError, isSuccess }] = useAddEventMutation();
+  const [removeEvent] = useRemoveEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
   const fieldNames = ['name', 'startTime', 'endTime'];
   const getEventsForDay = (day) => {
@@ -84,7 +85,16 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                     </p>
                   </div>
                   <div className="button-del-ev">
-                    <button type="button" className="event-del-button">X</button>
+                    <button
+                      type="button"
+                      className="event-del-button"
+                      onClick={() => {
+                        console.log(event.id);
+                        removeEvent(event.id);
+                      }}
+                    >
+                      X
+                    </button>
                   </div>
                 </div>
               ))}
