@@ -1,40 +1,34 @@
 package pl.edu.pw.calendarapp.notification.bizz;
 
 import pl.edu.pw.calendarapp.event.repo.Event;
-import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.notification.repo.Notification;
 import pl.edu.pw.calendarapp.notification.rest.NotificationView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NotificationMapper {
     private NotificationMapper() {
     }
 
-    public static List<NotificationView> map(final List<Notification> notificationList) {
-        List<NotificationView> notificationViewList = new ArrayList<NotificationView>();
+    public static NotificationView map(final Notification notification) {
+        NotificationView notificationView = new NotificationView();
 
-        for (Notification notification : notificationList) {
-            NotificationView notificationView = new NotificationView();
+        notificationView.setId(notification.getNotificationId());
+        notificationView.setStatus(notification.getStatus());
+        notificationView.setMessage(
+                getMessageFromEvent(notification.getEvent()));
 
-            notificationView.setId(notification.getNotificationId());
-            notificationView.setNotifyTime(notification.getNotifyTime().toLocalDateTime());
-            notificationView.setStatus(notification.getStatus());
+        return notificationView;
+    }
 
-            Member member = notification.getMember();
-            if (member != null) {
-                notificationView.setMember(member);
-            }
-
-            Event event = notification.getEvent();
-            if (event != null) {
-                notificationView.setEvent(event);
-            }
-
-            notificationViewList.add(notificationView);
-        }
-
-        return notificationViewList;
+    private static String getMessageFromEvent(final Event event) {
+        final LocalDateTime start = event.getStartTime().toLocalDateTime();
+        return String.format(
+                "%s begins at %s o'clock on %s",
+                event.getName(),
+                start.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")),
+                start.toLocalDate().format(DateTimeFormatter.ofPattern("MMMM dd"))
+        );
     }
 }

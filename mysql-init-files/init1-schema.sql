@@ -54,3 +54,13 @@ create table if not exists friend_request(
     foreign key fk_friend_sender (sender_id) references member (member_id),
     foreign key fk_friend_receiver (receiver_id) references member (member_id)
 );
+
+create table if not exists notification(
+    notification_id bigint not null auto_increment,
+    notify_time     timestamp not null,
+    member_id       bigint not null,
+    event_id        bigint not null,
+    constraint pk_notification primary key (notification_id),
+    constraint fk_member foreign key (member_id) references member (member_id),
+    constraint fk_event foreign key (event_id) references event (event_id)
+);
