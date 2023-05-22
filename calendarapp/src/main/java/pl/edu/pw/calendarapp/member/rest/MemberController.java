@@ -50,21 +50,21 @@ public class MemberController {
     @PostMapping("/{memberId}/friends/{requestId}")
     public void acceptFriendRequest(@PathVariable("memberId") final long memberId,
                                     @PathVariable("requestId") final long requestId) {
-        authService.isMemberFromAuth(memberId);
+        authService.validateMemberFromAuth(memberId);
         memberService.acceptFriendRequest(requestId, memberId);
     }
 
     @DeleteMapping("/{memberId}/friends/{requestId}")
     public void rejectFriendRequest(@PathVariable("memberId") final long memberId,
                                     @PathVariable("requestId") final long requestId) {
-        authService.isMemberFromAuth(memberId);
+        authService.validateMemberFromAuth(memberId);
         memberService.rejectFriendRequest(requestId, memberId);
     }
 
     @PostMapping("/{memberId}/friends")
     public void sendFriendRequest(@PathVariable("memberId") final long memberId,
                                   @RequestParam("friendId") final long friendId) {
-        authService.isMemberFromAuth(memberId);
+        authService.validateMemberFromAuth(memberId);
         memberService.sendFriendRequest(memberId, friendId);
     }
 

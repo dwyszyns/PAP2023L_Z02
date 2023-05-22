@@ -21,10 +21,10 @@ insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (3, 1, 1, 0, 1);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (4, 2, 1, 0, 1);
 
-insert into event(event_id, calendar_id, name, start_time, end_time) values (0, 0, 'Dentist appointment', '2023-03-01 12:00:00', '2023-03-01 13:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (1, 0, 'Check stove', '2023-03-02 13:00:00', '2023-03-02 14:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (2, 1, 'Katie''s birthday', '2023-03-03 12:00:00', '2023-03-03 12:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (3, 1, 'BBQ at Mom and Pop''s', '2023-03-04 11:00:00', '2023-03-04 12:00:00');
+insert into event(event_id, calendar_id, name, start_time, duration) values (0, 0, 'Dentist appointment', '2023-03-01 12:00:00', 60);
+insert into event(event_id, calendar_id, name, start_time, duration) values (1, 0, 'Check stove', '2023-03-02 13:00:00', 120);
+insert into event(event_id, calendar_id, name, start_time, duration) values (2, 1, 'Katie''s birthday', '2023-03-03 12:00:00', 120);
+insert into event(event_id, calendar_id, name, start_time, duration) values (3, 1, 'BBQ at Mom and Pop''s', '2023-03-04 11:00:00', 60);
 
 insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (0, 0, 0);
 insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (1, 0, 1);

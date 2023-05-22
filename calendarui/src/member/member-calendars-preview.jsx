@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './member.css';
 import { Link } from 'react-router-dom';
+import './member.css';
 
 const propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
@@ -9,10 +9,10 @@ const propTypes = {
 };
 
 const MemberCalendarsPreview = ({ calendars }) => (
-  <div className="calendars">
+  <div className="member-calendars">
     {calendars.map((calendar) => (
       <Link to={`../../calendar/${calendar.id}`} relative="path" key={calendar.id}>
-        <div className="calendar">
+        <div className="member-calendar">
           {calendar.name}
         </div>
       </Link>

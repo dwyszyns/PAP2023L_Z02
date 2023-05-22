@@ -6,5 +6,5 @@ import pl.edu.pw.calendarapp.auth.rest.MemberRegisterView;
 public interface AuthService {
     void registerMember(MemberRegisterView registerView) throws IllegalArgumentException;
 
-    void isMemberFromAuth(Long memberId) throws AccessDeniedException;
+    void validateMemberFromAuth(Long memberId) throws AccessDeniedException;
 }

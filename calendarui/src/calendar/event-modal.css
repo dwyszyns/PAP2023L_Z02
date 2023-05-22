@@ -1,0 +1,172 @@
+.modal-background {
+    position: fixed;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.title {
+    display: inline-block;
+    text-align: center;
+}
+
+.title-close-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.title-close-btn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.body {
+    flex: 50%;
+}
+
+.footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    background-color: #4979fa;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.footer button:hover {
+    transition: 0.25s;
+    background-color: cornflowerblue;
+}
+
+#cancel-btn-event {
+    background-color: #cc1234;
+}
+
+#cancel-btn-event:hover {
+    background-color: #ee1645;
+    transition: 0.25s;
+}
+
+.popup-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-add-event {
+    text-align: center;
+}
+
+.add-event-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+}
+
+.event-elems-view {
+    border-radius: 2px;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.event-elem-name {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    width: 93%;
+    height: fit-content;
+    background-color: #7e9dec;
+    margin: 0;
+    border: none;
+    cursor: text;
+}
+
+.event-elem-name p {
+    margin: 0
+}
+
+
+.event-del-button {
+    height: auto;
+    border: white;
+    background-color: #ec3153;
+    cursor: pointer;
+    float: left;
+    text-align: center;
+}
+
+.button-del-ev {
+    height: auto;
+}
+
+.event-view-list {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    height: auto;
+    background-color: #7e9dec;
+    margin-bottom: 5px;
+
+}
+
+.no-events {
+    background-color: white;
+}
+
+.elemx {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.added-event {
+    color: darkgreen;
+}
+
+.event-error-message {
+    color: #a80505;
+}
+
+.event-del-button:hover {
+    background-color: #9d0202;
+    transition: 0.25s;
+}
+
+.exit-events-view:hover {
+    color: #8a8888;
+    transition: 0.25s;
+}

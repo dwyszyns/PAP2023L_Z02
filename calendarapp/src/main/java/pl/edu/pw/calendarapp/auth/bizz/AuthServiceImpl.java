@@ -35,7 +35,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void isMemberFromAuth(Long memberId) throws AccessDeniedException {
+    public void validateMemberFromAuth(Long memberId) throws AccessDeniedException {
         if (AuthUtil.getMemberIdFromSecurityContext() != memberId) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }

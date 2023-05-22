@@ -22,20 +22,20 @@ const FriendRequest = ({ request }) => {
   return (
     <div className="friend-request">
       <div className="friend-request-text">
-        <p className="friend-request-username">{request.friend.username}</p>
-        <p className="friend-request-username">sent you a request</p>
+        <p className="calendars-request-name">{request.friend.username}</p>
+        <p className="calendars-request-name">sent you a request</p>
       </div>
-      <div className="friend-request-buttons">
+      <div className="calendars-request-buttons">
         <button
           type="button"
-          className="friend-request-button friend-request-accepted"
+          className="calendars-request-button friend-request-accepted"
           onClick={() => acceptRequest({ memberId: 1, requestId: request.requestId })}
         >
           accept
         </button>
         <button
           type="button"
-          className="friend-request-button"
+          className="calendars-request-button"
           onClick={() => declineRequest({ memberId: 1, requestId: request.requestId })}
         >
           decline

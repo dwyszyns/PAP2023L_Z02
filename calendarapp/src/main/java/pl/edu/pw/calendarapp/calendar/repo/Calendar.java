@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.edu.pw.calendarapp.event.repo.Event;
-import pl.edu.pw.calendarapp.member.repo.CalendarMember;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Calendar {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calendar_id", nullable = false)
     private Long calendarId;
     @Column(name = "name", nullable = false)

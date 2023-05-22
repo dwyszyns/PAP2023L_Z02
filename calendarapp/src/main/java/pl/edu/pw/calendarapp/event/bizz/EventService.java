@@ -1,7 +1,7 @@
 package pl.edu.pw.calendarapp.event.bizz;
 
-import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.event.repo.Event;
+import pl.edu.pw.calendarapp.event.rest.AddEventView;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,5 +11,9 @@ public interface EventService {
 
     Optional<Event> findById(long eventId);
 
-    void addEvent(Event event, Calendar calendar);
+    List<Event> getSubscribedForMemberAndCalendar(long memberId, long calendarId);
+
+    void addEvent(AddEventView event);
+
+    void removeEvent(long eventId);
 }
