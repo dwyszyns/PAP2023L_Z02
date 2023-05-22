@@ -41,9 +41,25 @@ public class CalendarController {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
     }
 
-    @PostMapping("/{calendarId}/member/{memberId}")
-    public void addMemberToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
-        applyWithCalendarAndMember(calendarId, memberId, calendarService::addMemberToCalendar);
+    @GetMapping("/request")
+    public List<JoinRequestView> getRequestsForMember() {
+        return calendarService.getRequestsForMember(AuthUtil.getMemberIdFromSecurityContext());
+    }
+
+    @PostMapping("/{calendarId}/join")
+    public void sendJoinRequest(@PathVariable Long calendarId) {
+        final long memberId = AuthUtil.getMemberIdFromSecurityContext();
+        applyWithCalendarAndMember(calendarId, memberId, calendarService::sendJoinRequest);
+    }
+
+    @DeleteMapping("/request/{requestId}")
+    public void rejectRequest(@PathVariable Long requestId) {
+        calendarService.rejectRequest(requestId);
+    }
+
+    @PostMapping("/request/{requestId}/accept")
+    public void acceptRequest(@PathVariable Long requestId) {
+        calendarService.acceptRequest(requestId);
     }
 
     @PostMapping("/{calendarId}/member/{memberId}/subscribe")

@@ -20,6 +20,12 @@ public interface CalendarMemberRepository extends JpaRepository<CalendarMember, 
     boolean memberOwnsCalendar(Long calendarId, Long memberId);
 
     @Query("select cm from CalendarMember cm " +
+            "join fetch cm.member m " +
+            "where cm.calendar.calendarId = :calendarId " +
+            "and cm.isOwner = true")
+    Optional<CalendarMember> getOwner(Long calendarId);
+
+    @Query("select cm from CalendarMember cm " +
             "where cm.calendar.calendarId = :calendarId " +
             "and cm.member.memberId = :memberId ")
     Optional<CalendarMember> getCalendarMember(Long calendarId, Long memberId);
