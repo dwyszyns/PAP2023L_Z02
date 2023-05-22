@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.event.bizz;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
@@ -48,6 +49,12 @@ public class EventServiceImpl implements EventService {
     @Transactional
     @Override
     public void addEvent(AddEventView eventView) {
+        if (!calendarMemberRepository.memberOwnsCalendar(
+                AuthUtil.getMemberIdFromSecurityContext(),
+                eventView.getCalendarId())
+        ) {
+            throw new AccessDeniedException("Member does not own calendar");
+        }
         final Calendar calendar = calendarRepository.getReferenceById(eventView.getCalendarId());
         final Event event = EventMapper.mapFromRequest(eventView);
         event.setCalendar(calendar);

@@ -11,12 +11,14 @@ const propTypes = {
 };
 
 const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
-  const [fields, setFields] = useState({
+  const defaultFields = {
     name: '',
     startTime: '',
-    endTime: '',
+    duration: '',
     calendarId,
-  });
+  };
+
+  const [fields, setFields] = useState(defaultFields);
 
   const [errors, setErrors] = useState({
     name: false,
@@ -27,7 +29,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   const [addEvent, { isError, isSuccess }] = useAddEventMutation();
   const [removeEvent] = useRemoveEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
-  const fieldNames = ['name', 'startTime', 'endTime'];
+  const fieldNames = ['name', 'startTime', 'duration'];
   const getEventsForDay = (day) => {
     const formattedDay = day.format('YYYY-MM-DD');
     return !(isLoading || error) && data.events[formattedDay];
@@ -44,10 +46,12 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
         newErrors = { ...newErrors, [fieldName]: false };
       }
     });
+    fields.startTime = `${modalDay.format('YYYY-MM-DD')}T${fields.startTime}`;
     if (isValid) {
       const { ...body } = fields;
       addEvent(body);
     }
+    setFields(defaultFields);
     setErrors(newErrors);
   };
 
@@ -81,17 +85,15 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                 <div className="event-view-list" key={event.id} id={`event-day-${event.id}`}>
                   <div className="elemx">
                     <p key={event.id} className="event-elem-name">
-                      {`${event.name} : ${event.startDate} - ${event.endDate}`}
+                      <p>{`${event.name}`}</p>
+                      <p>{`${event.startDate.split(' ')[1]} - ${event.endDate.split(' ')[1]}`}</p>
                     </p>
                   </div>
                   <div className="button-del-ev">
                     <button
                       type="button"
                       className="event-del-button"
-                      onClick={() => {
-                        console.log(event.id);
-                        removeEvent(event.id);
-                      }}
+                      onClick={() => removeEvent(event.id)}
                     >
                       X
                     </button>

@@ -24,7 +24,28 @@ const CalendarsSidebar = () => {
           Calendars
         </p>
         <div className="nested-sidebar-list-calendar">
-          {!isLoading && !error && data.map((calendar) => (
+          <p className="nested-sidebar-title nested-sidebar-sec-title">
+            Shared
+          </p>
+          {!isLoading && !error && data.filter((c) => !c.owner).map((calendar) => (
+            <button
+              type="button"
+              key={calendar.id}
+              className={renderClassName(calendar)}
+              onClick={() => setSelectedCalendarId(calendar.id)}
+            >
+              <Link to={`/calendar/${calendar.id}`} className="nested-sidebar-link">
+                <p>{calendar.name}</p>
+              </Link>
+              <button type="button" className="calendar-nav-elem-remove" onClick={() => removeCalendar(calendar.id)}>
+                <img id={`trash${calendar.id.toString()}`} src={TrashBin} alt="X" className="trash-bin-icon" />
+              </button>
+            </button>
+          ))}
+          <p className="nested-sidebar-title nested-sidebar-sec-title">
+            Personal
+          </p>
+          {!isLoading && !error && data.filter((c) => c.owner).map((calendar) => (
             <button
               type="button"
               key={calendar.id}

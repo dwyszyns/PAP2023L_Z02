@@ -101,12 +101,19 @@
 }
 
 .event-elem-name {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
     width: 93%;
     height: fit-content;
     background-color: #7e9dec;
     margin: 0;
     border: none;
     cursor: text;
+}
+
+.event-elem-name p {
+    margin: 0
 }
 
 

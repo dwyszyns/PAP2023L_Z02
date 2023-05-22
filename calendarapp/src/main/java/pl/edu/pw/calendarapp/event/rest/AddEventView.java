@@ -12,7 +12,7 @@ public class AddEventView {
     @Size(min = 1, max = 25)
     private String name;
     private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Integer duration;
     @NotBlank
     private Long calendarId;
 }

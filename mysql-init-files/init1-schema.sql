@@ -31,7 +31,7 @@ create table if not exists event(
     calendar_id bigint not null,
     name        varchar(255) not null,
     start_time  timestamp not null,
-    end_time    timestamp not null,
+    duration    int not null,
     primary key pk_event (event_id),
     foreign key fk_event_calendar (calendar_id) references calendar (calendar_id)
 );

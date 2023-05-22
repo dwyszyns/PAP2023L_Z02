@@ -31,7 +31,7 @@ create table event(
     calendar_id number(19, 0) not null,
     name        varchar(255) not null,
     start_time  timestamp not null,
-    end_time    timestamp not null,
+    duration    int not null,
     constraint pk_event primary key (event_id),
     constraint fk_event_calendar foreign key (calendar_id) references calendar (calendar_id)
 );

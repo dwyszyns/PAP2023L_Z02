@@ -23,8 +23,8 @@ public class Event {
     private String name;
     @Column(name = "start_time", nullable = false)
     private Timestamp startTime;
-    @Column(name = "end_time", nullable = false)
-    private Timestamp endTime;
+    @Column(name = "duration", nullable = false)
+    private Integer duration;
 
     @ManyToOne
     @JoinColumn(name = "calendar_id")

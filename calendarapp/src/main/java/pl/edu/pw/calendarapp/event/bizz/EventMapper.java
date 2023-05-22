@@ -17,8 +17,8 @@ public class EventMapper {
             final EventView view = new EventView();
             view.setId(e.getEventId() != null ? e.getEventId() : -1L);
             view.setName(e.getName());
-            Optional.ofNullable(e.getStartTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setStartDate);
-            Optional.ofNullable(e.getEndTime()).map(Timestamp::toLocalDateTime).ifPresent(view::setEndDate);
+            view.setStartDate(event.getStartTime().toLocalDateTime());
+            view.setEndDate(event.getStartTime().toLocalDateTime().plusMinutes(e.getDuration()));
             return view;
         }).orElse(null);
     }
@@ -28,7 +28,7 @@ public class EventMapper {
             final Event event = new Event();
             event.setName(aev.getName());
             event.setStartTime(Timestamp.valueOf(aev.getStartTime()));
-            event.setEndTime(Timestamp.valueOf(aev.getEndTime()));
+            event.setDuration(aev.getDuration());
             return event;
         }).orElse(null);
     }
