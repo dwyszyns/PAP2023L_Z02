@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     @Query(value = "select n from Notification n " +
@@ -13,4 +14,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             "and n.notifyTime < :now " +
             "and n.event.startTime > :now")
     List<Notification> findAllForMemberBefore(@Param("memberId") Long memberId, @Param("now") Timestamp now);
+
+    @Query(value = "select n from Notification n " +
+            "join fetch n.member m " +
+            "where n.notificationId = :notificationId")
+    Optional<Notification> findByIdWithMember(@Param("notificationId") Long notificationId);
 }

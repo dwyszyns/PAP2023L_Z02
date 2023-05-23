@@ -6,20 +6,23 @@ import pl.edu.pw.calendarapp.notification.rest.NotificationView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class NotificationMapper {
     private NotificationMapper() {
     }
 
     public static NotificationView map(final Notification notification) {
-        NotificationView notificationView = new NotificationView();
+        return Optional.ofNullable(notification).map(n -> {
+            NotificationView notificationView = new NotificationView();
 
-        notificationView.setId(notification.getNotificationId());
-        notificationView.setStatus(notification.getStatus());
-        notificationView.setMessage(
-                getMessageFromEvent(notification.getEvent()));
+            notificationView.setId(n.getNotificationId());
+            notificationView.setStatus(n.getStatus());
+            notificationView.setMessage(
+                    getMessageFromEvent(n.getEvent()));
 
-        return notificationView;
+            return notificationView;
+        }).orElse(null);
     }
 
     private static String getMessageFromEvent(final Event event) {
