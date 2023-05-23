@@ -6,10 +6,11 @@ import {
 
 import './sidebar.css';
 import FriendsSidebar from './friends/friends-sidebar';
+import CalendarsSidebar from './calendars/calendars-sidebar';
 import LogoutIcon from '../icons/logout-icon';
 
 const Sidebar = () => {
-  const [selectedTab, setSelectedTab] = useState('');
+  const [selectedTab, setSelectedTab] = useState('calendars');
   const tabs = [
     { icon: CalendarIcon, name: 'calendars' },
     { icon: FriendsIcon, name: 'friends' },
@@ -23,7 +24,7 @@ const Sidebar = () => {
       case 'user':
         return <></>;
       case 'calendars':
-        return <></>;
+        return <CalendarsSidebar />;
       case 'friends':
         return <FriendsSidebar />;
       case 'notifications':

@@ -9,26 +9,26 @@
     border-bottom: 1px solid #cccccc;
 }
 
-.friend-request-username {
+.calendars-request-name {
     margin: 0;
     width: 100%;
     text-align: center;
 }
 
-.friend-request-buttons {
+.calendars-request-buttons {
     display: flex;
     gap: 30px;
     justify-content: center;
     width: 100%;
 }
 
-.friend-request-button {
+.calendars-request-button {
     width: 100px;
     border: 1px solid #dfdfdf;
     border-radius: 5px;;
     background-color: #dfdfdf;
 }
 
-.friend-request-button:hover {
+.calendars-request-button:hover {
     background-color: #cacaca;
 }

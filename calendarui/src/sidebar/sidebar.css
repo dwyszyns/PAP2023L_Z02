@@ -46,6 +46,13 @@
     font-weight: 500;
 }
 
+.nested-sidebar-sec-title {
+    font-size: 1rem;
+    width: 90%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
 .friend-profile-picture {
     width: 24px;
     height: 24px;
@@ -55,11 +62,9 @@
 
 .nested-sidebar-button {
     background-color: #ffffff;
-    border-top: 0;
-    border-bottom: 0;
-    border-right: 0;
-    border-left: 0;
-    width: 90%;
+    border: 0;
+    display: flex;
+    width: 95%;
     height: 42px;
 }
 
@@ -81,4 +86,65 @@
 
 .nested-sidebar-button:active {
     background-color: #dedede;
+}
+
+
+.nested-sidebar-button.selected {
+    background-color: #efefef;
+}
+
+.nested-sidebar-list-calendar {
+    height: 85%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.action-btn-calendar {
+    height: fit-content;
+    width: fit-content;
+}
+
+.action-btn-calendar button {
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+}
+
+.action-btn-calendar button:hover {
+    color: #777777;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.trash-bin-icon {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.trash-bin-icon:hover {
+    fill: red;
+    filter: invert(25%) sepia(83%) saturate(3594%) hue-rotate(347deg) brightness(103%) contrast(97%);
+    transition: 0.25s;
+}
+
+.calendar-nav-elem {
+    width: 100%;
+    display: flex;
+}
+
+.calendar-nav-elem-remove {
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+
+
+.popup-remove-calendar {
+    width: auto;
+    height: auto;
 }

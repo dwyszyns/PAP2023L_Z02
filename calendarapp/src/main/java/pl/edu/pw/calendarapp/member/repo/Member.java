@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
 import pl.edu.pw.calendarapp.notification.repo.Notification;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", nullable = false)
     private Long memberId;
     @Column(name = "first_name", nullable = false)

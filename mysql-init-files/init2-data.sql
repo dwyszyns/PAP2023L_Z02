@@ -61,12 +61,12 @@ insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (30, 11, 16, true, true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (31, 12, 17, true, true);
 
-insert into event(event_id, calendar_id, name, start_time, end_time) values (1, 1, 'Dentist appointment', '2023-03-01 12:00:00', '2023-03-01 13:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (2, 1, 'Check stove', '2023-03-02 13:00:00', '2023-03-02 14:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (3, 2, 'Katie''s birthday', '2023-03-03 12:00:00', '2023-03-03 12:00:00');
-insert into event(event_id, calendar_id, name, start_time, end_time) values (4, 2, 'BBQ at Mom and Pop''s', '2023-03-04 11:00:00', '2023-03-04 12:00:00');
+insert into event(event_id, calendar_id, name, start_time, duration) values (1, 1, 'Dentist appointment', '2023-03-01 12:00:00', 60);
+insert into event(event_id, calendar_id, name, start_time, duration) values (2, 2, 'Check stove', '2023-03-03 13:00:00', 120);
+insert into event(event_id, calendar_id, name, start_time, duration) values (3, 2, 'Katie''s birthday', '2023-03-03 12:00:00', 120);
+insert into event(event_id, calendar_id, name, start_time, duration) values (4, 2, 'BBQ at Mom and Pop''s', '2023-03-03 11:00:00', 60);
 
-insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (1, 1, 1);
+insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (1, 1, 2);
 insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (2, 1, 2);
 insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (3, 2, 1);
 insert into event_subscriber(event_subscriber_id, event_id, subscriber_id) values (4, 3, 1);
@@ -81,7 +81,7 @@ insert into friend_request(request_id, sender_id, receiver_id, accepted) values 
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (7, 2, 8, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (8, 2, 9, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (9, 2, 11, true);
-insert into friend_request(request_id, sender_id, receiver_id, accepted) values (10, 11, 2, true);
+insert into friend_request(request_id, sender_id, receiver_id, accepted) values (10, 10, 2, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (11, 2, 12, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (12, 4, 5, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (13, 4, 11, false);

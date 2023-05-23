@@ -1,0 +1,91 @@
+.add-calendar-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 80px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 30px;
+}
+
+.title-add-event {
+    font-size: 60px;
+    font-weight: inherit;
+}
+
+.form-add-calendar {
+    width: 80%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    margin-top: 8%;
+}
+
+.question-form-visible {
+    font-size: 25px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.custom-select {
+    position: relative;
+    font-size: 25px;
+    margin-bottom: 7px;
+    border: none;
+    padding: 13px;
+    border-radius: 7px;
+}
+
+.info-add-calendar {
+    margin-bottom: 70px;
+    color: #6e6e6e;
+}
+
+.custom-select select {
+    display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+    background-color: DodgerBlue;
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+}
+
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+
+.add-calendar-button {
+    width: 100%;
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 17px 20px;
+    margin: 16px 0 16px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.add-calendar-button:hover {
+    background-color: #555555;
+}
+
+.choose-name-calendar {
+    font-size: 25px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    text-align: left;
+}

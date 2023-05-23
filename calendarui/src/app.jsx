@@ -6,9 +6,11 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Main from './main/main';
 import MemberProfile from './member/member-profile';
+import Calendar from './calendar/calendar';
 import Login from './auth/login';
 import Logout from './auth/logout';
 import Register from './auth/register';
+import AddCalendar from './calendar/add-calendar';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: 'member/:memberId',
         element: <MemberProfile />,
+      },
+      {
+        path: 'calendar/:calendarId',
+        element: <Calendar />,
+      },
+      {
+        path: 'calendar/add',
+        element: <AddCalendar />,
       },
     ],
   },
