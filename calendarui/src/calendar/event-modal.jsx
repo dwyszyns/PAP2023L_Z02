@@ -18,6 +18,12 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
     calendarId,
   };
 
+  const inputType = {
+    name: 'text',
+    startTime: 'time',
+    duration: 'text',
+  };
+
   const [fields, setFields] = useState(defaultFields);
 
   const [errors, setErrors] = useState({
@@ -117,14 +123,14 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
 
           <Popup trigger={<button type="button"> Add</button>} position="right center">
             <div className="popup-background">
-              <div className="modal-container">
+              <div className="modal-container-add-event">
                 <h2 className="title-add-event">Add new event</h2>
                 {fieldNames.map((fieldName) => (
                   <>
                     <input
                       key={fieldName}
                       id={`auth-${fieldName}-input`}
-                      type="text"
+                      type={inputType[fieldName]}
                       name={fieldName}
                       value={fields[fieldName]}
                       placeholder={fieldName.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}

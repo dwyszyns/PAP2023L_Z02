@@ -3,10 +3,12 @@ import './add-calendar.css';
 import { useAddCalendarMutation } from '../store/api';
 
 const AddCalendar = () => {
-  const [fields, setFields] = useState({
+  const defaultFields = {
     name: '',
     isPublic: false,
-  });
+  };
+
+  const [fields, setFields] = useState(defaultFields);
 
   const [errors, setErrors] = useState({
     name: false,
@@ -31,11 +33,12 @@ const AddCalendar = () => {
       addCalendar(body);
     }
     setErrors(newErrors);
+    setFields(defaultFields);
   };
 
   return (
     <div className="form-add-calendar">
-      <header className="title-add-event">Add a new calendar</header>
+      <header className="title-add-calendar">Add a new calendar</header>
       <label className="choose-name-calendar">Choose a name for your new calendar:</label>
       <input
         type="text"
