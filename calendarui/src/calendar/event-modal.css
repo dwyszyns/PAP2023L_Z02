@@ -8,7 +8,7 @@
 
 .modal-container-add-event {
     width: 500px;
-    height: 410px;
+    height: 500px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
@@ -86,20 +86,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 170px;
+    margin-bottom: 390px;
 }
 
 .title-add-event {
     text-align: center;
-    font-size: 28px;
+    font-size: 32px;
 }
 
 .add-event-input {
     width: 100%;
     padding: 12px 20px;
-    margin: 10px 0;
+    margin: 15px 0;
     box-sizing: border-box;
     border: none;
     border-radius: 4px;
+    font-size: 16px;
     background-color: #e5e5e5;
 }
 
@@ -179,6 +182,34 @@
 }
 
 .exit-events-view:hover {
+    color: #8a8888;
+    transition: 0.25s;
+}
+
+.header-popup {
+    display: flex;
+    justify-content: center;
+}
+
+.header-popup-add-event {
+    justify-content: center;
+    width: 93%;
+    margin-left: 35px;
+}
+
+.button-close-popup-add-event {
+    float: right;
+    justify-content: left;
+    width: 7%;
+}
+
+.button-close-popup-add-event-x {
+    border: none;
+    background-color: white;
+    font-size: 25px;
+}
+
+.button-close-popup-add-event-x:hover {
     color: #8a8888;
     transition: 0.25s;
 }

@@ -33,6 +33,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   });
 
   const [addEvent, { isError, isSuccess }] = useAddEventMutation();
+  const [popupView, setPopupView] = useState(false);
   const [removeEvent] = useRemoveEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
   const fieldNames = ['name', 'startTime', 'duration'];
@@ -69,6 +70,11 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
       return <p className="added-event">The event has been added successfully.</p>;
     }
     return <></>;
+  };
+
+  const offsetPopup = {
+    left: 1000,
+    right: 0,
   };
 
   return (
@@ -121,31 +127,40 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
             Cancel
           </button>
 
-          <Popup trigger={<button type="button"> Add</button>} position="right center">
-            <div className="popup-background">
-              <div className="modal-container-add-event">
-                <h2 className="title-add-event">Add new event</h2>
-                {fieldNames.map((fieldName) => (
-                  <>
-                    <input
-                      key={fieldName}
-                      id={`auth-${fieldName}-input`}
-                      type={inputType[fieldName]}
-                      name={fieldName}
-                      value={fields[fieldName]}
-                      placeholder={fieldName.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
-                      className="add-event-input"
-                      onChange={(e) => setFields({ ...fields, [fieldName]: e.target.value })}
-                    />
-                    {errors[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
-                  </>
-                ))}
-                <button type="button" className="auth-submit-button" onClick={handleSubmit}>Add</button>
-                <div className="auth-footer">
-                  {render()}
+          <Popup trigger={<button type="button"> Add</button>} position="center center" d>
+            {(close) => (
+              <div className="popup-background">
+                <div className="modal-container-add-event">
+                  <div className="header-popup">
+                    <div className="header-popup-add-event">
+                      <h2 className="title-add-event">Add new event</h2>
+                    </div>
+                    <div className="button-close-popup-add-event">
+                      <button onClick={close} className="button-close-popup-add-event-x">X</button>
+                    </div>
+                  </div>
+                  {fieldNames.map((fieldName) => (
+                    <>
+                      <input
+                        key={fieldName}
+                        id={`auth-${fieldName}-input`}
+                        type={inputType[fieldName]}
+                        name={fieldName}
+                        value={fields[fieldName]}
+                        placeholder={fieldName.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
+                        className="add-event-input"
+                        onChange={(e) => setFields({ ...fields, [fieldName]: e.target.value })}
+                      />
+                      {errors[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
+                    </>
+                  ))}
+                  <button type="button" className="auth-submit-button" onClick={handleSubmit}>Add</button>
+                  <div className="auth-footer">
+                    {render()}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </Popup>
 
         </div>
