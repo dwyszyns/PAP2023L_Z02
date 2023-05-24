@@ -14,6 +14,7 @@ const propTypes = {
 
 const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   const [selectedEventName, setSelectedEventName] = useState('');
+  const [selectedEventId, setSelectedEventId] = useState(0);
   const [removeEvent] = useRemoveEventMutation();
   const [selectedTab, setSelectedTab] = useState('events');
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
@@ -45,6 +46,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                   onClick={() => {
                     setSelectedEventName(event.name);
                     setSelectedTab('notifications');
+                    setSelectedEventId(event.id);
                   }}
                 >
                   <p key={event.id} className="event-elem-name">
@@ -101,6 +103,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
           <NotificationList
             selectedEventName={selectedEventName}
             setSelectedTab={setSelectedTab}
+            eventId={selectedEventId}
           />
         );
       case 'add-notification':

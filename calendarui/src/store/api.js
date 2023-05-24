@@ -37,6 +37,9 @@ export const api = createApi({
       query: (id) => `member/${id}/friends`,
       providesTags: () => ['FriendRequests'],
     }),
+    getNotificationsForEvent: builder.query({
+      query: (id) => `notification/event/${id}`,
+    }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query({ memberId, requestId }) {
         return {
@@ -107,6 +110,7 @@ export const {
   useRemoveEventMutation,
   useAddCalendarMutation,
   useRemoveCalendarMutation,
+  useGetNotificationsForEventQuery,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetCalendarByCalendarIdQuery,
