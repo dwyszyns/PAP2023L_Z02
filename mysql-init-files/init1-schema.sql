@@ -19,7 +19,7 @@ create table if not exists calendar_member(
     calendar_member_id bigint not null auto_increment,
     member_id          bigint not null,
     calendar_id        bigint not null,
-    is_owner           boolean default false,
+    role               varchar(20) not null,
     auto_subscribed    boolean default false,
     primary key pk_calendar_member (calendar_member_id),
     foreign key fk_calendar_member_calendar (calendar_id) references calendar (calendar_id),

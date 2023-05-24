@@ -19,7 +19,7 @@ create table calendar_member(
     calendar_member_id identity not null,
     member_id          number(19, 0) not null,
     calendar_id        number(19, 0) not null,
-    is_owner           number(1,0) default false,
+    role               varchar(20) not null,
     auto_subscribed    number(1,0) default false,
     constraint pk_calendar_member primary key (calendar_member_id),
     constraint fk_calendar_member_calendar foreign key (calendar_id) references calendar (calendar_id),
