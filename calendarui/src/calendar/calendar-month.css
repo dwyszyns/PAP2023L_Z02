@@ -44,19 +44,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 80%;
 }
 
 .small-calendar-day-labels {
     display: grid;
     height: 60px;
-    width: 100%;
+    width: 85%;
     grid-template-columns: repeat(7, 1fr);
 }
 
 .small-calendar-array {
     display: grid;
-    height: 620px;
-    width: 900px;
+    height: 650px;
+    width: 85%;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }

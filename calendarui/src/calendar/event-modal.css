@@ -13,7 +13,6 @@
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    /*display: flex;*/
     flex-direction: column;
     padding: 25px;
 }
@@ -290,4 +289,61 @@
 
 .body-notification-list {
     height: 100%;
+}
+
+.modal-container-add-notification {
+    display: none;
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.choose-number-notification {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.number-input-notification {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 20px;
+}
+
+.question-form-time-type {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.custom-select-type {
+    position: relative;
+    font-size: 20px;
+    margin-bottom: 7px;
+    border: none;
+    padding: 13px;
+    border-radius: 7px;
+}
+
+.submit-noti-button {
+    width: 100%;
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    margin: 35px 0 16px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }
