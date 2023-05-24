@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.calendar.rest;
+package pl.edu.pw.calendarapp.calendarmember.rest;
 
 import lombok.Data;
 

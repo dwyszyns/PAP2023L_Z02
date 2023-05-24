@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.calendar.bizz;
+package pl.edu.pw.calendarapp.calendarmember.bizz;
 
 import lombok.Getter;
 

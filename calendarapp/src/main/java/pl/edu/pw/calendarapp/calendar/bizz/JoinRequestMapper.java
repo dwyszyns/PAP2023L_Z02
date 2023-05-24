@@ -1,7 +1,8 @@
 package pl.edu.pw.calendarapp.calendar.bizz;
 
-import pl.edu.pw.calendarapp.calendar.repo.JoinRequest;
-import pl.edu.pw.calendarapp.calendar.rest.JoinRequestView;
+import pl.edu.pw.calendarapp.calendarmember.bizz.CalendarMemberRoleEnum;
+import pl.edu.pw.calendarapp.calendarmember.repo.JoinRequest;
+import pl.edu.pw.calendarapp.calendarmember.rest.JoinRequestView;
 import pl.edu.pw.calendarapp.member.bizz.MemberMapper;
 
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class JoinRequestMapper {
                     joinRequestView.setSender(MemberMapper.mapMemberPreview(jr.getSender()));
                     joinRequestView.setCalendar(CalendarMapper.mapPreview(
                             jr.getCalendar(),
-                            joinRequestView.getFromOwner() ?
+                            Boolean.TRUE.equals(joinRequestView.getFromOwner()) ?
                                     CalendarMemberRoleEnum.OWNER.getRole() :
                                     CalendarMemberRoleEnum.GUEST.getRole()));
                     return joinRequestView;

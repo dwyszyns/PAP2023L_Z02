@@ -1,9 +1,10 @@
-package pl.edu.pw.calendarapp.calendar.repo;
+package pl.edu.pw.calendarapp.calendarmember.repo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
 @Entity

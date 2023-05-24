@@ -1,8 +1,8 @@
 package pl.edu.pw.calendarapp.member.bizz;
 
 import pl.edu.pw.calendarapp.calendar.bizz.CalendarMapper;
-import pl.edu.pw.calendarapp.calendar.bizz.CalendarMemberRoleEnum;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
+import pl.edu.pw.calendarapp.calendarmember.bizz.CalendarMemberRoleEnum;
 import pl.edu.pw.calendarapp.member.repo.FriendRequest;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.rest.FriendView;

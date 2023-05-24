@@ -7,6 +7,9 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.bizz.CalendarService;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.calendarmember.bizz.CalendarMemberService;
+import pl.edu.pw.calendarapp.calendarmember.rest.CalendarMemberView;
+import pl.edu.pw.calendarapp.calendarmember.rest.JoinRequestView;
 import pl.edu.pw.calendarapp.member.bizz.MemberService;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
@@ -18,6 +21,7 @@ import java.util.function.BiConsumer;
 @RequiredArgsConstructor
 public class CalendarController {
     private final CalendarService calendarService;
+    private final CalendarMemberService calendarMemberService;
     private final MemberService memberService;
 
     @GetMapping("/member/{memberId}")
@@ -49,32 +53,32 @@ public class CalendarController {
     @PostMapping("/{calendarId}/join")
     public void sendJoinRequest(@PathVariable Long calendarId) {
         final long memberId = AuthUtil.getMemberIdFromSecurityContext();
-        applyWithCalendarAndMember(calendarId, memberId, calendarService::sendJoinRequest);
+        applyWithCalendarAndMember(calendarId, memberId, calendarMemberService::sendJoinRequest);
     }
 
     @GetMapping("/{calendarId}/member")
     public List<CalendarMemberView> getMembersOfCalendar(@PathVariable Long calendarId) {
-        return calendarService.getMembersForCalendar(calendarId);
+        return calendarMemberService.getMembersForCalendar(calendarId);
     }
 
     @PostMapping("/{calendarId}/member/{memberId}/subscribe")
     public void subscribeToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
-        applyWithCalendarAndMember(calendarId, memberId, calendarService::subscribeToCalendar);
+        applyWithCalendarAndMember(calendarId, memberId, calendarMemberService::subscribeToCalendar);
     }
 
     @GetMapping("/request")
     public List<JoinRequestView> getRequestsForMember() {
-        return calendarService.getRequestsForMember(AuthUtil.getMemberIdFromSecurityContext());
+        return calendarMemberService.getRequestsForMember(AuthUtil.getMemberIdFromSecurityContext());
     }
 
     @DeleteMapping("/request/{requestId}")
     public void rejectRequest(@PathVariable Long requestId) {
-        calendarService.rejectRequest(requestId);
+        calendarMemberService.rejectRequest(requestId);
     }
 
     @PostMapping("/request/{requestId}/accept")
     public void acceptRequest(@PathVariable Long requestId) {
-        calendarService.acceptRequest(requestId);
+        calendarMemberService.acceptRequest(requestId);
     }
 
     private void applyWithCalendarAndMember(long calendarId, long memberId, BiConsumer<Calendar, Member> andThen) {

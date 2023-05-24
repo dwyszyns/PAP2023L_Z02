@@ -1,4 +1,4 @@
-package pl.edu.pw.calendarapp.calendar.repo;
+package pl.edu.pw.calendarapp.calendarmember.repo;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

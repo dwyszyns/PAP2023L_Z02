@@ -7,9 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
-import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
-import pl.edu.pw.calendarapp.calendar.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMember;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 

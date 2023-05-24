@@ -54,6 +54,11 @@ public class MemberController {
         memberService.acceptFriendRequest(requestId, memberId);
     }
 
+    @PostMapping("/current/friends/{requestId}")
+    public void acceptFriendRequestForCurrent(@PathVariable("requestId") final long requestId) {
+        memberService.acceptFriendRequest(requestId, AuthUtil.getMemberIdFromSecurityContext());
+    }
+
     @DeleteMapping("/{memberId}/friends/{requestId}")
     public void rejectFriendRequest(@PathVariable("memberId") final long memberId,
                                     @PathVariable("requestId") final long requestId) {

@@ -1,7 +1,7 @@
-package pl.edu.pw.calendarapp.calendar.bizz;
+package pl.edu.pw.calendarapp.calendarmember.bizz;
 
-import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
-import pl.edu.pw.calendarapp.calendar.rest.CalendarMemberView;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMember;
+import pl.edu.pw.calendarapp.calendarmember.rest.CalendarMemberView;
 
 import java.util.Optional;
 

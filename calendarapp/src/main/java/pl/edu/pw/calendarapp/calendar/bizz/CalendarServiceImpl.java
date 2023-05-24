@@ -2,15 +2,15 @@ package pl.edu.pw.calendarapp.calendar.bizz;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
-import pl.edu.pw.calendarapp.calendar.repo.*;
+import pl.edu.pw.calendarapp.calendar.repo.CalendarRepository;
 import pl.edu.pw.calendarapp.calendar.rest.AddCalendarView;
-import pl.edu.pw.calendarapp.calendar.rest.CalendarMemberView;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
-import pl.edu.pw.calendarapp.calendar.rest.JoinRequestView;
+import pl.edu.pw.calendarapp.calendarmember.bizz.CalendarMemberRoleEnum;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMember;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class CalendarServiceImpl implements CalendarService {
     private final CalendarRepository calendarRepository;
     private final CalendarMemberRepository calendarMemberRepository;
-    private final JoinRequestRepository joinRequestRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
 
@@ -58,30 +57,6 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     @Transactional
-    public void sendJoinRequest(Calendar calendar, Member member) {
-        final Member owner = calendarMemberRepository.getOwner(calendar.getCalendarId())
-                .orElseThrow(() -> new IllegalArgumentException("Calendar has no owner"))
-                .getMember();
-        final JoinRequest joinRequest = new JoinRequest();
-        joinRequest.setCalendar(calendar);
-        joinRequest.setSender(member);
-        joinRequest.setReceiver(owner);
-        joinRequest.setFromOwner(true);
-        joinRequestRepository.save(joinRequest);
-    }
-
-    @Override
-    @Transactional
-    public void subscribeToCalendar(Calendar calendar, Member member) {
-        validateUserOwnsCalendar(calendar.getCalendarId());
-        final CalendarMember calendarMember = calendarMemberRepository.getCalendarMember(calendar.getCalendarId(), member.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Member is not a part of this calendar"));
-        calendarMember.setAutoSubscribed(true);
-        calendarMemberRepository.save(calendarMember);
-    }
-
-    @Override
-    @Transactional
     public void deleteCalendar(Long calendarId) {
         final long memberId = AuthUtil.getMemberIdFromSecurityContext();
         if (!calendarMemberRepository.memberOwnsCalendar(memberId, calendarId)) {
@@ -108,50 +83,4 @@ public class CalendarServiceImpl implements CalendarService {
         return CalendarMapper.mapPreview(calendarMemberRepository.save(calendarMember).getCalendar(), role);
     }
 
-    @Override
-    public List<JoinRequestView> getRequestsForMember(long memberId) {
-        return joinRequestRepository.findByReceiver(memberId).stream()
-                .map(JoinRequestMapper::map)
-                .toList();
-    }
-
-    @Override
-    public void rejectRequest(Long requestId) {
-        final JoinRequest joinRequest = joinRequestRepository.findByIdWithRefs(requestId)
-                .orElseThrow(() -> new IllegalArgumentException("Request not found"));
-        if (!joinRequest.getReceiver().getMemberId().equals(AuthUtil.getMemberIdFromSecurityContext())) {
-            throw new AccessDeniedException("You are not the receiver of this request");
-        }
-        joinRequestRepository.deleteById(requestId);
-    }
-
-    @Override
-    @Transactional
-    public void acceptRequest(Long requestId) {
-        final JoinRequest joinRequest = joinRequestRepository.findByIdWithRefs(requestId)
-                .orElseThrow(() -> new IllegalArgumentException("Request not found"));
-        if (!joinRequest.getReceiver().getMemberId().equals(AuthUtil.getMemberIdFromSecurityContext())) {
-            throw new AccessDeniedException("You are not the receiver of this request");
-        }
-        final CalendarMember calendarMember = new CalendarMember();
-        calendarMember.setCalendar(joinRequest.getCalendar());
-        calendarMember.setMember(joinRequest.getSender());
-        calendarMember.setRole(CalendarMemberRoleEnum.GUEST.getRole());
-        calendarMemberRepository.save(calendarMember);
-        joinRequestRepository.deleteById(requestId);
-    }
-
-    @Override
-    public List<CalendarMemberView> getMembersForCalendar(Long calendarId) {
-        validateUserOwnsCalendar(calendarId);
-        return calendarMemberRepository.findAllForCalendar(calendarId).stream()
-                .map(CalendarMemberMapper::map)
-                .toList();
-    }
-
-    private void validateUserOwnsCalendar(final long calendarId) {
-        if (!calendarMemberRepository.memberOwnsCalendar(AuthUtil.getMemberIdFromSecurityContext(), calendarId)) {
-            throw new AccessDeniedException("You are not the owner of this calendar");
-        }
-    }
 }
