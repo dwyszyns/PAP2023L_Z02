@@ -12,6 +12,11 @@ import java.util.List;
 public class NotificationController {
     private final NotificationService notificationService;
 
+    @GetMapping("/event/{eventId}")
+    public List<NotificationView> getNotificationsForEvent(@PathVariable Long eventId) {
+        return notificationService.findAllForEvent(eventId);
+    }
+
     @GetMapping("/member/{memberId}")
     public List<NotificationView> getNotificationsForMember(@PathVariable Long memberId) {
         return notificationService.findAllForMember(memberId);

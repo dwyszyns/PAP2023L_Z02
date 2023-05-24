@@ -24,12 +24,21 @@ public class NotificationServiceImpl implements NotificationService {
     private final MemberRepository memberRepository;
 
     @Override
+    public List<NotificationView> findAllForEvent(long memberId) {
+        final Timestamp now = new Timestamp(System.currentTimeMillis());
+        return notificationRepository.findAllForEvent(memberId, now).stream()
+                .map(NotificationMapper::map)
+                .toList();
+    }
+
+    @Override
     public List<NotificationView> findAllForMember(long memberId) {
         final Timestamp now = new Timestamp(System.currentTimeMillis());
         return notificationRepository.findAllForMemberBefore(memberId, now).stream()
                 .map(NotificationMapper::map)
                 .toList();
     }
+
 
     @Override
     public NotificationView addNotification(final AddNotificationView addNotificationView) {

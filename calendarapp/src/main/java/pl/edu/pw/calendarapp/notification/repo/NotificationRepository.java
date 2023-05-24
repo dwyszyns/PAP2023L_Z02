@@ -10,10 +10,15 @@ import java.util.Optional;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     @Query(value = "select n from Notification n " +
+            "where n.event.eventId = :eventId ")
+    List<Notification> findAllForEvent(@Param("memberId") Long eventId, @Param("now") Timestamp now);
+
+    @Query(value = "select n from Notification n " +
             "where n.member.memberId = :memberId " +
             "and n.notifyTime < :now " +
             "and n.event.startTime > :now")
     List<Notification> findAllForMemberBefore(@Param("memberId") Long memberId, @Param("now") Timestamp now);
+
 
     @Query(value = "select n from Notification n " +
             "join fetch n.member m " +
