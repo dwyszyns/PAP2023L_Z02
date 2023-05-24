@@ -4,27 +4,23 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
+  setSelectedTab: PropTypes.func.isRequired,
 };
 
-const AddNotification = ({ selectedEventName }) => {
+const AddNotification = ({ selectedEventName, setSelectedTab }) => {
   const [timeType, setTimeType] = useState('');
 
-  const defaultFieldsAddNotification = {
+  const defaultFields = {
     time: '',
     type: false,
   };
 
-  const [fieldsAddNotification, setFieldsAddNotification] = useState(defaultFieldsAddNotification);
+  const [fields, setFields] = useState(defaultFields);
 
-  const [errorsAddNotification, setErrorsAddNotification] = useState({
+  const [errors, setErrors] = useState({
     time: false,
     type: false,
   });
-
-  const closeAddNotification = async () => {
-    (document.getElementById('notification-of-day-list-container')).style.display = 'flex';
-    (document.getElementById('add-notification-container')).style.display = 'none';
-  };
 
   return (
     <div id="add-notification-container" className="modal-container-add-notification">
@@ -33,7 +29,13 @@ const AddNotification = ({ selectedEventName }) => {
           <h2 className="title-add-event">Add new notification</h2>
         </div>
         <div className="button-close-popup-add-event">
-          <button type="button" onClick={closeAddNotification} className="button-close-popup-add-event-x">X</button>
+          <button
+            type="button"
+            onClick={() => setSelectedTab('notifications')}
+            className="button-close-popup-add-event-x"
+          >
+            X
+          </button>
         </div>
       </div>
       <h3 className="add-event-date">
@@ -45,14 +47,18 @@ const AddNotification = ({ selectedEventName }) => {
       <input
         type="text"
         name="time"
-        value={fieldsAddNotification.time}
+        value={fields.time}
         placeholder={'Time'.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
         className="number-input-notification"
-        onChange={(e) => setFieldsAddNotification({ ...fieldsAddNotification, time: e.target.value })}
+        onChange={(event) => setFields({ ...fields, time: event.target.value })}
       />
-      {errorsAddNotification.name && <p className="auth-error-message">Please enter a valid value</p>}
+      {errors.name && <p className="auth-error-message">Please enter a valid value</p>}
 
-      <select className="custom-select-type" onChange={(type) => setTimeType(type.target.value)} name="privacy">
+      <select
+        className="custom-select-type"
+        onChange={(type) => setTimeType(type.target.value)}
+        name="privacy"
+      >
         <option value="m">Minutes</option>
         <option value="h">Hours</option>
         <option value="d">Days</option>

@@ -7,7 +7,6 @@
 }
 
 .modal-container-add-event {
-    display: none;
     width: 500px;
     height: 500px;
     border-radius: 12px;
@@ -226,7 +225,6 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     flex-direction: column;
     padding: 25px;
-    display: none;
 }
 
 .header-notification-list {
@@ -292,7 +290,6 @@
 }
 
 .modal-container-add-notification {
-    display: none;
     width: 500px;
     height: 500px;
     border-radius: 12px;

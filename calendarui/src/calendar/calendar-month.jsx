@@ -110,7 +110,11 @@ const CalendarMonth = ({ calendarId }) => {
               </button>
             ))}
             {modalOpen && (
-            <EventModal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
+              <EventModal
+                setOpenModal={setModalOpen}
+                calendarId={calendarId}
+                modalDay={modalDay}
+              />
             )}
           </div>
         </div>

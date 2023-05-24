@@ -6,25 +6,26 @@ import { useAddEventMutation } from '../store/api';
 const propTypes = {
   calendarId: PropTypes.number.isRequired,
   modalDay: PropTypes.number.isRequired,
+  setSelectedTab: PropTypes.func.isRequired,
 };
 
-const AddEvent = ({ calendarId, modalDay }) => {
-  const defaultFieldsAddEvent = {
+const AddEvent = ({ calendarId, modalDay, setSelectedTab }) => {
+  const defaultFields = {
     name: '',
     startTime: '',
     duration: '',
     calendarId,
   };
 
-  const inputTypeAddEvent = {
+  const inputType = {
     name: 'text',
     startTime: 'time',
     duration: 'text',
   };
 
-  const [fieldsAddEvent, setFieldsAddEvent] = useState(defaultFieldsAddEvent);
+  const [fields, setFields] = useState(defaultFields);
 
-  const [errorsAddEvent, setErrorsAddEvent] = useState({
+  const [errors, setErrors] = useState({
     name: false,
     startTime: false,
     endTime: false,
@@ -34,23 +35,23 @@ const AddEvent = ({ calendarId, modalDay }) => {
   const fieldNamesAddEvent = ['name', 'startTime', 'duration'];
 
   const handleSubmit = () => {
-    let newErrors = { ...errorsAddEvent };
+    let newErrors = { ...errors };
     let isValid = true;
     fieldNamesAddEvent.forEach((fieldName) => {
-      if (fieldsAddEvent[fieldName].trim() === '') {
+      if (fields[fieldName].trim() === '') {
         newErrors = { ...newErrors, [fieldName]: true };
         isValid = false;
       } else {
         newErrors = { ...newErrors, [fieldName]: false };
       }
     });
-    fieldsAddEvent.startTime = `${modalDay.format('YYYY-MM-DD')}T${fieldsAddEvent.startTime}`;
+    fields.startTime = `${modalDay.format('YYYY-MM-DD')}T${fields.startTime}`;
     if (isValid) {
-      const { ...body } = fieldsAddEvent;
+      const { ...body } = fields;
       addEvent(body);
     }
-    setFieldsAddEvent(defaultFieldsAddEvent);
-    setErrorsAddEvent(newErrors);
+    setFields(defaultFields);
+    setErrors(newErrors);
   };
 
   const render = () => {
@@ -63,11 +64,6 @@ const AddEvent = ({ calendarId, modalDay }) => {
     return <></>;
   };
 
-  const closeAddEvent = async () => {
-    (document.getElementById('events-of-day-list-container')).style.display = 'flex';
-    (document.getElementById('add-event-container')).style.display = 'none';
-  };
-
   return (
     <div id="add-event-container" className="modal-container-add-event">
       <div className="header-popup">
@@ -75,7 +71,13 @@ const AddEvent = ({ calendarId, modalDay }) => {
           <h2 className="title-add-event">Add new event</h2>
         </div>
         <div className="button-close-popup-add-event">
-          <button type="button" onClick={closeAddEvent} className="button-close-popup-add-event-x">X</button>
+          <button
+            type="button"
+            onClick={() => setSelectedTab('events')}
+            className="button-close-popup-add-event-x"
+          >
+            X
+          </button>
         </div>
       </div>
       <h3 className="add-event-date">
@@ -86,14 +88,14 @@ const AddEvent = ({ calendarId, modalDay }) => {
           <input
             key={fieldName}
             id={`auth-${fieldName}-input`}
-            type={inputTypeAddEvent[fieldName]}
+            type={inputType[fieldName]}
             name={fieldName}
-            value={fieldsAddEvent[fieldName]}
+            value={fields[fieldName]}
             placeholder={fieldName.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
             className="add-event-input"
-            onChange={(e) => setFieldsAddEvent({ ...fieldsAddEvent, [fieldName]: e.target.value })}
+            onChange={(e) => setFields({ ...fields, [fieldName]: e.target.value })}
           />
-          {errorsAddEvent[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
+          {errors[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
         </>
       ))}
       <button type="button" className="auth-submit-button" onClick={handleSubmit}>Add</button>
