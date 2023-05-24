@@ -10,10 +10,10 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "select cm.member from CalendarMember cm where cm.calendar.calendarId = :calendarId")
-    List<Member> findAllForCalendar(@Param("calendarId") Long calendarId);
 
-    @Query(value = "select cm.member from CalendarMember cm where cm.calendar.calendarId = :calendarId and cm.autoSubscribed = true")
+    @Query(value = "select cm.member from CalendarMember cm " +
+            "where cm.calendar.calendarId = :calendarId " +
+            "and cm.autoSubscribed = true")
     List<Member> findAutoSubscribedForCalendar(@Param("calendarId") Long calendarId);
 
     @Query(value = "select distinct m from Member m " +
