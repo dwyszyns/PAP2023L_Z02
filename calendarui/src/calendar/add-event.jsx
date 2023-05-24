@@ -8,7 +8,7 @@ const propTypes = {
   modalDay: PropTypes.number.isRequired,
 };
 
-const EventModal = ({ calendarId, modalDay }) => {
+const AddEvent = ({ calendarId, modalDay }) => {
   const defaultFieldsAddEvent = {
     name: '',
     startTime: '',
@@ -104,6 +104,6 @@ const EventModal = ({ calendarId, modalDay }) => {
   );
 };
 
-EventModal.propTypes = propTypes;
+AddEvent.propTypes = propTypes;
 
-export default EventModal;
+export default AddEvent;
