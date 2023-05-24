@@ -72,8 +72,8 @@ public class EventServiceImpl implements EventService {
         eventRepository.findById(eventId)
                 .ifPresent(event -> {
                     if (calendarMemberRepository.memberOwnsCalendar(
-                            AuthUtil.getMemberIdFromSecurityContext(),
-                            event.getCalendar().getCalendarId())
+                            event.getCalendar().getCalendarId(),
+                            AuthUtil.getMemberIdFromSecurityContext())
                     ) {
                         eventRepository.delete(event);
                     } else {
