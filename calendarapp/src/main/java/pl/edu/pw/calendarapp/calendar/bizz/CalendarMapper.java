@@ -6,10 +6,7 @@ import pl.edu.pw.calendarapp.event.bizz.EventMapper;
 import pl.edu.pw.calendarapp.event.rest.EventView;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CalendarMapper {
@@ -24,6 +21,7 @@ public class CalendarMapper {
                             .map(eventList -> eventList.stream()
                                     .map(EventMapper::map)
                                     .filter(Objects::nonNull)
+                                    .sorted(Comparator.comparing(EventView::getStartDate))
                                     .collect(Collectors.groupingBy(event ->
                                             event.getStartDate().format(DateTimeFormatter.ISO_DATE))))
                             .orElse(Map.of());

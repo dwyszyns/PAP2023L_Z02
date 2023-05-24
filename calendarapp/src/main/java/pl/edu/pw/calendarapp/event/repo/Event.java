@@ -31,9 +31,9 @@ public class Event {
     @JoinColumn(name = "calendar_id")
     private Calendar calendar;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Notification> notifications;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventSubscriber> subscribers;
 }

@@ -16,12 +16,12 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notification_id", nullable = false)
     private Long notificationId;
     @Column(name = "notify_time", nullable = false)
     private Timestamp notifyTime;
-    @Column(name = "seen")
+    @Column(name = "seen", nullable = false)
     private Boolean seen;
 
     @ManyToOne

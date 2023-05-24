@@ -7,7 +7,6 @@ import lombok.Setter;
 import pl.edu.pw.calendarapp.event.repo.Event;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "calendar")
@@ -29,20 +28,4 @@ public class Calendar {
 
     @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
     private List<CalendarMember> members;
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof final Calendar calendar)) {
-            return false;
-        }
-        return calendarId.equals(calendar.calendarId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(calendarId);
-    }
 }

@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.notification.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.notification.bizz.NotificationService;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class NotificationController {
 
     @GetMapping("/event/{eventId}")
     public List<NotificationView> getNotificationsForEvent(@PathVariable Long eventId) {
-        return notificationService.findAllForEvent(eventId);
+        return notificationService.findAllForEventAndMember(eventId, AuthUtil.getMemberIdFromSecurityContext());
     }
 
     @GetMapping("/member/{memberId}")

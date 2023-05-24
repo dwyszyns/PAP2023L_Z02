@@ -24,8 +24,8 @@ public class NotificationServiceImpl implements NotificationService {
     private final MemberRepository memberRepository;
 
     @Override
-    public List<NotificationView> findAllForEvent(long memberId) {
-        return notificationRepository.findAllForEvent(memberId).stream()
+    public List<NotificationView> findAllForEventAndMember(long eventId, long memberId) {
+        return notificationRepository.findAllForEventAndMember(eventId, memberId).stream()
                 .map(NotificationMapper::map)
                 .toList();
     }

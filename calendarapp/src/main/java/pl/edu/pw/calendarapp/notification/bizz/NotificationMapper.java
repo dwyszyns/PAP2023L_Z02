@@ -19,7 +19,7 @@ public class NotificationMapper {
             notificationView.setId(n.getNotificationId());
             notificationView.setSeen(n.getSeen());
             notificationView.setMessage(getMessageFromEvent(n.getEvent()));
-
+            notificationView.setNotifyTime(n.getNotifyTime().toLocalDateTime());
             return notificationView;
         }).orElse(null);
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NotificationService {
 
-    List<NotificationView> findAllForEvent(long memberId);
+    List<NotificationView> findAllForEventAndMember(long eventId, long memberId);
 
     List<NotificationView> findAllForMember(long memberId);
 

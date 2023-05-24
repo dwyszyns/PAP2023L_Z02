@@ -95,6 +95,7 @@ public class EventServiceImpl implements EventService {
             final Notification notification = new Notification();
             notification.setMember(member);
             notification.setEvent(event);
+            notification.setSeen(false);
             notification.setNotifyTime(
                     Timestamp.valueOf(event.getStartTime().toLocalDateTime().minusMinutes(MINUTES_TO_NOTIFY)));
 
