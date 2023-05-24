@@ -6,6 +6,16 @@
     align-items: center;
 }
 
+.modal-container-add-event {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+}
+
 .modal-container {
     width: 500px;
     height: 500px;
@@ -16,6 +26,7 @@
     flex-direction: column;
     padding: 25px;
 }
+
 
 .title {
     display: inline-block;
@@ -75,19 +86,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 170px;
+    margin-bottom: 390px;
 }
 
 .title-add-event {
     text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
 .add-event-input {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 15px 0;
     box-sizing: border-box;
     border: none;
     border-radius: 4px;
+    font-size: 16px;
     background-color: #e5e5e5;
 }
 
@@ -109,11 +125,12 @@
     background-color: #7e9dec;
     margin: 0;
     border: none;
-    cursor: text;
+    cursor: pointer;
 }
 
 .event-elem-name p {
-    margin: 0
+    margin: 0;
+    cursor: text;
 }
 
 
@@ -151,6 +168,7 @@
     padding-bottom: 2px;
     margin-bottom: 4px;
     width: 100%;
+    cursor: pointer;
 }
 
 .added-event {
@@ -169,4 +187,160 @@
 .exit-events-view:hover {
     color: #8a8888;
     transition: 0.25s;
+}
+
+.header-popup {
+    display: flex;
+    justify-content: center;
+}
+
+.header-popup-add-event {
+    justify-content: center;
+    width: 93%;
+    margin-left: 35px;
+}
+
+.button-close-popup-add-event {
+    float: right;
+    justify-content: left;
+    width: 7%;
+}
+
+.button-close-popup-add-event-x {
+    border: none;
+    background-color: white;
+    font-size: 25px;
+}
+
+.button-close-popup-add-event-x:hover {
+    color: #8a8888;
+    transition: 0.25s;
+}
+
+.modal-notification-container {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.header-notification-list {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.header-noti {
+    display: flex;
+    justify-content: center;
+}
+
+.event-name-notification {
+    margin-top: 10px;
+    font-weight: normal;
+    color: #444444;
+}
+
+.list-of-notification-with-header {
+    height: 80%;
+}
+
+.add-notification-button {
+    width: 85%;
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    margin: 16px 0 16px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-add-noti-area {
+    justify-content: center;
+}
+
+.add-event-date {
+    margin-top: 0;
+    font-weight: normal;
+    color: #444444;
+}
+
+.info-about-notification {
+    color: #525252;
+}
+
+.notification-view-list {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #7e9dec;
+    margin-bottom: 5px;
+}
+
+.body-notification-list {
+    height: 100%;
+}
+
+.modal-container-add-notification {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.choose-number-notification {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.number-input-notification {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 20px;
+}
+
+.question-form-time-type {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.custom-select-type {
+    position: relative;
+    font-size: 20px;
+    margin-bottom: 7px;
+    border: none;
+    padding: 13px;
+    border-radius: 7px;
+}
+
+.submit-noti-button {
+    width: 100%;
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    margin: 35px 0 16px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }

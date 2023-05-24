@@ -44,19 +44,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 80%;
 }
 
 .small-calendar-day-labels {
     display: grid;
     height: 60px;
-    width: 950px;
+    width: 85%;
     grid-template-columns: repeat(7, 1fr);
 }
 
 .small-calendar-array {
     display: grid;
-    height: 620px;
-    width: 950px;
+    height: 650px;
+    width: 85%;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }
@@ -129,7 +130,7 @@
     margin-bottom: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
-    max-height: 21px;
+    max-height: 18px;
     overflow: hidden;
 }
 

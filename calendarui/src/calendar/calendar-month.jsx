@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import './calendar-month.css';
 import PropTypes from 'prop-types';
@@ -32,6 +32,10 @@ const CalendarMonth = ({ calendarId }) => {
     const formattedDay = day.format('YYYY-MM-DD');
     return !(isLoading || error) && data.events[formattedDay];
   };
+
+  useEffect(() => {
+    setCurrentMonth(dayjs().month());
+  }, []);
 
   return (
     <div className="small-calendar">
@@ -106,7 +110,11 @@ const CalendarMonth = ({ calendarId }) => {
               </button>
             ))}
             {modalOpen && (
-            <EventModal setOpenModal={setModalOpen} calendarId={calendarId} modalDay={modalDay} />
+              <EventModal
+                setOpenModal={setModalOpen}
+                calendarId={calendarId}
+                modalDay={modalDay}
+              />
             )}
           </div>
         </div>
