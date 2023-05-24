@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.edu.pw.calendarapp.calendar.repo.CalendarMember;
 import pl.edu.pw.calendarapp.event.repo.EventSubscriber;
+import pl.edu.pw.calendarapp.notification.repo.Notification;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -36,4 +37,7 @@ public class Member {
 
     @OneToMany(mappedBy = "subscriber", cascade = CascadeType.ALL)
     private List<EventSubscriber> subscribedEvents;
+
+    @OneToMany(mappedBy = "member")
+    private List<Notification> notifications;
 }

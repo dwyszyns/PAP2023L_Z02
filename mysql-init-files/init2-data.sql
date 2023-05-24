@@ -94,3 +94,6 @@ insert into friend_request(request_id, sender_id, receiver_id, accepted) values 
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (20, 11, 1, true);
 insert into friend_request(request_id, sender_id, receiver_id, accepted) values (21, 11, 5, true);
 
+insert into notification(notification_id, notify_time, member_id, event_id) values (1, '2023-03-01 12:00:00', 1, 1);
+insert into notification(notification_id, notify_time, member_id, event_id) values (2, '2023-03-02 13:00:00', 1, 2);
+insert into notification(notification_id, notify_time, member_id, event_id) values (3, '2023-03-03 12:00:00', 1, 3);
