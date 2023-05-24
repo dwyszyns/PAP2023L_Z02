@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     @Query(value = "select n from Notification n " +
             "where n.event.eventId = :eventId ")
-    List<Notification> findAllForEvent(@Param("memberId") Long eventId, @Param("now") Timestamp now);
+    List<Notification> findAllForEvent(@Param("eventId") Long eventId);
 
     @Query(value = "select n from Notification n " +
             "where n.member.memberId = :memberId " +
