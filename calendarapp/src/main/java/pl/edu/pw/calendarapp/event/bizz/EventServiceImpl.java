@@ -50,8 +50,8 @@ public class EventServiceImpl implements EventService {
     @Override
     public void addEvent(AddEventView eventView) {
         if (!calendarMemberRepository.memberOwnsCalendar(
-                AuthUtil.getMemberIdFromSecurityContext(),
-                eventView.getCalendarId())
+                eventView.getCalendarId(),
+                AuthUtil.getMemberIdFromSecurityContext())
         ) {
             throw new AccessDeniedException("Member does not own calendar");
         }
