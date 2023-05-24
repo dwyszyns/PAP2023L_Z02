@@ -37,7 +37,7 @@ public class NotificationServiceImpl implements NotificationService {
         final Notification notification = new Notification();
         notification.setEvent(event);
         notification.setNotifyTime(Timestamp.valueOf(addNotificationView.getNotifyTime()));
-        notification.setStatus(false);
+        notification.setSeen(false);
         notification.setMember(memberRepository.getReferenceById(AuthUtil.getMemberIdFromSecurityContext()));
         return NotificationMapper.map(notificationRepository.save(notification));
     }
@@ -50,5 +50,16 @@ public class NotificationServiceImpl implements NotificationService {
             throw new AccessDeniedException("You are not allowed to delete this notification");
         }
         notificationRepository.delete(notification);
+    }
+
+    @Override
+    public void updateNotificationStatus(List<Long> ids) {
+        notificationRepository.findAllByIdWithMember(ids).forEach(notification -> {
+            if (!notification.getMember().getMemberId().equals(AuthUtil.getMemberIdFromSecurityContext())) {
+                throw new AccessDeniedException("You are not allowed to update this notification");
+            }
+            notification.setSeen(true);
+            notificationRepository.save(notification);
+        });
     }
 }

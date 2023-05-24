@@ -17,6 +17,12 @@ public class NotificationController {
         return notificationService.findAllForMember(memberId);
     }
 
+    @PostMapping("/update")
+    public void updateNotificationStatus(@RequestBody List<Long> ids) {
+        notificationService.updateNotificationStatus(ids);
+    }
+
+
     @PostMapping
     public NotificationView addNotification(@RequestBody AddNotificationView addNotificationView) {
         return notificationService.addNotification(addNotificationView);

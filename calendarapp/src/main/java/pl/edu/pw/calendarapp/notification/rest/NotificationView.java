@@ -6,5 +6,5 @@ import lombok.Data;
 public class NotificationView {
     private long id;
     private String message;
-    private boolean status;
+    private boolean seen;
 }

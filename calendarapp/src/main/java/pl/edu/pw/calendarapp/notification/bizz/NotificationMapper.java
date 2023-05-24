@@ -17,9 +17,8 @@ public class NotificationMapper {
             NotificationView notificationView = new NotificationView();
 
             notificationView.setId(n.getNotificationId());
-            notificationView.setStatus(n.getStatus());
-            notificationView.setMessage(
-                    getMessageFromEvent(n.getEvent()));
+            notificationView.setSeen(n.getSeen());
+            notificationView.setMessage(getMessageFromEvent(n.getEvent()));
 
             return notificationView;
         }).orElse(null);

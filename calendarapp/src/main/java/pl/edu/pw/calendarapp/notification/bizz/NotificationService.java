@@ -12,4 +12,6 @@ public interface NotificationService {
     NotificationView addNotification(AddNotificationView addNotificationView);
 
     void deleteNotification(long notificationId);
+
+    void updateNotificationStatus(List<Long> ids);
 }

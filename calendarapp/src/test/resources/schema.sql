@@ -72,6 +72,7 @@ create table notification(
     notify_time     timestamp not null,
     member_id       number(19, 0) not null,
     event_id        number(19, 0) not null,
+    seen            number(1,0) default false,
     constraint pk_notification primary key (notification_id),
     constraint fk_member foreign key (member_id) references member (member_id),
     constraint fk_event foreign key (event_id) references event (event_id)
