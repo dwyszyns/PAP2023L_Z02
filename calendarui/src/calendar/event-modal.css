@@ -7,12 +7,13 @@
 }
 
 .modal-container-add-event {
+    display: none;
     width: 500px;
     height: 500px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     padding: 25px;
 }
@@ -27,6 +28,7 @@
     flex-direction: column;
     padding: 25px;
 }
+
 
 .title {
     display: inline-block;
@@ -93,6 +95,7 @@
 .title-add-event {
     text-align: center;
     font-size: 32px;
+    margin-bottom: 10px;
 }
 
 .add-event-input {
@@ -124,11 +127,12 @@
     background-color: #7e9dec;
     margin: 0;
     border: none;
-    cursor: text;
+    cursor: pointer;
 }
 
 .event-elem-name p {
-    margin: 0
+    margin: 0;
+    cursor: text;
 }
 
 
@@ -166,6 +170,7 @@
     padding-bottom: 2px;
     margin-bottom: 4px;
     width: 100%;
+    cursor: pointer;
 }
 
 .added-event {
@@ -212,4 +217,77 @@
 .button-close-popup-add-event-x:hover {
     color: #8a8888;
     transition: 0.25s;
+}
+
+.modal-notification-container {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+    display: none;
+}
+
+.header-notification-list {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.header-noti {
+    display: flex;
+    justify-content: center;
+}
+
+.event-name-notification {
+    margin-top: 10px;
+    font-weight: normal;
+    color: #444444;
+}
+
+.list-of-notification-with-header {
+    height: 80%;
+}
+
+.add-notification-button {
+    width: 85%;
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    margin: 16px 0 16px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-add-noti-area {
+    justify-content: center;
+}
+
+.add-event-date {
+    margin-top: 0;
+    font-weight: normal;
+    color: #444444;
+}
+
+.info-about-notification {
+    color: #525252;
+}
+
+.notification-view-list {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #7e9dec;
+    margin-bottom: 5px;
+}
+
+.body-notification-list {
+    height: 100%;
 }
