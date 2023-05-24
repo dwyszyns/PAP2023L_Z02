@@ -20,13 +20,8 @@
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-draggable": "^4.4.5",
-    "react-hot-loader": "^4.13.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
-    "reactjs-popup": "^2.0.5",
-    "react-datetime-picker": "^5.1.0",
-    "@material-ui/pickers": "^3.3.10",
     "@syncfusion/ej2-react-calendars": "^21.2.5"
   },
   "devDependencies": {

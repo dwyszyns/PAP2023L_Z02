@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './event-modal.css';
 import PropTypes from 'prop-types';
-import { useAddEventMutation, useGetCalendarByCalendarIdQuery, useRemoveEventMutation } from '../store/api';
+import { useGetCalendarByCalendarIdQuery, useRemoveEventMutation } from '../store/api';
+import AddNotification from './add-notification';
+import NotificationList from './notification-list';
+import AddEvent from './add-event';
 
 const propTypes = {
   setOpenModal: PropTypes.func.isRequired,
@@ -10,78 +13,13 @@ const propTypes = {
 };
 
 const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
-  const defaultFieldsAddEvent = {
-    name: '',
-    startTime: '',
-    duration: '',
-    calendarId,
-  };
-
-  const inputTypeAddEvent = {
-    name: 'text',
-    startTime: 'time',
-    duration: 'text',
-  };
-
-  const [timeType, setTimeType] = useState('');
   const [selectedEventName, setSelectedEventName] = useState('');
-  const [fieldsAddEvent, setFieldsAddEvent] = useState(defaultFieldsAddEvent);
-
-  const [errorsAddEvent, setErrorsAddEvent] = useState({
-    name: false,
-    startTime: false,
-    endTime: false,
-  });
-
-  const [addEvent, { isError, isSuccess }] = useAddEventMutation();
   const [removeEvent] = useRemoveEventMutation();
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
-  const fieldNamesAddEvent = ['name', 'startTime', 'duration'];
+
   const getEventsForDay = (day) => {
     const formattedDay = day.format('YYYY-MM-DD');
     return !(isLoading || error) && data.events[formattedDay];
-  };
-
-  const defaultFieldsAddNotification = {
-    time: '',
-    type: false,
-  };
-
-  const [fieldsAddNotification, setFieldsAddNotification] = useState(defaultFieldsAddNotification);
-
-  const [errorsAddNotification, setErrorsAddNotification] = useState({
-    time: false,
-    type: false,
-  });
-
-  const handleSubmit = () => {
-    let newErrors = { ...errorsAddEvent };
-    let isValid = true;
-    fieldNamesAddEvent.forEach((fieldName) => {
-      if (fieldsAddEvent[fieldName].trim() === '') {
-        newErrors = { ...newErrors, [fieldName]: true };
-        isValid = false;
-      } else {
-        newErrors = { ...newErrors, [fieldName]: false };
-      }
-    });
-    fieldsAddEvent.startTime = `${modalDay.format('YYYY-MM-DD')}T${fieldsAddEvent.startTime}`;
-    if (isValid) {
-      const { ...body } = fieldsAddEvent;
-      addEvent(body);
-    }
-    setFieldsAddEvent(defaultFieldsAddEvent);
-    setErrorsAddEvent(newErrors);
-  };
-
-  const render = () => {
-    if (isError) {
-      return <p className="event-error-message">Please provide correct details.</p>;
-    }
-    if (isSuccess) {
-      return <p className="added-event">The event has been added successfully.</p>;
-    }
-    return <></>;
   };
 
   const handleAddEvent = async () => {
@@ -89,29 +27,9 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
     (document.getElementById('events-of-day-list-container')).style.display = 'none';
   };
 
-  const closeAddEvent = async () => {
-    (document.getElementById('events-of-day-list-container')).style.display = 'flex';
-    (document.getElementById('add-event-container')).style.display = 'none';
-  };
-
   const openNotificationEdit = async () => {
     (document.getElementById('notification-of-day-list-container')).style.display = 'flex';
     (document.getElementById('events-of-day-list-container')).style.display = 'none';
-  };
-
-  const closeNotificationEdit = async () => {
-    (document.getElementById('notification-of-day-list-container')).style.display = 'none';
-    (document.getElementById('events-of-day-list-container')).style.display = 'flex';
-  };
-
-  const openAddNotification = async () => {
-    (document.getElementById('notification-of-day-list-container')).style.display = 'none';
-    (document.getElementById('add-notification-container')).style.display = 'flex';
-  };
-
-  const closeAddNotification = async () => {
-    (document.getElementById('notification-of-day-list-container')).style.display = 'flex';
-    (document.getElementById('add-notification-container')).style.display = 'none';
   };
 
   return (
@@ -174,105 +92,9 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
           <button type="button" onClick={handleAddEvent}> Add</button>
         </div>
       </div>
-      <div id="add-event-container" className="modal-container-add-event">
-        <div className="header-popup">
-          <div className="header-popup-add-event">
-            <h2 className="title-add-event">Add new event</h2>
-          </div>
-          <div className="button-close-popup-add-event">
-            <button type="button" onClick={closeAddEvent} className="button-close-popup-add-event-x">X</button>
-          </div>
-        </div>
-        <h3 className="add-event-date">
-          {modalDay.format('DD-MM-YYYY')}
-        </h3>
-        {fieldNamesAddEvent.map((fieldName) => (
-          <>
-            <input
-              key={fieldName}
-              id={`auth-${fieldName}-input`}
-              type={inputTypeAddEvent[fieldName]}
-              name={fieldName}
-              value={fieldsAddEvent[fieldName]}
-              placeholder={fieldName.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
-              className="add-event-input"
-              onChange={(e) => setFieldsAddEvent({ ...fieldsAddEvent, [fieldName]: e.target.value })}
-            />
-            {errorsAddEvent[fieldName] && <p className="auth-error-message">Please enter a valid value</p>}
-          </>
-        ))}
-        <button type="button" className="auth-submit-button" onClick={handleSubmit}>Add</button>
-        <div className="auth-footer">
-          {render()}
-        </div>
-      </div>
-      <div className="modal-notification-container" id="notification-of-day-list-container">
-        <div className="body-notification-list">
-          <div className="list-of-notification-with-header">
-            <div className="header-noti">
-              <div className="header-popup-add-event">
-                <h2 className="header-notification-list">Notification list</h2>
-              </div>
-              <div className="button-close-popup-add-event">
-                <button type="button" onClick={closeNotificationEdit} className="button-close-popup-add-event-x">X</button>
-              </div>
-            </div>
-            <h3 className="event-name-notification">
-              Event:
-              {'  '}
-              {selectedEventName}
-            </h3>
-            <div className="notification-view-list">
-              <div className="elemx">
-                <p className="event-elem-name">
-                  <p> Data powiadomienia - do zmiany</p>
-                </p>
-              </div>
-              <div className="button-del-ev">
-                <button type="button" className="event-del-button">X</button>
-              </div>
-            </div>
-          </div>
-          <div className="button-add-noti-area">
-            <button type="button" className="add-notification-button" onClick={openAddNotification}>Add</button>
-          </div>
-        </div>
-      </div>
-      <div id="add-notification-container" className="modal-container-add-notification">
-        <div className="header-popup">
-          <div className="header-popup-add-event">
-            <h2 className="title-add-event">Add new notification</h2>
-          </div>
-          <div className="button-close-popup-add-event">
-            <button type="button" onClick={closeAddNotification} className="button-close-popup-add-event-x">X</button>
-          </div>
-        </div>
-        <h3 className="add-event-date">
-          Event:
-          {'  '}
-          {selectedEventName}
-        </h3>
-        <label className="choose-number-notification">Choose time before event start:</label>
-        <input
-          type="text"
-          name="time"
-          value={fieldsAddNotification.time}
-          placeholder={'Time'.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
-          className="number-input-notification"
-          onChange={(e) => setFieldsAddNotification({ ...fieldsAddNotification, time: e.target.value })}
-        />
-        {errorsAddNotification.name && <p className="auth-error-message">Please enter a valid value</p>}
-
-        <select className="custom-select-type" onChange={(type) => setTimeType(type.target.value)} name="privacy">
-          <option value="m">Minutes</option>
-          <option value="h">Hours</option>
-          <option value="d">Days</option>
-        </select>
-        <button type="button" className="submit-noti-button">Add</button>
-        <div className="auth-footer">
-          {render()}
-        </div>
-      </div>
+      <AddEvent calendarId={calendarId} modalDay={modalDay} />
+      <NotificationList selectedEventName={selectedEventName} />
+      <AddNotification selectedEventName={selectedEventName} />
     </div>
   );
 };
