@@ -1,6 +1,7 @@
 package pl.edu.pw.calendarapp.member.bizz;
 
 import pl.edu.pw.calendarapp.calendar.bizz.CalendarMapper;
+import pl.edu.pw.calendarapp.calendar.bizz.CalendarMemberRoleEnum;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.member.repo.FriendRequest;
 import pl.edu.pw.calendarapp.member.repo.Member;
@@ -22,8 +23,11 @@ public class MemberMapper {
                 .map(view -> {
                     final List<CalendarView> calendars = Optional.ofNullable(member.getCalendars())
                             .map(calendarMembers -> calendarMembers.stream()
-                                    .filter(calendarMember -> calendarMember != null && calendarMember.getIsOwner())
-                                    .map(calendarMember -> CalendarMapper.mapPreview(calendarMember.getCalendar(), true))
+                                    .filter(calendarMember -> calendarMember != null &&
+                                            CalendarMemberRoleEnum.isOwner(calendarMember.getRole()))
+                                    .map(calendarMember -> CalendarMapper.mapPreview(
+                                            calendarMember.getCalendar(),
+                                            calendarMember.getRole()))
                                     .filter(calendarView -> calendarView != null && calendarView.isPublic())
                                     .limit(6)
                                     .toList()

@@ -2,6 +2,7 @@ package pl.edu.pw.calendarapp.calendar.bizz;
 
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.rest.AddCalendarView;
+import pl.edu.pw.calendarapp.calendar.rest.CalendarMemberView;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.calendar.rest.JoinRequestView;
 import pl.edu.pw.calendarapp.member.repo.Member;
@@ -30,4 +31,6 @@ public interface CalendarService {
     void rejectRequest(Long requestId);
 
     void acceptRequest(Long requestId);
+
+    List<CalendarMemberView> getMembersForCalendar(Long calendarId);
 }

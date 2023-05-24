@@ -8,6 +8,7 @@ import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.calendar.repo.Calendar;
 import pl.edu.pw.calendarapp.calendar.repo.*;
 import pl.edu.pw.calendarapp.calendar.rest.AddCalendarView;
+import pl.edu.pw.calendarapp.calendar.rest.CalendarMemberView;
 import pl.edu.pw.calendarapp.calendar.rest.CalendarView;
 import pl.edu.pw.calendarapp.calendar.rest.JoinRequestView;
 import pl.edu.pw.calendarapp.event.repo.Event;
@@ -34,7 +35,7 @@ public class CalendarServiceImpl implements CalendarService {
                 .map(Event::getEventId)
                 .collect(Collectors.toCollection(HashSet::new));
         final Optional<CalendarView> calendar = calendarMemberRepository.getCalendarMember(calendarId, memberId)
-                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getIsOwner()));
+                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getRole()));
         calendar.map(CalendarView::getEvents)
                 .ifPresent(views -> views.values().stream()
                         .flatMap(Collection::stream)
@@ -51,7 +52,7 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public List<CalendarView> findAllForMember(long memberId) {
         return calendarMemberRepository.findAllForMember(memberId).stream()
-                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getIsOwner()))
+                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getRole()))
                 .toList();
     }
 
@@ -98,12 +99,13 @@ public class CalendarServiceImpl implements CalendarService {
         calendar.setName(calendarView.getName());
         calendar.setIsPublic(calendarView.isPublic());
         calendarRepository.save(calendar);
+        final String role = CalendarMemberRoleEnum.OWNER.getRole();
         final CalendarMember calendarMember = new CalendarMember();
         calendarMember.setCalendar(calendar);
         calendarMember.setMember(member);
-        calendarMember.setIsOwner(true);
-        return CalendarMapper.mapPreview(calendarMemberRepository.save(calendarMember).getCalendar(), true);
-
+        calendarMember.setRole(role);
+        calendarMember.setAutoSubscribed(true);
+        return CalendarMapper.mapPreview(calendarMemberRepository.save(calendarMember).getCalendar(), role);
     }
 
     @Override
@@ -134,9 +136,17 @@ public class CalendarServiceImpl implements CalendarService {
         final CalendarMember calendarMember = new CalendarMember();
         calendarMember.setCalendar(joinRequest.getCalendar());
         calendarMember.setMember(joinRequest.getSender());
-        calendarMember.setIsOwner(false);
+        calendarMember.setRole(CalendarMemberRoleEnum.GUEST.getRole());
         calendarMemberRepository.save(calendarMember);
         joinRequestRepository.deleteById(requestId);
+    }
+
+    @Override
+    public List<CalendarMemberView> getMembersForCalendar(Long calendarId) {
+        validateUserOwnsCalendar(calendarId);
+        return calendarMemberRepository.findAllForCalendar(calendarId).stream()
+                .map(CalendarMemberMapper::map)
+                .toList();
     }
 
     private void validateUserOwnsCalendar(final long calendarId) {

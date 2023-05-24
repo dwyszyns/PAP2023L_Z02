@@ -16,13 +16,13 @@ public interface CalendarMemberRepository extends JpaRepository<CalendarMember, 
     @Query("select count(cm) > 0 from CalendarMember cm " +
             "where cm.calendar.calendarId = :calendarId " +
             "and cm.member.memberId = :memberId " +
-            "and cm.isOwner = true")
+            "and cm.role = 'owner'")
     boolean memberOwnsCalendar(Long calendarId, Long memberId);
 
     @Query("select cm from CalendarMember cm " +
             "join fetch cm.member m " +
             "where cm.calendar.calendarId = :calendarId " +
-            "and cm.isOwner = true")
+            "and cm.role = 'owner'")
     Optional<CalendarMember> getOwner(Long calendarId);
 
     @Query("select cm from CalendarMember cm " +
@@ -33,6 +33,10 @@ public interface CalendarMemberRepository extends JpaRepository<CalendarMember, 
     @Query(value = "select cm from CalendarMember cm where cm.member.memberId = :memberId")
     @EntityGraph(attributePaths = {"calendar", "calendar.events"})
     List<CalendarMember> findAllForMember(@Param("memberId") Long memberId);
+
+    @Query(value = "select cm from CalendarMember cm where cm.calendar.calendarId = :calendarId")
+    @EntityGraph(attributePaths = {"member"})
+    List<CalendarMember> findAllForCalendar(@Param("calendarId") Long calendarId);
 
     @Modifying
     @Query("delete from CalendarMember cm " +

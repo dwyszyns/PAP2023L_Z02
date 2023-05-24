@@ -41,15 +41,30 @@ public class CalendarController {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
     }
 
-    @GetMapping("/request")
-    public List<JoinRequestView> getRequestsForMember() {
-        return calendarService.getRequestsForMember(AuthUtil.getMemberIdFromSecurityContext());
+    @DeleteMapping("/{calendarId}")
+    public void deleteCalendar(@PathVariable Long calendarId) {
+        calendarService.deleteCalendar(calendarId);
     }
 
     @PostMapping("/{calendarId}/join")
     public void sendJoinRequest(@PathVariable Long calendarId) {
         final long memberId = AuthUtil.getMemberIdFromSecurityContext();
         applyWithCalendarAndMember(calendarId, memberId, calendarService::sendJoinRequest);
+    }
+
+    @GetMapping("/{calendarId}/member")
+    public List<CalendarMemberView> getMembersOfCalendar(@PathVariable Long calendarId) {
+        return calendarService.getMembersForCalendar(calendarId);
+    }
+
+    @PostMapping("/{calendarId}/member/{memberId}/subscribe")
+    public void subscribeToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
+        applyWithCalendarAndMember(calendarId, memberId, calendarService::subscribeToCalendar);
+    }
+
+    @GetMapping("/request")
+    public List<JoinRequestView> getRequestsForMember() {
+        return calendarService.getRequestsForMember(AuthUtil.getMemberIdFromSecurityContext());
     }
 
     @DeleteMapping("/request/{requestId}")
@@ -60,16 +75,6 @@ public class CalendarController {
     @PostMapping("/request/{requestId}/accept")
     public void acceptRequest(@PathVariable Long requestId) {
         calendarService.acceptRequest(requestId);
-    }
-
-    @PostMapping("/{calendarId}/member/{memberId}/subscribe")
-    public void subscribeToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
-        applyWithCalendarAndMember(calendarId, memberId, calendarService::subscribeToCalendar);
-    }
-
-    @DeleteMapping("/{calendarId}")
-    public void deleteCalendar(@PathVariable Long calendarId) {
-        calendarService.deleteCalendar(calendarId);
     }
 
     private void applyWithCalendarAndMember(long calendarId, long memberId, BiConsumer<Calendar, Member> andThen) {

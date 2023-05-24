@@ -18,7 +18,11 @@ public class JoinRequestMapper {
                     joinRequestView.setRequestId(jr.getRequestId());
                     joinRequestView.setFromOwner(jr.getFromOwner());
                     joinRequestView.setSender(MemberMapper.mapMemberPreview(jr.getSender()));
-                    joinRequestView.setCalendar(CalendarMapper.mapPreview(jr.getCalendar(), !joinRequestView.getFromOwner()));
+                    joinRequestView.setCalendar(CalendarMapper.mapPreview(
+                            jr.getCalendar(),
+                            joinRequestView.getFromOwner() ?
+                                    CalendarMemberRoleEnum.OWNER.getRole() :
+                                    CalendarMemberRoleEnum.GUEST.getRole()));
                     return joinRequestView;
                 }).orElse(null);
     }

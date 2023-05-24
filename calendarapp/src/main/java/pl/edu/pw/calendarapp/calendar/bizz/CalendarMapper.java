@@ -16,9 +16,9 @@ public class CalendarMapper {
     private CalendarMapper() {
     }
 
-    public static CalendarView map(final Calendar calendar, final boolean isOwner) {
+    public static CalendarView map(final Calendar calendar, final String role) {
         return Optional.ofNullable(calendar)
-                .map(c -> mapPreview(c, isOwner))
+                .map(c -> mapPreview(c, role))
                 .map(view -> {
                     final Map<String, List<EventView>> events = Optional.ofNullable(calendar.getEvents())
                             .map(eventList -> eventList.stream()
@@ -32,13 +32,13 @@ public class CalendarMapper {
                 }).orElse(null);
     }
 
-    public static CalendarView mapPreview(final Calendar calendar, final boolean isOwner) {
+    public static CalendarView mapPreview(final Calendar calendar, final String role) {
         return Optional.ofNullable(calendar).map(c -> {
             final CalendarView view = new CalendarView();
             view.setId(c.getCalendarId() != null ? c.getCalendarId() : -1L);
             view.setName(c.getName());
             view.setPublic(Boolean.TRUE.equals(c.getIsPublic()));
-            view.setOwner(isOwner);
+            view.setRole(role);
             return view;
         }).orElse(null);
     }

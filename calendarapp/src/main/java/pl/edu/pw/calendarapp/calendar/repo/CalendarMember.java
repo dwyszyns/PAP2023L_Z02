@@ -16,8 +16,8 @@ public class CalendarMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calendar_member_id", nullable = false)
     private Long calendarMemberId;
-    @Column(name = "is_owner")
-    private Boolean isOwner;
+    @Column(name = "role")
+    private String role;
     @Column(name = "auto_subscribed")
     private Boolean autoSubscribed;
 
