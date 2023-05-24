@@ -15,7 +15,9 @@ import pl.edu.pw.calendarapp.event.repo.EventSubscriberRepository;
 import pl.edu.pw.calendarapp.event.rest.AddEventView;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
+import pl.edu.pw.calendarapp.notification.repo.Notification;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +31,8 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
     private final EventSubscriberRepository eventSubscriberRepository;
+
+    private static final int MINUTES_TO_NOTIFY = 15;
 
 
     @Override
@@ -82,11 +86,20 @@ public class EventServiceImpl implements EventService {
 
     private void subscribeMembersToEvent(final Event event, final List<Member> members) {
         event.setSubscribers(new ArrayList<>(Optional.ofNullable(event.getSubscribers()).orElse(List.of())));
+        event.setNotifications(new ArrayList<>(Optional.ofNullable(event.getNotifications()).orElse(List.of())));
         members.forEach(member -> {
             final EventSubscriber eventSubscriber = new EventSubscriber();
             eventSubscriber.setSubscriber(member);
             eventSubscriber.setEvent(event);
+
+            final Notification notification = new Notification();
+            notification.setMember(member);
+            notification.setEvent(event);
+            notification.setNotifyTime(
+                    Timestamp.valueOf(event.getStartTime().toLocalDateTime().minusMinutes(MINUTES_TO_NOTIFY)));
+
             event.getSubscribers().add(eventSubscriber);
+            event.getNotifications().add(notification);
         });
     }
 }
