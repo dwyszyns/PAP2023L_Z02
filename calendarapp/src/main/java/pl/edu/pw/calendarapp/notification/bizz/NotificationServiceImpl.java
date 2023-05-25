@@ -1,5 +1,6 @@
 package pl.edu.pw.calendarapp.notification.bizz;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,11 @@ public class NotificationServiceImpl implements NotificationService {
 
 
     @Override
+    @Transactional
     public NotificationView addNotification(final AddNotificationView addNotificationView) {
-        final Event event = eventRepository.getReferenceById(addNotificationView.getEventId());
+        final Event event = eventRepository.findById(addNotificationView.getEventId()).orElseThrow(
+                () -> new IllegalArgumentException("Event not found")
+        );
         final Notification notification = new Notification();
         notification.setEvent(event);
         notification.setNotifyTime(Timestamp.valueOf(addNotificationView.getNotifyTime()));
