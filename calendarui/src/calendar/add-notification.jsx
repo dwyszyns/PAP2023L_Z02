@@ -7,9 +7,12 @@ const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
   setSelectedTab: PropTypes.func.isRequired,
   eventStartDate: PropTypes.string.isRequired,
+  eventId: PropTypes.number.isRequired,
 };
 
-const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) => {
+const AddNotification = ({
+  selectedEventName, setSelectedTab, eventStartDate, eventId,
+}) => {
   const [unit, setUnit] = useState('m');
 
   const defaultFields = {
@@ -19,6 +22,7 @@ const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) 
 
   const bodyFields = {
     notifyTime: '',
+    eventId,
   };
 
   const [fields, setFields] = useState(defaultFields);
