@@ -15,6 +15,7 @@ const propTypes = {
 const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
   const [selectedEventName, setSelectedEventName] = useState('');
   const [selectedEventId, setSelectedEventId] = useState(0);
+  const [selectedEventStartDate, setSelectedEventStartDate] = useState('');
   const [removeEvent] = useRemoveEventMutation();
   const [selectedTab, setSelectedTab] = useState('events');
   const { data, isLoading, error } = useGetCalendarByCalendarIdQuery(calendarId);
@@ -47,6 +48,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
                     setSelectedEventName(event.name);
                     setSelectedTab('notifications');
                     setSelectedEventId(event.id);
+                    setSelectedEventStartDate(event.startDate);
                   }}
                 >
                   <p key={event.id} className="event-elem-name">
@@ -111,6 +113,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
           <AddNotification
             selectedEventName={selectedEventName}
             setSelectedTab={setSelectedTab}
+            eventStartDate={selectedEventStartDate}
           />
         );
       default:

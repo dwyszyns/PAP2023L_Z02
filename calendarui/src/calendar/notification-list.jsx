@@ -1,7 +1,7 @@
 import React from 'react';
 import './event-modal.css';
 import PropTypes from 'prop-types';
-import { useGetNotificationsForEventQuery } from '../store/api';
+import { useGetNotificationsForEventQuery, useRemoveNotificationMutation } from '../store/api';
 
 const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
@@ -11,6 +11,8 @@ const propTypes = {
 
 const NotificationList = ({ selectedEventName, setSelectedTab, eventId }) => {
   const { data, isLoading, error } = useGetNotificationsForEventQuery(eventId);
+  const [removeNotification] = useRemoveNotificationMutation();
+
   return (
     <div className="modal-notification-container" id="notification-of-day-list-container">
       <div className="body-notification-list">
@@ -44,7 +46,13 @@ const NotificationList = ({ selectedEventName, setSelectedTab, eventId }) => {
                       </p>
                     </p>
                     <div className="button-del-ev">
-                      <button type="button" className="event-del-button">X</button>
+                      <button
+                        type="button"
+                        className="event-del-button"
+                        onClick={() => removeNotification(notification.id)}
+                      >
+                        X
+                      </button>
                     </div>
                   </div>
                 </div>

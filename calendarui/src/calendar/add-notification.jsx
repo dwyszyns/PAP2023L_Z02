@@ -6,14 +6,19 @@ import { useAddNotificationMutation } from '../store/api';
 const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
   setSelectedTab: PropTypes.func.isRequired,
+  eventStartDate: PropTypes.string.isRequired,
 };
 
-const AddNotification = ({ selectedEventName, setSelectedTab }) => {
-  const [timeType, setTimeType] = useState('');
+const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) => {
+  const [unit, setUnit] = useState('m');
 
   const defaultFields = {
     time: '',
     type: 'm',
+  };
+
+  const bodyFields = {
+    notifyTime: '',
   };
 
   const [fields, setFields] = useState(defaultFields);
@@ -24,17 +29,37 @@ const AddNotification = ({ selectedEventName, setSelectedTab }) => {
     type: false,
   });
 
+  const findDate = () => {
+    const inputDate = new Date(eventStartDate);
+
+    if (unit === 'm') {
+      inputDate.setMinutes(inputDate.getMinutes() - parseInt(fields.time, 10));
+    } else if (unit === 'h') {
+      inputDate.setHours(inputDate.getHours() - parseInt(fields.time, 10));
+    } else if (unit === 'd') {
+      inputDate.setDate(inputDate.getDate() - parseInt(fields.time, 10));
+    }
+
+    const year = inputDate.getFullYear();
+    const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = inputDate.getDate().toString().padStart(2, '0');
+    const hours = inputDate.getHours().toString().padStart(2, '0');
+    const minutes = inputDate.getMinutes().toString().padStart(2, '0');
+
+    bodyFields.notifyTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
   const handleAdd = () => {
     let newErrors = { ...errors };
     let isValid = true;
-    if (!fields.name) {
-      newErrors = { ...newErrors, name: true };
+    if (fields.time.length === 0) {
+      newErrors = { ...newErrors, time: true };
       isValid = false;
     } else {
-      newErrors = { ...newErrors, name: false };
+      newErrors = { ...newErrors, time: false };
     }
     if (isValid) {
-      const { ...body } = fields;
+      const { ...body } = bodyFields;
       addNotification(body);
     }
     setErrors(newErrors);
@@ -75,14 +100,23 @@ const AddNotification = ({ selectedEventName, setSelectedTab }) => {
 
       <select
         className="custom-select-type"
-        onChange={(type) => setTimeType(type.target.value)}
+        onChange={(type) => setUnit(type.target.value)}
         name="privacy"
       >
         <option value="m">Minutes</option>
         <option value="h">Hours</option>
         <option value="d">Days</option>
       </select>
-      <button type="button" className="submit-noti-button" onClick={handleAdd}>Add</button>
+      <button
+        type="button"
+        className="submit-noti-button"
+        onClick={() => {
+          findDate();
+          handleAdd();
+        }}
+      >
+        Add
+      </button>
       <div className="auth-footer" />
     </div>
   );

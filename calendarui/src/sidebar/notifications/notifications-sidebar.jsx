@@ -24,7 +24,11 @@ const NotificationsSidebar = () => {
                   key={notification.id}
                   className="notification-elem"
                 >
-                  <p />
+                  <p>
+                    {' '}
+                    {notification.message}
+                    {' '}
+                  </p>
                   <button type="button" className="calendar-nav-elem-remove">
                     <img id={`trash${notification.id.toString()}`} src={TrashBin} alt="X" className="trash-bin-icon" />
                   </button>
