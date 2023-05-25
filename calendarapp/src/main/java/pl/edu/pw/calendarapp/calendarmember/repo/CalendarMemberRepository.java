@@ -17,7 +17,7 @@ public interface CalendarMemberRepository extends JpaRepository<CalendarMember, 
             "where cm.calendar.calendarId = :calendarId " +
             "and cm.member.memberId = :memberId " +
             "and cm.role like 'owner'")
-    boolean memberOwnsCalendar(Long calendarId, Long memberId);
+    boolean memberOwnsCalendar(Long memberId, Long calendarId);
 
     @Query("select cm from CalendarMember cm " +
             "join fetch cm.member m " +

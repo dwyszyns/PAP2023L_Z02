@@ -12,6 +12,6 @@ import java.util.List;
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
     @Query("SELECT c FROM Calendar c " +
             "WHERE c.name LIKE CONCAT('%', :searchTerm, '%') " +
-            "AND :member NOT IN c.members")
+            "AND :member NOT IN (c.members)")
     List<Calendar> searchCalendarsForMember(@Param("searchTerm") String searchTerm, @Param("member") Member member);
 }

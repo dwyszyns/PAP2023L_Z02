@@ -11,13 +11,14 @@ const CalendarMemberModal = ({ calendarId, setOpenModal }) => {
   const { data, isLoading, isError } = useGetCalendarMembersByCalendarIdQuery(calendarId);
 
   const render = () => {
+    console.log(data);
     if (isLoading) {
       return <p>Loading...</p>;
     }
     if (isError) {
       return <p>Error</p>;
     }
-    return data && data.members.map((member) => (
+    return data && data.map((member) => (
       <div className="member" key={member.id}>
         <p>{member.name}</p>
         <p>{member.role}</p>
@@ -26,7 +27,7 @@ const CalendarMemberModal = ({ calendarId, setOpenModal }) => {
   };
 
   return (
-    <div className="modal-background">
+    <div className="modal-background-member">
       <div className="modal-container">
         <div className="title-close-btn">
           <button type="button" onClick={() => { setOpenModal(false); }} className="exit-events-view">
