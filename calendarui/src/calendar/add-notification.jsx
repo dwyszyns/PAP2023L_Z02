@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './event-modal.css';
 import PropTypes from 'prop-types';
+import { useAddNotificationMutation } from '../store/api';
 
 const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
@@ -12,15 +13,33 @@ const AddNotification = ({ selectedEventName, setSelectedTab }) => {
 
   const defaultFields = {
     time: '',
-    type: false,
+    type: 'm',
   };
 
   const [fields, setFields] = useState(defaultFields);
+  const [addNotification] = useAddNotificationMutation();
 
   const [errors, setErrors] = useState({
     time: false,
     type: false,
   });
+
+  const handleAdd = () => {
+    let newErrors = { ...errors };
+    let isValid = true;
+    if (!fields.name) {
+      newErrors = { ...newErrors, name: true };
+      isValid = false;
+    } else {
+      newErrors = { ...newErrors, name: false };
+    }
+    if (isValid) {
+      const { ...body } = fields;
+      addNotification(body);
+    }
+    setErrors(newErrors);
+    setFields(defaultFields);
+  };
 
   return (
     <div id="add-notification-container" className="modal-container-add-notification">
@@ -63,7 +82,7 @@ const AddNotification = ({ selectedEventName, setSelectedTab }) => {
         <option value="h">Hours</option>
         <option value="d">Days</option>
       </select>
-      <button type="button" className="submit-noti-button">Add</button>
+      <button type="button" className="submit-noti-button" onClick={handleAdd}>Add</button>
       <div className="auth-footer" />
     </div>
   );

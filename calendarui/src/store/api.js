@@ -40,6 +40,9 @@ export const api = createApi({
     getNotificationsForEvent: builder.query({
       query: (id) => `notification/event/${id}`,
     }),
+    getNotificationsForMember: builder.query({
+      query: (memberId) => `notification/member/${memberId}`,
+    }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query({ memberId, requestId }) {
         return {
@@ -100,6 +103,21 @@ export const api = createApi({
       }),
       invalidatesTags: ['Calendars'],
     }),
+    addNotification: builder.mutation({
+      query: (body) => ({
+        url: '/notification',
+        method: 'POST',
+        body,
+      }),
+    }),
+    removeNotification: builder.mutation({
+      query(notificationId) {
+        return {
+          url: `/notification/${notificationId}`,
+          method: 'DELETE',
+        };
+      },
+    }),
   }),
 });
 
@@ -110,6 +128,9 @@ export const {
   useRemoveEventMutation,
   useAddCalendarMutation,
   useRemoveCalendarMutation,
+  useAddNotificationMutation,
+  useRemoveNotificationMutation,
+  useGetNotificationsForMemberQuery,
   useGetNotificationsForEventQuery,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
