@@ -73,4 +73,8 @@ public class MemberController {
         memberService.sendFriendRequest(memberId, friendId);
     }
 
+    @GetMapping("/search/{filter}")
+    public List<MemberView> searchMembers(@PathVariable String filter) {
+        return memberService.searchMembers(filter);
+    }
 }

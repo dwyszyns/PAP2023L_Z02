@@ -81,6 +81,13 @@ public class CalendarController {
         calendarMemberService.acceptRequest(requestId);
     }
 
+    @GetMapping("/search/{filter}")
+    public List<CalendarView> searchCalendars(@PathVariable String filter) {
+        final Member member = memberService.findById(AuthUtil.getMemberIdFromSecurityContext()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
+        return calendarService.searchCalendars(filter, member);
+    }
+
     private void applyWithCalendarAndMember(long calendarId, long memberId, BiConsumer<Calendar, Member> andThen) {
         final Member member = memberService.findById(memberId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));

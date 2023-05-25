@@ -83,4 +83,12 @@ public class CalendarServiceImpl implements CalendarService {
         return CalendarMapper.mapPreview(calendarMemberRepository.save(calendarMember).getCalendar(), role);
     }
 
+    @Override
+    public List<CalendarView> searchCalendars(String searchTerm, Member member) {
+        List<Calendar> matchingCalendars = calendarRepository.searchCalendarsForMember(searchTerm, member);
+        return matchingCalendars.stream()
+                .map(calendar -> CalendarMapper.map(calendar, "maintainer"))
+                .collect(Collectors.toList());
+    }
+
 }
