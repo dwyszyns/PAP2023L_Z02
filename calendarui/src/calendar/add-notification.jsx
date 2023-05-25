@@ -22,7 +22,7 @@ const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) 
   };
 
   const [fields, setFields] = useState(defaultFields);
-  const [addNotification] = useAddNotificationMutation();
+  const [addNotification, { isError, isSuccess }] = useAddNotificationMutation();
 
   const [errors, setErrors] = useState({
     time: false,
@@ -66,6 +66,16 @@ const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) 
     setFields(defaultFields);
   };
 
+  const render = () => {
+    if (isError) {
+      return <p className="event-error-message">Please provide correct details.</p>;
+    }
+    if (isSuccess) {
+      return <p className="added-event">The event has been added successfully.</p>;
+    }
+    return <></>;
+  };
+
   return (
     <div id="add-notification-container" className="modal-container-add-notification">
       <div className="header-popup">
@@ -96,7 +106,7 @@ const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) 
         className="number-input-notification"
         onChange={(event) => setFields({ ...fields, time: event.target.value })}
       />
-      {errors.name && <p className="auth-error-message">Please enter a valid value</p>}
+      {errors.name && <p className="auth-error-message-noti">Please enter a valid value</p>}
 
       <select
         className="custom-select-type"
@@ -117,7 +127,9 @@ const AddNotification = ({ selectedEventName, setSelectedTab, eventStartDate }) 
       >
         Add
       </button>
-      <div className="auth-footer" />
+      <div className="noti-footer">
+        {render()}
+      </div>
     </div>
   );
 };

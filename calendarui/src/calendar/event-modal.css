@@ -368,3 +368,18 @@
     border: none;
     height: 55%;
 }
+
+.auth-error-message-noti {
+    margin-top: -20px;
+    color: red;
+}
+
+.noti-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+}

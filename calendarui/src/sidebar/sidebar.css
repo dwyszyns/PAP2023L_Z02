@@ -76,6 +76,7 @@
     width: 95%;
     height: auto;
     margin-bottom: 5px;
+    align-items: center;
 }
 
 .nested-sidebar-button-notification:hover {
@@ -182,7 +183,8 @@
     align-items: center;
     gap: 14px;
     padding-left: 6px;
-    margin-top: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: text;
 }
 
