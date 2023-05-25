@@ -41,7 +41,7 @@ insert into calendar_member(calendar_member_id, member_id, calendar_id, role, au
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (10, 2, 7, 'owner', true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (11, 4, 2, 'guest', true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (12, 5, 2, 'guest', true);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (13, 11, 2, 'guest', true);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (13, 10, 2, 'guest', true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (14, 11, 2, 'guest', true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (15, 7, 3, 'guest', true);
 insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (16, 8, 3, 'guest', true);

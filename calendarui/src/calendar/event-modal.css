@@ -49,11 +49,16 @@
 }
 
 .member {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 6fr 3fr 2fr;
     justify-content: space-between;
     align-items: center;
     height: fit-content;
     margin-bottom: 10px;
+}
+
+.member-role-select {
+
 }
 
 .member p {

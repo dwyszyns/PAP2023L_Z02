@@ -9,7 +9,11 @@ import java.util.List;
 
 public interface CalendarMemberService {
     void subscribeToCalendar(Calendar calendar, Member member);
+
+    void setRoleByCalendarAndMember(Calendar calendar, Member member, String role);
     
+    void deleteByCalendarAndMember(Calendar calendar, Member member);
+
     List<JoinRequestView> getRequestsForMember(long memberId);
 
     void sendJoinRequest(Calendar calendar, Member member);

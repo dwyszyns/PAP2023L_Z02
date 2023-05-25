@@ -9,6 +9,7 @@ import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
 import pl.edu.pw.calendarapp.member.bizz.MemberMapper;
 import pl.edu.pw.calendarapp.member.bizz.MemberService;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,7 @@ public class MemberController {
     public List<FriendView> getFriendsForMember(@PathVariable("memberId") final long memberId) {
         return memberService.getFriendsForMember(memberId).stream()
                 .map(request -> MemberMapper.mapFriend(request, memberId))
+                .sorted(Comparator.comparing(view -> view.getFriend().getUsername()))
                 .toList();
     }
 
@@ -47,30 +49,19 @@ public class MemberController {
                 .toList();
     }
 
-    @PostMapping("/{memberId}/friends/{requestId}")
-    public void acceptFriendRequest(@PathVariable("memberId") final long memberId,
-                                    @PathVariable("requestId") final long requestId) {
-        authService.validateMemberFromAuth(memberId);
-        memberService.acceptFriendRequest(requestId, memberId);
-    }
-
     @PostMapping("/current/friends/{requestId}")
     public void acceptFriendRequestForCurrent(@PathVariable("requestId") final long requestId) {
         memberService.acceptFriendRequest(requestId, AuthUtil.getMemberIdFromSecurityContext());
     }
 
-    @DeleteMapping("/{memberId}/friends/{requestId}")
-    public void rejectFriendRequest(@PathVariable("memberId") final long memberId,
-                                    @PathVariable("requestId") final long requestId) {
-        authService.validateMemberFromAuth(memberId);
-        memberService.rejectFriendRequest(requestId, memberId);
+    @DeleteMapping("/current/friends/{requestId}")
+    public void rejectFriendRequest(@PathVariable("requestId") final long requestId) {
+        memberService.rejectFriendRequest(requestId, AuthUtil.getMemberIdFromSecurityContext());
     }
 
-    @PostMapping("/{memberId}/friends")
-    public void sendFriendRequest(@PathVariable("memberId") final long memberId,
-                                  @RequestParam("friendId") final long friendId) {
-        authService.validateMemberFromAuth(memberId);
-        memberService.sendFriendRequest(memberId, friendId);
+    @PostMapping("/current/friends")
+    public void sendFriendRequest(@RequestParam("friendId") final long friendId) {
+        memberService.sendFriendRequest(AuthUtil.getMemberIdFromSecurityContext(), friendId);
     }
 
     @GetMapping("/search/{filter}")

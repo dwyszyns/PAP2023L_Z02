@@ -15,6 +15,7 @@ import pl.edu.pw.calendarapp.calendarmember.rest.CalendarMemberView;
 import pl.edu.pw.calendarapp.calendarmember.rest.JoinRequestView;
 import pl.edu.pw.calendarapp.member.repo.Member;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -40,12 +41,29 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
 
     @Override
     @Transactional
-    public void subscribeToCalendar(Calendar calendar, Member member) {
+    public void subscribeToCalendar(final Calendar calendar, final Member member) {
         validateUserOwnsCalendar(calendar.getCalendarId());
         final CalendarMember calendarMember = calendarMemberRepository.getCalendarMember(calendar.getCalendarId(), member.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("Member is not a part of this calendar"));
         calendarMember.setAutoSubscribed(true);
         calendarMemberRepository.save(calendarMember);
+    }
+
+    @Override
+    public void setRoleByCalendarAndMember(final Calendar calendar, final Member member, final String role) {
+        validateUserOwnsCalendar(calendar.getCalendarId());
+        final CalendarMember calendarMember = calendarMemberRepository.findByCalendarAndMember(calendar, member)
+                .orElseThrow(() -> new IllegalArgumentException("Calendar member not found"));
+        calendarMember.setRole(CalendarMemberRoleEnum.fromString(role).getRole());
+        calendarMemberRepository.save(calendarMember);
+    }
+
+    @Override
+    public void deleteByCalendarAndMember(final Calendar calendar, final Member member) {
+        validateUserOwnsCalendar(calendar.getCalendarId());
+        final CalendarMember calendarMember = calendarMemberRepository.findByCalendarAndMember(calendar, member)
+                .orElseThrow(() -> new IllegalArgumentException("Calendar member not found"));
+        calendarMemberRepository.delete(calendarMember);
     }
 
     @Override
@@ -86,6 +104,8 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
         validateUserOwnsCalendar(calendarId);
         return calendarMemberRepository.findAllForCalendar(calendarId).stream()
                 .map(CalendarMemberMapper::map)
+                .sorted(Comparator.comparing(CalendarMemberView::getRole, Comparator.reverseOrder())
+                        .thenComparing(CalendarMemberView::getName))
                 .toList();
     }
 

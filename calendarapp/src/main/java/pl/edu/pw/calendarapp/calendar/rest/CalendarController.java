@@ -61,9 +61,27 @@ public class CalendarController {
         return calendarMemberService.getMembersForCalendar(calendarId);
     }
 
-    @PostMapping("/{calendarId}/member/{memberId}/subscribe")
-    public void subscribeToCalendar(@PathVariable Long calendarId, @PathVariable Long memberId) {
-        applyWithCalendarAndMember(calendarId, memberId, calendarMemberService::subscribeToCalendar);
+    @PostMapping("/{calendarId}/member/{memberId}")
+    public void subscribeToCalendar(
+            @PathVariable Long calendarId,
+            @PathVariable Long memberId,
+            @RequestParam("role") String role
+    ) {
+        applyWithCalendarAndMember(calendarId, memberId, (calendar, member) ->
+                calendarMemberService.setRoleByCalendarAndMember(calendar, member, role));
+    }
+
+    @DeleteMapping("/{calendarId}/member/{memberId}")
+    public void subscribeToCalendar(
+            @PathVariable Long calendarId,
+            @PathVariable Long memberId
+    ) {
+        applyWithCalendarAndMember(calendarId, memberId, calendarMemberService::deleteByCalendarAndMember);
+    }
+
+    @PostMapping("/{calendarId}/subscribe")
+    public void subscribeToCalendar(@PathVariable Long calendarId) {
+        applyWithCalendarAndMember(calendarId, AuthUtil.getMemberIdFromSecurityContext(), calendarMemberService::subscribeToCalendar);
     }
 
     @GetMapping("/request")

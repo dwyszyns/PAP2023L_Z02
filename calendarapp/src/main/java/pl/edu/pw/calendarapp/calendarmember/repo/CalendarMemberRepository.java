@@ -6,12 +6,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.edu.pw.calendarapp.calendar.repo.Calendar;
+import pl.edu.pw.calendarapp.member.repo.Member;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CalendarMemberRepository extends JpaRepository<CalendarMember, Long> {
+    
+    Optional<CalendarMember> findByCalendarAndMember(Calendar calendar, Member member);
 
     @Query("select count(cm) > 0 from CalendarMember cm " +
             "where cm.calendar.calendarId = :calendarId " +

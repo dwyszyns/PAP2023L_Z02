@@ -14,7 +14,7 @@ public class CalendarMemberMapper {
         return Optional.ofNullable(calendarMember)
                 .map(cm -> {
                     final CalendarMemberView calendarMemberView = new CalendarMemberView();
-                    calendarMemberView.setId(cm.getCalendarMemberId());
+                    calendarMemberView.setId(cm.getMember().getMemberId());
                     calendarMemberView.setName(String.format(
                             "%s %s",
                             cm.getMember().getFirstName(),
