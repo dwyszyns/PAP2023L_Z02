@@ -33,6 +33,10 @@ export const api = createApi({
       query: (id) => `calendar/${id}`,
       providesTags: ['Calendar'],
     }),
+    getCalendarMembersByCalendarId: builder.query({
+      query: (id) => `calendar/${id}/member`,
+      providesTags: ['CalendarMembers'],
+    }),
     getFriendsForMemberId: builder.query({
       query: (id) => `member/${id}/friends`,
       providesTags: () => ['FriendRequests'],
@@ -109,6 +113,7 @@ export const {
   useRemoveCalendarMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
+  useGetCalendarMembersByCalendarIdQuery,
   useGetCalendarByCalendarIdQuery,
   useGetFriendsForMemberIdQuery,
   useAcceptRequestForMemberIdAndRequestIdMutation,

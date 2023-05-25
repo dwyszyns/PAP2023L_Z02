@@ -1,7 +1,9 @@
 .calendar-header {
     align-items: center;
+    justify-content: space-between;
     display: flex;
     margin-left: 20px;
+    gap: 30px;
 }
 
 .calendar-header-icon {
@@ -11,8 +13,18 @@
 }
 
 .calendar-header-title {
-    margin: 5px 0 0 15px;
+    margin: 0 0 0 15px;
+    padding-bottom: 0;
     font-size: 3rem;
     color: #888888;
     font-weight: 700;
+}
+
+.calendar-members-button {
+    border: none;
+    background: transparent;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+    margin-bottom: -5px;
 }
