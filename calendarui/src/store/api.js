@@ -17,7 +17,7 @@ export const api = createApi({
       },
     },
   ),
-  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar'],
+  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'Notifications'],
   endpoints: (builder) => ({
     login: builder.query({
       query: () => 'auth/login',
@@ -39,9 +39,11 @@ export const api = createApi({
     }),
     getNotificationsForEvent: builder.query({
       query: (id) => `notification/event/${id}`,
+      providesTags: ['Notifications'],
     }),
     getNotificationsForMember: builder.query({
       query: (memberId) => `notification/member/${memberId}`,
+      providesTags: ['Notifications'],
     }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query({ memberId, requestId }) {
@@ -109,6 +111,7 @@ export const api = createApi({
         method: 'POST',
         body,
       }),
+      providesTags: ['Notifications'],
     }),
     removeNotification: builder.mutation({
       query(notificationId) {
@@ -117,6 +120,7 @@ export const api = createApi({
           method: 'DELETE',
         };
       },
+      providesTags: ['Notifications'],
     }),
   }),
 });
