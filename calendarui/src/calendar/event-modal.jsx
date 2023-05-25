@@ -114,6 +114,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
             selectedEventName={selectedEventName}
             setSelectedTab={setSelectedTab}
             eventStartDate={selectedEventStartDate}
+            eventId={selectedEventId}
           />
         );
       default:

@@ -111,7 +111,7 @@ export const api = createApi({
         method: 'POST',
         body,
       }),
-      providesTags: ['Notifications'],
+      invalidatesTags: ['Notifications'],
     }),
     removeNotification: builder.mutation({
       query(notificationId) {
