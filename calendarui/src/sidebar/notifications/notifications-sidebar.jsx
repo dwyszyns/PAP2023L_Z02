@@ -4,7 +4,7 @@ import { useGetNotificationsForMemberQuery, useRemoveNotificationMutation } from
 import TrashBin from '../calendars/trash-bin.svg';
 
 const NotificationsSidebar = () => {
-  const { data, isLoading, error } = useGetNotificationsForMemberQuery(1);
+  const { data, isLoading, error } = useGetNotificationsForMemberQuery('current');
   const [removeNotification] = useRemoveNotificationMutation();
 
   return (
