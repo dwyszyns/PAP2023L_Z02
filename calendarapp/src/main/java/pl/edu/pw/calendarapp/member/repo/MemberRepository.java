@@ -23,4 +23,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByIdWithCalendars(@Param("memberId") Long memberId);
 
     Optional<MemberUserProjection> findMemberByUsername(String username);
+
+    @Query("SELECT m FROM Member m " +
+            "WHERE m.username LIKE CONCAT('%', :searchTerm, '%') " +
+            "OR m.firstName LIKE CONCAT('%', :searchTerm, '%') " +
+            "OR m.lastName LIKE CONCAT('%', :searchTerm, '%')")
+    List<Member> searchMembers(@Param("searchTerm") String searchTerm);
 }

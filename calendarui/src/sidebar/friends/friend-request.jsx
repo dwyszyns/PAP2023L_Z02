@@ -29,14 +29,14 @@ const FriendRequest = ({ request }) => {
         <button
           type="button"
           className="calendars-request-button friend-request-accepted"
-          onClick={() => acceptRequest({ memberId: 1, requestId: request.requestId })}
+          onClick={() => acceptRequest(request.requestId)}
         >
           accept
         </button>
         <button
           type="button"
           className="calendars-request-button"
-          onClick={() => declineRequest({ memberId: 1, requestId: request.requestId })}
+          onClick={() => declineRequest(request.requestId)}
         >
           decline
         </button>

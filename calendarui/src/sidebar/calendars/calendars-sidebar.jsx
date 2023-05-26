@@ -27,7 +27,7 @@ const CalendarsSidebar = () => {
           <p className="nested-sidebar-title nested-sidebar-sec-title">
             Shared
           </p>
-          {!isLoading && !error && data.filter((c) => !c.owner).map((calendar) => (
+          {!isLoading && !error && data.filter((c) => c.role !== 'owner').map((calendar) => (
             <button
               type="button"
               key={calendar.id}
@@ -45,7 +45,7 @@ const CalendarsSidebar = () => {
           <p className="nested-sidebar-title nested-sidebar-sec-title">
             Personal
           </p>
-          {!isLoading && !error && data.filter((c) => c.owner).map((calendar) => (
+          {!isLoading && !error && data.filter((c) => c.role === 'owner').map((calendar) => (
             <button
               type="button"
               key={calendar.id}

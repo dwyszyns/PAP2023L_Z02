@@ -16,11 +16,11 @@ insert into member(member_id, first_name, last_name, username, password, date_jo
 insert into calendar(calendar_id, name, public) values (0, 'My Calendar', true);
 insert into calendar(calendar_id, name, public) values (1, 'Family', true);
 
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (0, 0, 1, 1, 1);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (1, 0, 0, 0, 0);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (2, 1, 0, 1, 0);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (3, 1, 1, 0, 1);
-insert into calendar_member(calendar_member_id, member_id, calendar_id, is_owner, auto_subscribed) values (4, 2, 1, 0, 1);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (0, 0, 1, 'owner', 1);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (1, 0, 0, 'guest', 0);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (2, 1, 0, 'owner', 0);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (3, 1, 1, 'guest', 1);
+insert into calendar_member(calendar_member_id, member_id, calendar_id, role, auto_subscribed) values (4, 2, 1, 'guest', 1);
 
 insert into event(event_id, calendar_id, name, start_time, duration) values (0, 0, 'Dentist appointment', '2023-03-01 12:00:00', 60);
 insert into event(event_id, calendar_id, name, start_time, duration) values (1, 0, 'Check stove', '2023-03-02 13:00:00', 120);

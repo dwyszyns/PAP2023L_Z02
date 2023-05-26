@@ -6,6 +6,16 @@
     align-items: center;
 }
 
+.modal-background-member {
+    margin-left: 5vw;
+    margin-top: 5vh;
+    position: fixed;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .modal-container-add-event {
     width: 500px;
     height: 500px;
@@ -36,6 +46,23 @@
 .title-close-btn {
     display: flex;
     justify-content: flex-end;
+}
+
+.member {
+    display: grid;
+    grid-template-columns: 2fr 6fr 3fr 2fr;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    margin-bottom: 10px;
+}
+
+.member-role-select {
+
+}
+
+.member p {
+    margin: 0;
 }
 
 .title-close-btn button {

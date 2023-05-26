@@ -16,11 +16,9 @@ public interface CalendarService {
 
     List<CalendarView> findAllForMember(long memberId);
 
-    void addMemberToCalendar(Calendar calendar, Member member);
-
-    void subscribeToCalendar(Calendar calendar, Member member);
-
     void deleteCalendar(Long calendarId);
 
     CalendarView createCalendar(AddCalendarView calendarView);
+
+    List<CalendarView> searchCalendars(String searchTerm, Member member);
 }
