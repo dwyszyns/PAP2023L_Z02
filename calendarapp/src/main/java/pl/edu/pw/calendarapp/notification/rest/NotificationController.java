@@ -24,6 +24,12 @@ public class NotificationController {
         return notificationService.findAllForMember(AuthUtil.getMemberIdFromSecurityContext());
     }
 
+    @GetMapping("/member/current")
+    public List<NotificationView> getNotificationsForCurrentMember() {
+        return notificationService.findAllForMember(AuthUtil.getMemberIdFromSecurityContext());
+    }
+
+
     @PostMapping("/update")
     public void updateNotificationStatus(@RequestBody List<Long> ids) {
         notificationService.updateNotificationStatus(ids);
