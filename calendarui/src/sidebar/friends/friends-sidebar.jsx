@@ -74,9 +74,7 @@ const FriendsSidebar = () => {
         ))}
         { selectedFilter.length === 0 ? (
           <div className="action-btn-calendar">
-            <Link to="/calendar/add">
-              <button type="button">+</button>
-            </Link>
+            <button type="button">+</button>
           </div>
         ) : ('')}
       </div>
