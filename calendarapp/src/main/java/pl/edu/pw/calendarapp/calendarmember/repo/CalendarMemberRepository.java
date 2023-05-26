@@ -14,14 +14,21 @@ import java.util.Optional;
 
 @Repository
 public interface CalendarMemberRepository extends JpaRepository<CalendarMember, Long> {
-    
+
     Optional<CalendarMember> findByCalendarAndMember(Calendar calendar, Member member);
+
+    @Query("select count(cm) > 0 from CalendarMember cm " +
+            "where cm.calendar.calendarId = :calendarId " +
+            "and cm.member.memberId = :memberId " +
+            "and (cm.role like 'owner' or cm.role like 'maintainer')")
+    boolean memberOwnsMaintainsCalendar(Long memberId, Long calendarId);
 
     @Query("select count(cm) > 0 from CalendarMember cm " +
             "where cm.calendar.calendarId = :calendarId " +
             "and cm.member.memberId = :memberId " +
             "and cm.role like 'owner'")
     boolean memberOwnsCalendar(Long memberId, Long calendarId);
+
 
     @Query("select cm from CalendarMember cm " +
             "join fetch cm.member m " +

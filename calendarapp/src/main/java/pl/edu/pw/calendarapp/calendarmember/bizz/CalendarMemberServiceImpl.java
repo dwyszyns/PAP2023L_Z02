@@ -42,8 +42,7 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
     @Override
     @Transactional
     public void subscribeToCalendar(final Calendar calendar, final Member member) {
-        validateUserOwnsCalendar(calendar.getCalendarId());
-        final CalendarMember calendarMember = calendarMemberRepository.getCalendarMember(calendar.getCalendarId(), member.getMemberId())
+        final CalendarMember calendarMember = calendarMemberRepository.findByCalendarAndMember(calendar, member)
                 .orElseThrow(() -> new IllegalArgumentException("Member is not a part of this calendar"));
         calendarMember.setAutoSubscribed(true);
         calendarMemberRepository.save(calendarMember);
@@ -51,7 +50,7 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
 
     @Override
     public void setRoleByCalendarAndMember(final Calendar calendar, final Member member, final String role) {
-        validateUserOwnsCalendar(calendar.getCalendarId());
+        validateUserIsOwner(calendar.getCalendarId());
         final CalendarMember calendarMember = calendarMemberRepository.findByCalendarAndMember(calendar, member)
                 .orElseThrow(() -> new IllegalArgumentException("Calendar member not found"));
         calendarMember.setRole(CalendarMemberRoleEnum.fromString(role).getRole());
@@ -60,7 +59,7 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
 
     @Override
     public void deleteByCalendarAndMember(final Calendar calendar, final Member member) {
-        validateUserOwnsCalendar(calendar.getCalendarId());
+        validateUserIsOwner(calendar.getCalendarId());
         final CalendarMember calendarMember = calendarMemberRepository.findByCalendarAndMember(calendar, member)
                 .orElseThrow(() -> new IllegalArgumentException("Calendar member not found"));
         calendarMemberRepository.delete(calendarMember);
@@ -101,7 +100,7 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
 
     @Override
     public List<CalendarMemberView> getMembersForCalendar(Long calendarId) {
-        validateUserOwnsCalendar(calendarId);
+        validateUserIsOwnerOrMaintainer(calendarId);
         return calendarMemberRepository.findAllForCalendar(calendarId).stream()
                 .map(CalendarMemberMapper::map)
                 .sorted(Comparator.comparing(CalendarMemberView::getRole, Comparator.reverseOrder())
@@ -109,7 +108,13 @@ public class CalendarMemberServiceImpl implements CalendarMemberService {
                 .toList();
     }
 
-    private void validateUserOwnsCalendar(final long calendarId) {
+    private void validateUserIsOwnerOrMaintainer(final long calendarId) {
+        if (!calendarMemberRepository.memberOwnsMaintainsCalendar(AuthUtil.getMemberIdFromSecurityContext(), calendarId)) {
+            throw new AccessDeniedException("You are not the owner of this calendar");
+        }
+    }
+
+    private void validateUserIsOwner(final long calendarId) {
         if (!calendarMemberRepository.memberOwnsCalendar(AuthUtil.getMemberIdFromSecurityContext(), calendarId)) {
             throw new AccessDeniedException("You are not the owner of this calendar");
         }

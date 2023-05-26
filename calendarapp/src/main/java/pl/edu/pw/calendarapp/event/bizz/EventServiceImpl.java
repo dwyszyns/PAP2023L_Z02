@@ -49,7 +49,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     @Override
     public void addEvent(AddEventView eventView) {
-        if (!calendarMemberRepository.memberOwnsCalendar(
+        if (!calendarMemberRepository.memberOwnsMaintainsCalendar(
                 AuthUtil.getMemberIdFromSecurityContext(),
                 eventView.getCalendarId())
         ) {
@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService {
     public void removeEvent(long eventId) {
         eventRepository.findById(eventId)
                 .ifPresent(event -> {
-                    if (calendarMemberRepository.memberOwnsCalendar(
+                    if (calendarMemberRepository.memberOwnsMaintainsCalendar(
                             AuthUtil.getMemberIdFromSecurityContext(),
                             event.getCalendar().getCalendarId())
                     ) {
