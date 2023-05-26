@@ -19,7 +19,6 @@ const CalendarMemberModal = ({ calendarId, setOpenModal }) => {
   const [removeMember] = useRemoveMemberFromCalendarMutation();
 
   const render = () => {
-    console.log(data);
     if (isLoading) {
       return <p>Loading...</p>;
     }
@@ -33,7 +32,11 @@ const CalendarMemberModal = ({ calendarId, setOpenModal }) => {
         <select
           className="member-role-select"
           value={member.role}
-          onChange={(type) => updateRole({ calendarId, memberId: member.id, role: type.target.value })}
+          onChange={(type) => updateRole({
+            calendarId,
+            memberId: member.id,
+            role: type.target.value,
+          })}
           name="guest"
           disabled={member.role === 'owner'}
         >

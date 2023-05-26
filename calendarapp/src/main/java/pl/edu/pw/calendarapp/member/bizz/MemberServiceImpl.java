@@ -10,7 +10,6 @@ import pl.edu.pw.calendarapp.member.rest.MemberView;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
         List<Member> matchingMembers = memberRepository.searchMembers(searchTerm);
         return matchingMembers.stream()
                 .map(MemberMapper::mapMember)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

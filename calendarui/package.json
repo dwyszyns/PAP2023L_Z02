@@ -20,9 +20,9 @@
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-hot-loader": "^4.13.1",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.9.0",
-    "@syncfusion/ej2-react-calendars": "^21.2.5"
+    "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
     "@neutrinojs/airbnb": "^9.5.0",

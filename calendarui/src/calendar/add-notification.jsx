@@ -101,6 +101,7 @@ const AddNotification = ({
         {'  '}
         {selectedEventName}
       </h3>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="choose-number-notification">Choose time before event start:</label>
       <input
         type="text"

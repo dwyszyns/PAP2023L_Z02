@@ -17,13 +17,20 @@ export const api = createApi({
       },
     },
   ),
-  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers', 'Notifications'],
+  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers', 'Notifications', 'Member'],
   endpoints: (builder) => ({
-    login: builder.query({
-      query: () => 'auth/login',
+    login: builder.mutation({
+      query() {
+        return {
+          url: 'auth/login',
+          method: 'GET',
+        };
+      },
+      invalidatesTags: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers', 'Notifications', 'Member'],
     }),
     getMemberById: builder.query({
       query: (id) => `member/${id}`,
+      providesTags: ['Member'],
     }),
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
@@ -144,7 +151,7 @@ export const api = createApi({
 });
 
 export const {
-  useLazyLoginQuery,
+  useLoginMutation,
   useRegisterMutation,
   useAddEventMutation,
   useRemoveEventMutation,
