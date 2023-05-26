@@ -32,3 +32,29 @@
 .calendars-request-button:hover {
     background-color: #cacaca;
 }
+
+.searching-friends-input {
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 7px;
+}
+
+.searching-friends-container {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.searching-friends-button {
+    border: none;
+    background-color: white;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
