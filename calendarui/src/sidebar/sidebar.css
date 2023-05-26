@@ -193,3 +193,15 @@
     width: auto;
     height: auto;
 }
+
+.seen-icon {
+    width: 26px;
+    height: 26px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.seen-icon:hover {
+    filter: invert(30%) sepia(1%) saturate(394%) hue-rotate(347deg) brightness(150%) contrast(97%);
+    transition: 0.25s;
+}

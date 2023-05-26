@@ -21,7 +21,7 @@ public class NotificationController {
 
     @GetMapping("/member/{memberId}")
     public List<NotificationView> getNotificationsForMember(@PathVariable Long memberId) {
-        return notificationService.findAllForMember(memberId);
+        return notificationService.findAllForMember(AuthUtil.getMemberIdFromSecurityContext());
     }
 
     @PostMapping("/update")

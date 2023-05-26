@@ -1,7 +1,7 @@
 import React from 'react';
 import '../sidebar.css';
 import { useGetNotificationsForMemberQuery, useRemoveNotificationMutation } from '../../store/api';
-import TrashBin from '../calendars/trash-bin.svg';
+import TrashBin from './seen.svg';
 
 const NotificationsSidebar = () => {
   const { data, isLoading, error } = useGetNotificationsForMemberQuery(1);
@@ -36,7 +36,7 @@ const NotificationsSidebar = () => {
                     </div>
                     <div className="notification-elem-remove">
                       <button type="button" className="calendar-nav-elem-remove" onClick={() => removeNotification(notification.id)}>
-                        <img id={`trash${notification.id.toString()}`} src={TrashBin} alt="X" className="trash-bin-icon" />
+                        <img id={`trash${notification.id.toString()}`} src={TrashBin} alt="X" className="seen-icon" />
                       </button>
                     </div>
                   </button>
