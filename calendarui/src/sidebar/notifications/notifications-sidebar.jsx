@@ -4,7 +4,7 @@ import { useGetNotificationsForMemberQuery, useRemoveNotificationMutation } from
 import TrashBin from './seen.svg';
 
 const NotificationsSidebar = () => {
-  const { data, isLoading, error } = useGetNotificationsForMemberQuery('current');
+  const { data, isLoading, error } = useGetNotificationsForMemberQuery(1);
   const [removeNotification] = useRemoveNotificationMutation();
 
   return (
