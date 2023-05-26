@@ -89,3 +89,8 @@
     margin-bottom: 20px;
     text-align: left;
 }
+
+.auth-error-message-cal {
+    margin-top: -90px;
+    color: red;
+}

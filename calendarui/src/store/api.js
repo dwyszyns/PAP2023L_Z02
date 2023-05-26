@@ -17,7 +17,7 @@ export const api = createApi({
       },
     },
   ),
-  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers'],
+  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers', 'Notifications'],
   endpoints: (builder) => ({
     login: builder.query({
       query: () => 'auth/login',
@@ -40,6 +40,14 @@ export const api = createApi({
     getFriendsForMemberId: builder.query({
       query: (id) => `member/${id}/friends`,
       providesTags: () => ['FriendRequests'],
+    }),
+    getNotificationsForEvent: builder.query({
+      query: (id) => `notification/event/${id}`,
+      providesTags: ['Notifications'],
+    }),
+    getNotificationsForMember: builder.query({
+      query: (memberId) => `notification/member/${memberId}`,
+      providesTags: ['Notifications'],
     }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query(requestId) {
@@ -101,6 +109,23 @@ export const api = createApi({
       }),
       invalidatesTags: ['Calendars'],
     }),
+    addNotification: builder.mutation({
+      query: (body) => ({
+        url: '/notification',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Notifications'],
+    }),
+    removeNotification: builder.mutation({
+      query(notificationId) {
+        return {
+          url: `/notification/${notificationId}`,
+          method: 'DELETE',
+        };
+      },
+      providesTags: ['Notifications'],
+    }),
     updateMemberRole: builder.mutation({
       query: ({ calendarId, memberId, role }) => ({
         url: `/calendar/${calendarId}/member/${memberId}?role=${role}`,
@@ -127,6 +152,10 @@ export const {
   useRemoveCalendarMutation,
   useUpdateMemberRoleMutation,
   useRemoveMemberFromCalendarMutation,
+  useAddNotificationMutation,
+  useRemoveNotificationMutation,
+  useGetNotificationsForMemberQuery,
+  useGetNotificationsForEventQuery,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
   useGetCalendarMembersByCalendarIdQuery,

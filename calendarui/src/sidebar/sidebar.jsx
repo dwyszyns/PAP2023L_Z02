@@ -8,6 +8,7 @@ import './sidebar.css';
 import FriendsSidebar from './friends/friends-sidebar';
 import CalendarsSidebar from './calendars/calendars-sidebar';
 import LogoutIcon from '../icons/logout-icon';
+import NotificationsSidebar from './notifications/notifications-sidebar';
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('calendars');
@@ -30,7 +31,7 @@ const Sidebar = () => {
       case 'friends':
         return <FriendsSidebar />;
       case 'notifications':
-        return <></>;
+        return <NotificationsSidebar />;
       default:
         return <></>;
     }

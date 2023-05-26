@@ -48,7 +48,7 @@ const AddCalendar = () => {
         className="add-calendar-input"
         onChange={(e) => setFields({ ...fields, name: e.target.value })}
       />
-      {errors.name && <p className="auth-error-message">Please enter a valid value</p>}
+      {errors.name && <p className="auth-error-message-cal">Please enter a valid value</p>}
 
       <label htmlFor="visible" className="question-form-visible">Choose a privacy for your new calendar:</label>
       <select className="custom-select" onChange={(calendar) => setIsPublicInfo(calendar.target.value)} name="privacy">

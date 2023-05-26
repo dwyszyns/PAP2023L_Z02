@@ -146,7 +146,8 @@
 .event-elem-name {
     display: flex;
     justify-content: space-between;
-    padding-left: 20px;
+    padding-left: 25px;
+    padding-right: 20px;
     width: 93%;
     height: fit-content;
     background-color: #7e9dec;
@@ -188,6 +189,8 @@
 
 .no-events {
     background-color: white;
+    font-size: 20px;
+
 }
 
 .elemx {
@@ -196,6 +199,7 @@
     margin-bottom: 4px;
     width: 100%;
     cursor: pointer;
+    display: flex;
 }
 
 .added-event {
@@ -308,7 +312,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    background-color: #7e9dec;
+    background-color: #a1911e;
     margin-bottom: 5px;
 }
 
@@ -328,9 +332,9 @@
 
 .choose-number-notification {
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 10px;
-    text-align: left;
+    float: left;
 }
 
 .number-input-notification {
@@ -354,10 +358,11 @@
 .custom-select-type {
     position: relative;
     font-size: 20px;
-    margin-bottom: 7px;
+    margin-bottom: 15px;
     border: none;
     padding: 13px;
     border-radius: 7px;
+    width: 100%;
 }
 
 .submit-noti-button {
@@ -370,4 +375,38 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.notifications-elems-view {
+    border-radius: 2px;
+    width: 100%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    height: 65%;
+}
+
+.no-notification {
+    margin-top: 40px;
+    border-radius: 2px;
+    width: 100%;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    height: 55%;
+}
+
+.auth-error-message-noti {
+    margin-top: -20px;
+    color: red;
+}
+
+.noti-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
 }
