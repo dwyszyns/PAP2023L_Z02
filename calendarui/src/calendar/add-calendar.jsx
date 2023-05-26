@@ -39,6 +39,7 @@ const AddCalendar = () => {
   return (
     <div className="form-add-calendar">
       <header className="title-add-calendar">Add a new calendar</header>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="choose-name-calendar">Choose a name for your new calendar:</label>
       <input
         type="text"
@@ -50,6 +51,7 @@ const AddCalendar = () => {
       />
       {errors.name && <p className="auth-error-message-cal">Please enter a valid value</p>}
 
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="visible" className="question-form-visible">Choose a privacy for your new calendar:</label>
       <select className="custom-select" onChange={(calendar) => setIsPublicInfo(calendar.target.value)} name="privacy">
         <option value="0">Private</option>

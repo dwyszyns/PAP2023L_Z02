@@ -10,4 +10,4 @@ function getDayArray(month = dayjs().month()) {
   });
 }
 
-export { getDayArray };
+export default getDayArray;

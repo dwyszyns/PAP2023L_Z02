@@ -42,6 +42,7 @@ const EventModal = ({ setOpenModal, calendarId, modalDay }) => {
           <div className="event-elems-view" id={modalDay.format('YY-MM-DD')}>
             {getEventsForDay(modalDay) && getEventsForDay(modalDay).map((event) => (
               <div className="event-view-list" key={event.id} id={`event-day-${event.id}`}>
+                {/* eslint-disable-next-line */}
                 <div
                   className="elemx"
                   onClick={() => {
