@@ -17,7 +17,7 @@ export const api = createApi({
       },
     },
   ),
-  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar'],
+  tagTypes: ['FriendRequests', 'Events', 'Calendars', 'Calendar', 'CalendarMembers'],
   endpoints: (builder) => ({
     login: builder.query({
       query: () => 'auth/login',
@@ -33,23 +33,27 @@ export const api = createApi({
       query: (id) => `calendar/${id}`,
       providesTags: ['Calendar'],
     }),
+    getCalendarMembersByCalendarId: builder.query({
+      query: (id) => `calendar/${id}/member`,
+      providesTags: ['CalendarMembers'],
+    }),
     getFriendsForMemberId: builder.query({
       query: (id) => `member/${id}/friends`,
       providesTags: () => ['FriendRequests'],
     }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
-      query({ memberId, requestId }) {
+      query(requestId) {
         return {
-          url: `member/${memberId}/friends/${requestId}`,
+          url: `member/current/friends/${requestId}`,
           method: 'POST',
         };
       },
       invalidatesTags: ['FriendRequests'],
     }),
     declineRequestForMemberIdAndRequestId: builder.mutation({
-      query({ memberId, requestId }) {
+      query(requestId) {
         return {
-          url: `member/${memberId}/friends/${requestId}`,
+          url: `member/current/friends/${requestId}`,
           method: 'DELETE',
         };
       },
@@ -97,6 +101,20 @@ export const api = createApi({
       }),
       invalidatesTags: ['Calendars'],
     }),
+    updateMemberRole: builder.mutation({
+      query: ({ calendarId, memberId, role }) => ({
+        url: `/calendar/${calendarId}/member/${memberId}?role=${role}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['CalendarMembers'],
+    }),
+    removeMemberFromCalendar: builder.mutation({
+      query: ({ calendarId, memberId }) => ({
+        url: `/calendar/${calendarId}/member/${memberId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['CalendarMembers'],
+    }),
   }),
 });
 
@@ -107,8 +125,11 @@ export const {
   useRemoveEventMutation,
   useAddCalendarMutation,
   useRemoveCalendarMutation,
+  useUpdateMemberRoleMutation,
+  useRemoveMemberFromCalendarMutation,
   useGetMemberByIdQuery,
   useGetCalendarsForMemberIdQuery,
+  useGetCalendarMembersByCalendarIdQuery,
   useGetCalendarByCalendarIdQuery,
   useGetFriendsForMemberIdQuery,
   useAcceptRequestForMemberIdAndRequestIdMutation,

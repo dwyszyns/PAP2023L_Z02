@@ -6,9 +6,11 @@ import pl.edu.pw.calendarapp.member.repo.FriendRequest;
 import pl.edu.pw.calendarapp.member.repo.FriendRequestRepository;
 import pl.edu.pw.calendarapp.member.repo.Member;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
+import pl.edu.pw.calendarapp.member.rest.MemberView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,14 @@ public class MemberServiceImpl implements MemberService {
             friendRequest.setReceiver(receiver);
             friendRequestRepository.save(friendRequest);
         }
+    }
+
+    @Override
+    public List<MemberView> searchMembers(String searchTerm) {
+        List<Member> matchingMembers = memberRepository.searchMembers(searchTerm);
+        return matchingMembers.stream()
+                .map(MemberMapper::mapMember)
+                .collect(Collectors.toList());
     }
 
 }

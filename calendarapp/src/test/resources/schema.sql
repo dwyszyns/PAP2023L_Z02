@@ -19,7 +19,7 @@ create table calendar_member(
     calendar_member_id identity not null,
     member_id          number(19, 0) not null,
     calendar_id        number(19, 0) not null,
-    is_owner           number(1,0) default false,
+    role               varchar(20) not null,
     auto_subscribed    number(1,0) default false,
     constraint pk_calendar_member primary key (calendar_member_id),
     constraint fk_calendar_member_calendar foreign key (calendar_id) references calendar (calendar_id),
@@ -53,6 +53,19 @@ create table friend_request(
     constraint pk_friend_request primary key (request_id),
     constraint fk_friend_sender foreign key (sender_id) references member (member_id),
     constraint fk_friend_receiver foreign key (receiver_id) references member (member_id)
+);
+
+
+create table join_request(
+    request_id  identity not null,
+    sender_id   number(19, 0) not null,
+    receiver_id number(19, 0) not null,
+    calendar_id number(19, 0) not null,
+    from_owner  number(1,0) not null default false,
+    constraint pk_join_request primary key (request_id),
+    constraint fk_join_sender foreign key (sender_id) references member (member_id),
+    constraint fk_join_receiver foreign key (receiver_id) references member (member_id),
+    constraint fk_join_calendar foreign key (calendar_id) references calendar (calendar_id)
 );
 
 create table event_seq(

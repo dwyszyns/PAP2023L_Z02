@@ -12,7 +12,7 @@ const Calendar = () => {
   return (
     data ? (
       <div className="calendar-container">
-        <CalendarHeader calendarName={data.name} />
+        <CalendarHeader calendarId={data.id} calendarName={data.name} role={data.role} />
         <div className="calendar-main-view">
           <CalendarMonth calendarId={calendarId} />
         </div>

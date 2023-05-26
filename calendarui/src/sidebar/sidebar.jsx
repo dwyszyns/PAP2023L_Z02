@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   CalendarIcon, FriendsIcon, IconButton, NotificationIcon, UserIcon,
 } from '../icons';
@@ -17,6 +17,8 @@ const Sidebar = () => {
     { icon: NotificationIcon, name: 'notifications' },
   ];
 
+  const location = useLocation();
+
   const onButtonClick = (tab) => setSelectedTab(tab);
 
   const renderNested = () => {
@@ -33,6 +35,12 @@ const Sidebar = () => {
         return <></>;
     }
   };
+
+  useEffect(() => {
+    if (location.pathname.includes('calendar')) {
+      setSelectedTab('calendars');
+    }
+  }, [location]);
 
   return (
     <>

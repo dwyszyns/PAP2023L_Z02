@@ -19,7 +19,7 @@ create table if not exists calendar_member(
     calendar_member_id bigint not null auto_increment,
     member_id          bigint not null,
     calendar_id        bigint not null,
-    is_owner           boolean default false,
+    role               varchar(20) not null,
     auto_subscribed    boolean default false,
     primary key pk_calendar_member (calendar_member_id),
     foreign key fk_calendar_member_calendar (calendar_id) references calendar (calendar_id),
@@ -53,4 +53,17 @@ create table if not exists friend_request(
     primary key pk_friend_request (request_id),
     foreign key fk_friend_sender (sender_id) references member (member_id),
     foreign key fk_friend_receiver (receiver_id) references member (member_id)
+);
+
+
+create table if not exists join_request(
+    request_id  bigint not null auto_increment,
+    sender_id   bigint not null,
+    receiver_id bigint not null,
+    calendar_id bigint not null,
+    from_owner  boolean not null default false,
+    constraint pk_join_request primary key (request_id),
+    constraint fk_join_sender foreign key (sender_id) references member (member_id),
+    constraint fk_join_receiver foreign key (receiver_id) references member (member_id),
+    constraint fk_join_calendar foreign key (calendar_id) references calendar (calendar_id)
 );
