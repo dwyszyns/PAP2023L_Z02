@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setCredentials } from './auth-slice';
-import { useLazyLoginQuery } from '../store/api';
+import { useLoginMutation } from '../store/api';
 import './auth.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [userTriggered, setUserTriggered] = useState(false);
-  const [trigger, status] = useLazyLoginQuery();
+  const [trigger, status] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

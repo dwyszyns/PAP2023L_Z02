@@ -4,7 +4,7 @@ delete from calendar_member;
 delete from event;
 delete from member;
 delete from calendar;
-delete from notifications;
+delete from notification;
 
 
 insert into member(member_id, first_name, last_name, username, password, date_joined) values (0, 'John', 'Doe', 'johndoe', '$2a$13$EcMkFjTT4MQfWuZ1G1GEUuBZMzu6XiBl7961VJjxAUbr.i8HqBiqi', '2023-02-21 00:00:00');

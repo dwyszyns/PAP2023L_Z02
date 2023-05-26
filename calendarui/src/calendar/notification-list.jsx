@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const NotificationList = ({ selectedEventName, setSelectedTab, eventId }) => {
-  const { data, isLoading, error } = useGetNotificationsForEventQuery(eventId);
+  const { data } = useGetNotificationsForEventQuery(eventId);
   const [removeNotification] = useRemoveNotificationMutation();
 
   return (

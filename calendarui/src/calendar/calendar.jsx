@@ -7,7 +7,7 @@ import { useGetCalendarByCalendarIdQuery } from '../store/api';
 
 const Calendar = () => {
   const { calendarId } = useParams();
-  const { error, data, isLoading } = useGetCalendarByCalendarIdQuery(calendarId);
+  const { data } = useGetCalendarByCalendarIdQuery(calendarId);
 
   return (
     data ? (

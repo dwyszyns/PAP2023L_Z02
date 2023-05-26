@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import './calendar-month.css';
 import PropTypes from 'prop-types';
-import { getDayArray } from './util';
+import getDayArray from './util';
 import { useGetCalendarByCalendarIdQuery } from '../store/api';
 import EventModal from './event-modal';
 
@@ -53,7 +53,12 @@ const CalendarMonth = ({ calendarId }) => {
         </div>
       </div>
       <div className="small-calendar-elems">
-        <button className="small-calendar-cursor-pointer" onClick={() => setCurrentMonth(currentMonth - 1)} type="button" />
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <button
+          className="small-calendar-cursor-pointer"
+          onClick={() => setCurrentMonth(currentMonth - 1)}
+          type="button"
+        />
         <div className="small-calendar-calendar-body">
           <div className="small-calendar-day-labels">
             {dayNames.map((day) => (
@@ -118,6 +123,7 @@ const CalendarMonth = ({ calendarId }) => {
             )}
           </div>
         </div>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button className="small-calendar-cursor-pointer right" onClick={() => setCurrentMonth(currentMonth + 1)} type="button" />
       </div>
     </div>

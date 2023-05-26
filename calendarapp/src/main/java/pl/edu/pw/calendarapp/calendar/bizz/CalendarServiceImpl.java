@@ -51,7 +51,7 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public List<CalendarView> findAllForMember(long memberId) {
         return calendarMemberRepository.findAllForMember(memberId).stream()
-                .map(cm -> CalendarMapper.map(cm.getCalendar(), cm.getRole()))
+                .map(cm -> CalendarMapper.mapPreview(cm.getCalendar(), cm.getRole()))
                 .toList();
     }
 
@@ -88,7 +88,7 @@ public class CalendarServiceImpl implements CalendarService {
         List<Calendar> matchingCalendars = calendarRepository.searchCalendarsForMember(searchTerm, member);
         return matchingCalendars.stream()
                 .map(calendar -> CalendarMapper.map(calendar, "maintainer"))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }
