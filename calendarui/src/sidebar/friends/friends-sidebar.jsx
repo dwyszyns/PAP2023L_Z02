@@ -4,10 +4,13 @@ import { useDeclineRequestForMemberIdAndRequestIdMutation, useGetFriendsForMembe
 import '../sidebar.css';
 import FriendRequest from './friend-request';
 import MemberIcon from '../../icons/member-icon';
+import './friend-request.css';
 import TrashBin from '../calendars/trash-bin.svg';
+import SearchIcon from './search-icon.svg';
 
 const FriendsSidebar = () => {
   const [selectedFriend, setSelectedFriend] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('');
   const { data, isLoading, error } = useGetFriendsForMemberIdQuery('current');
   const [deleteRequest] = useDeclineRequestForMemberIdAndRequestIdMutation();
 
@@ -27,6 +30,29 @@ const FriendsSidebar = () => {
         {!isLoading && !error && data.map((friendReq) => (
           <>
             {friendReq.accepted
+              ? ('')
+              : <FriendRequest request={friendReq} />}
+          </>
+        ))}
+        <div className="searching-friends-container">
+          <input
+            type="text"
+            name="name"
+            value={selectedFilter}
+            placeholder={'Username'.replace(/([a-z])([A-Z])/g, (match, p1, p2) => `${p1} ${p2.toLowerCase()}`)}
+            className="searching-friends-input"
+            onChange={(e) => setSelectedFilter(e.target.value)}
+          />
+          <button
+            type="button"
+            className="searching-friends-button"
+          >
+            <img src={SearchIcon} alt="X" className="seen-icon" />
+          </button>
+        </div>
+        {!isLoading && !error && data.map((friendReq) => (
+          <>
+            {friendReq.accepted && friendReq.friend.username.includes(selectedFilter)
               ? (
                 <button
                   type="button"
@@ -43,10 +69,14 @@ const FriendsSidebar = () => {
                   </button>
                 </button>
               )
-              : <FriendRequest request={friendReq} />}
+              : ('')}
           </>
-
         ))}
+        { selectedFilter.length === 0 ? (
+          <div className="action-btn-calendar">
+            <button type="button">+</button>
+          </div>
+        ) : ('')}
       </div>
     </>
   );

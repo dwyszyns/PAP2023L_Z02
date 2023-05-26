@@ -25,10 +25,35 @@
 .calendars-request-button {
     width: 100px;
     border: 1px solid #dfdfdf;
-    border-radius: 5px;;
+    border-radius: 5px;
     background-color: #dfdfdf;
 }
 
 .calendars-request-button:hover {
     background-color: #cacaca;
+}
+
+.searching-friends-input {
+    width: 100%;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 15px;
+}
+
+.searching-friends-container {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0 15px 0;
+    padding: 0 10% 0 10%;
+}
+
+.searching-friends-button {
+    border: none;
+    background-color: white;
 }
