@@ -205,3 +205,66 @@
     filter: invert(30%) sepia(1%) saturate(394%) hue-rotate(347deg) brightness(150%) contrast(97%);
     transition: 0.25s;
 }
+
+.new-friend-username {
+    display: flex;
+    margin-bottom: 5px;
+    width: 80%;
+    text-align: center;
+    align-items: center;
+}
+
+
+.add-friend-list-container {
+    margin-left: 26px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-new-friend-btn-container {
+    border: none;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.new-friend-elem {
+    display: flex;
+    height: auto;
+}
+
+.add-new-friend-btn {
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.not-found-username {
+    font-size: 17px;
+    float: left;
+}
+
+.header-add-friend {
+    display: flex;
+    justify-content: center;
+}
+
+.title-add-new-friend {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.button-close-add-friend {
+    border: none;
+    font-size: 23px;
+    padding-bottom: 27px;
+    background-color: white;
+}
+
+.add-new-friend-btn-container:hover {
+    color: #6e6e6e;
+    transition: 0.25s;
+}

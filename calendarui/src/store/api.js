@@ -30,7 +30,7 @@ export const api = createApi({
     }),
     getMemberById: builder.query({
       query: (id) => `member/${id}`,
-      providesTags: ['Member'],
+      providesTags: ['Member', 'Calendars', 'Calendar', 'CalendarMembers'],
     }),
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
