@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSearchMembersQuery } from '../../store/api';
+import { useSearchMembersQuery, useSendFriendRequestMutation } from '../../store/api';
 import '../sidebar.css';
 import MemberIcon from '../../icons/member-icon';
+import CheckIcon from './check-icon.svg';
 
 const propTypes = {
   selectedNewFriend: PropTypes.string.isRequired,
@@ -13,10 +14,13 @@ const propTypes = {
 const AddFriendList = ({ selectedNewFriend, friends }) => {
   const { data, isLoading, error } = useSearchMembersQuery(selectedNewFriend);
   const [selectedUserId, setSelectedUserId] = useState(-1);
+  const [addFriend] = useSendFriendRequestMutation();
 
   const addNewFriend = () => {
-    setSelectedUserId(0);
+    addFriend(selectedUserId);
   };
+
+  const friendIds = friends.map((friend) => friend.friend.id);
 
   return (
     <div className="add-friend-list-container">
@@ -36,7 +40,13 @@ const AddFriendList = ({ selectedNewFriend, friends }) => {
                   addNewFriend();
                 }}
               >
-                <p className="add-new-friend-btn">+</p>
+                <>
+                  {friendIds.includes(user.id)
+                    ? (
+                      <img src={CheckIcon} alt="X" className="check-icon" />
+                    )
+                    : (<p className="add-new-friend-btn">+</p>)}
+                </>
               </button>
             </div>
           ))}
@@ -44,7 +54,9 @@ const AddFriendList = ({ selectedNewFriend, friends }) => {
       ) : (
         <>
           {selectedNewFriend.length !== 0 ? (
-            <p className="not-found-username">User not found</p>) : ('')}
+            <p className="not-found-username">User not found</p>)
+          // eslint-disable-next-line max-len
+            : (<p className="info-add-friend"><i>Enter first name, last name or username to search and add a new friend</i></p>)}
         </>
       )}
     </div>

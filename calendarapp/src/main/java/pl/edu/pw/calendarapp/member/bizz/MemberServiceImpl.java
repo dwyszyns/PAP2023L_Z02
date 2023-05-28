@@ -52,6 +52,7 @@ public class MemberServiceImpl implements MemberService {
             final FriendRequest friendRequest = new FriendRequest();
             friendRequest.setSender(sender);
             friendRequest.setReceiver(receiver);
+            friendRequest.setAccepted(false);
             friendRequestRepository.save(friendRequest);
         }
     }

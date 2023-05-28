@@ -60,6 +60,15 @@ export const api = createApi({
       query: (filter) => `/member/search/${filter}`,
       providesTags: ['FriendRequests'],
     }),
+    sendFriendRequest: builder.mutation({
+      query(friendId) {
+        return {
+          url: `member/current/friends?friendId=${friendId}`,
+          method: 'POST',
+        };
+      },
+      invalidatesTags: ['FriendRequests', 'Member'],
+    }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query(requestId) {
         return {
@@ -165,6 +174,7 @@ export const {
   useRemoveMemberFromCalendarMutation,
   useAddNotificationMutation,
   useRemoveNotificationMutation,
+  useSendFriendRequestMutation,
   useGetNotificationsForMemberQuery,
   useGetNotificationsForEventQuery,
   useGetMemberByIdQuery,
