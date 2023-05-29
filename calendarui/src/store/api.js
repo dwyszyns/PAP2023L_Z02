@@ -30,7 +30,7 @@ export const api = createApi({
     }),
     getMemberById: builder.query({
       query: (id) => `member/${id}`,
-      providesTags: ['Member'],
+      providesTags: ['Member', 'Calendars', 'Calendar', 'CalendarMembers'],
     }),
     getCalendarsForMemberId: builder.query({
       query: (id) => `calendar/member/${id}`,
@@ -59,6 +59,15 @@ export const api = createApi({
     searchMembers: builder.query({
       query: (filter) => `/member/search/${filter}`,
       providesTags: ['FriendRequests'],
+    }),
+    sendFriendRequest: builder.mutation({
+      query(friendId) {
+        return {
+          url: `member/current/friends?friendId=${friendId}`,
+          method: 'POST',
+        };
+      },
+      invalidatesTags: ['FriendRequests', 'Member'],
     }),
     acceptRequestForMemberIdAndRequestId: builder.mutation({
       query(requestId) {
@@ -165,6 +174,7 @@ export const {
   useRemoveMemberFromCalendarMutation,
   useAddNotificationMutation,
   useRemoveNotificationMutation,
+  useSendFriendRequestMutation,
   useGetNotificationsForMemberQuery,
   useGetNotificationsForEventQuery,
   useGetMemberByIdQuery,
