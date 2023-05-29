@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.calendarapp.auth.bizz.AuthUtil;
+import pl.edu.pw.calendarapp.calendarmember.repo.CalendarMemberRepository;
 import pl.edu.pw.calendarapp.event.repo.Event;
 import pl.edu.pw.calendarapp.event.repo.EventRepository;
 import pl.edu.pw.calendarapp.member.repo.MemberRepository;
@@ -23,6 +24,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+    private final CalendarMemberRepository calendarMemberRepository;
 
     @Override
     public List<NotificationView> findAllForEventAndMember(long eventId, long memberId) {
@@ -46,6 +48,12 @@ public class NotificationServiceImpl implements NotificationService {
         final Event event = eventRepository.findById(addNotificationView.getEventId()).orElseThrow(
                 () -> new IllegalArgumentException("Event not found")
         );
+        if (!calendarMemberRepository.memberOwnsMaintainsCalendar(
+                AuthUtil.getMemberIdFromSecurityContext(),
+                event.getCalendar().getCalendarId())
+        ) {
+            throw new AccessDeniedException("Member does not own calendar");
+        }
         final Notification notification = new Notification();
         notification.setEvent(event);
         notification.setNotifyTime(Timestamp.valueOf(addNotificationView.getNotifyTime()));
