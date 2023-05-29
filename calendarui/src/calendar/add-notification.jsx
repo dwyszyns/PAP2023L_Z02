@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './event-modal.css';
 import PropTypes from 'prop-types';
-import { useAddNotificationMutation } from '../store/api';
+import {useAddNotificationMutation} from '../store/api';
 
 const propTypes = {
   selectedEventName: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ const AddNotification = ({
   };
 
   const [fields, setFields] = useState(defaultFields);
-  const [addNotification, { isError, isSuccess }] = useAddNotificationMutation();
+  const [addNotification, { error, isError, isSuccess }] = useAddNotificationMutation();
 
   const [errors, setErrors] = useState({
     time: false,
@@ -72,7 +72,7 @@ const AddNotification = ({
 
   const render = () => {
     if (isError) {
-      return <p className="event-error-message">Please provide correct details.</p>;
+      return <p className="event-error-message">{error.data.message ? error.data.message : 'Please provide correct details.'}</p>;
     }
     if (isSuccess) {
       return <p className="added-event">The event has been added successfully.</p>;

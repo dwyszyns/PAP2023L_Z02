@@ -1,13 +1,17 @@
 import React from 'react';
 import './calendar.css';
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import CalendarHeader from './calendar-header';
 import CalendarMonth from './calendar-month';
-import { useGetCalendarByCalendarIdQuery } from '../store/api';
+import {useGetCalendarByCalendarIdQuery} from '../store/api';
 
 const Calendar = () => {
   const { calendarId } = useParams();
-  const { data } = useGetCalendarByCalendarIdQuery(calendarId);
+  const { error, data, isLoading } = useGetCalendarByCalendarIdQuery(calendarId);
+
+    if (!isLoading && error) {
+        return <div className="calendar-private-message">Sorry, this calendar is private.</div>;
+    }
 
   return (
     data ? (
