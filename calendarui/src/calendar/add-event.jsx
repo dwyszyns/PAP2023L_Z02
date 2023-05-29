@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './event-modal.css';
 import PropTypes from 'prop-types';
-import { useAddEventMutation } from '../store/api';
+import {useAddEventMutation} from '../store/api';
+
 
 const propTypes = {
   calendarId: PropTypes.number.isRequired,
@@ -31,7 +32,7 @@ const AddEvent = ({ calendarId, modalDay, setSelectedTab }) => {
     endTime: false,
   });
 
-  const [addEvent, { isError, isSuccess }] = useAddEventMutation();
+  const [addEvent, { error, isError, isSuccess }] = useAddEventMutation();
   const fieldNamesAddEvent = ['name', 'startTime', 'duration'];
 
   const handleSubmit = () => {
@@ -56,7 +57,7 @@ const AddEvent = ({ calendarId, modalDay, setSelectedTab }) => {
 
   const render = () => {
     if (isError) {
-      return <p className="event-error-message">Please provide correct details.</p>;
+      return <p className="event-error-message">{error.data.message ? error.data.message : 'Please provide correct details.'}</p>;
     }
     if (isSuccess) {
       return <p className="added-event">The event has been added successfully.</p>;
